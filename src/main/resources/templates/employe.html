@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Employe</title>
+</head>
+<body>
+	<form action="#" th:action="employe" th:object="${employe}" method="post">
+
+		<table>
+			<tr>
+				<td>Nom:</td>
+				<td><input type="text" th:field="*{Nom_Employe}" /></td>
+			</tr>
+			<tr>
+				<td>Prenom:</td>
+				<td><input type="text" th:field="*{Prenom_Employe}" /></td>
+			</tr>
+
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" th:field="*{Email_Employe}" /></td>
+			</tr>
+
+
+
+
+
+
+			<tr>
+				<td><input type="submit" value="Valider" /></td>
+				<td><input type="reset" value="Annuler" /></td>
+			</tr>
+		</table>
+
+		<ul>
+			<li th:each="employe : ${employes}">
+			    <span th:text="${employe.Nom_Employe}"></span>
+				<span th:text="${employe.Prenom_Employe}"></span>
+				<span th:text="${employe.Id_Employe}"></span> 
+			</li>
+		</ul>
+
+
+
+	</form>
+</body>
+</html>

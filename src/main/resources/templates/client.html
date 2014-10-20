@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Client</title>
+</head>
+<body>
+	<form action="#" th:action="client" th:object="${client}" method="post">
+
+		<table>
+			<tr>
+				<td>Nom:</td>
+				<td><input type="text" th:field="*{Nom}" /></td>
+			</tr>
+			<tr>
+				<td>Prenom:</td>
+				<td><input type="text" th:field="*{Prenom}" /></td>
+			</tr>
+			
+		    <tr>
+				<td>Telephone:</td>
+				<td><input type="text" th:field="*{Telephone}" /></td>
+			</tr>
+
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" th:field="*{Email}" /></td>
+			</tr>
+			
+			<tr>
+				<td>Adress:</td>
+				<td><input type="text" th:field="*{Adress}" /></td>
+			</tr>
+
+
+
+
+
+
+			<tr>
+				<td><input type="submit" value="Valider" /></td>
+				<td><input type="reset" value="Annuler" /></td>
+			</tr>
+		</table>
+
+		<ul>
+			<li th:each="client : ${clients}">
+			    <span th:text="${client.Nom}"></span>
+				<span th:text="${client.Prenom}"></span>
+				<span th:text="${client.Id_Client}"></span> 
+			</li>
+		</ul>
+
+
+
+	</form>
+</body>
+</html>
