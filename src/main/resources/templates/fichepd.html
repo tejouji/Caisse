@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Fiche Produit</title>
+</head>
+<body>
+<form action="#" th:action="@{/listpd}"  th:object="${produit}"    method="post"  enctype="multipart/form-data">
+	
+	 <table >
+	  
+    <tr>
+    <td>
+ Désignation:
+    </td>
+    <td>
+    <input type="text" th:field="*{designation_pd}" />
+    </td>
+     <td th:if="${#fields.hasErrors('designation_pd')}" th:errors="*{designation_pd}">tva Error</td>
+    </tr>
+    <tr>
+    <td>
+ prix_ht
+    </td>
+    <td>
+    <input type="text" th:field="*{prix_ht}" />
+    </td>
+     <td th:if="${#fields.hasErrors('prix_ht')}" th:errors="*{prix_ht}">tva Error</td>
+    </tr>
+     <tr>
+    <td>
+ quantite
+    </td>
+    <td>
+    <input type="text" th:field="*{quantite}" />
+    </td>
+     <td th:if="${#fields.hasErrors('quantite')}" th:errors="*{quantite}">tva Error</td>
+    </tr>
+     
+ 
+    
+    
+ <!--    <td   >
+    <select >
+    <option  ></option>
+    
+</select>
+--> 
+    <tr>
+    <td>
+ categorie
+    </td >
+  <td>
+ 
+ 
+            <select th:field="*{categorie}" >
+            <option value="-----------">-----------</option>
+                <option th:each="categorie : ${categorieProduits}"
+                        th:value="${categorie.id}" th:text="${categorie.designation}"></option>
+                
+            </select>
+    
+    </td>  
+    </tr>  
+    <tr>
+    <td>
+    image
+    </td>
+    <td>
+    <input type="file" name="file" th:field="*{picture}"  />
+    </td>
+    <td>
+    Name: <input type="text" name="name" />
+    
+    </td>
+    </tr> 
+    <tr>
+    <td>
+ TVA
+    </td>
+    <td>
+    <input type="text" th:field="*{tva}" />
+    </td>
+     <td th:if="${#fields.hasErrors('tva')}" th:errors="*{tva}">tva Error</td>
+    </tr>
+    
+    <tr>
+    <td><input type="submit" value="Valider" /></td>
+    
+    <td><input type="reset" value="Annuler" /></td>
+    </tr>
+    </table>    
+    <table border="2">
+   <th>numéro</th>
+   <th>désignation</th>
+     <th>Prix Hors Taxe</th>
+   <th>Quantité</th>
+   <th>Catégorie</th>
+   <th>Tva</th>
+   <tr th:each="produit : ${produits}">
+   <td th:text="${produit.id}"></td>
+   <td th:text="${produit.designation_pd}"></td>
+    <td th:text="${produit.prix_ht}"></td>
+    <td th:text="${produit.quantite}"></td>
+    <td th:text="${produit.categorie.getDesignation()}"></td>
+    <td th:text="${produit.tva}"></td>
+   </tr>
+   </table>
+    </form>
+   
+</body>
+</html>
