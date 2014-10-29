@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import fr.uha.miage.caisse.model.CategorieProduit;
 import fr.uha.miage.caisse.model.Client;
 import fr.uha.miage.caisse.repository.ClientRepository;
@@ -35,7 +37,13 @@ public class ClientController {
 	  	return "client";
 	}
 	
-	
+	@RequestMapping(value ="/delete", method = RequestMethod.GET)
+	public String deleteClient(@RequestParam("Id") Long Id_Client, Model model) {
+		
+		clientrepository.delete(Id_Client);
+		
+		return "client";
+	}
 	
 	
 

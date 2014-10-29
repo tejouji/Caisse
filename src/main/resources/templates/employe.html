@@ -5,43 +5,184 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Employe</title>
+<script type="text/javascript">
+	function divaffiche() {
+		document.getElementById("popup").style.display = "block";
+		document.getElementById("cache").style.display = "inline";
+		document.getElementById("voir").style.display = "none";
+	}
+	function verifform()
+	  {
+	   if(document.formulaire.nom.value == "")
+	    {
+	     alert("Veuillez entrer votre nom!");
+	     document.formulaire.nom.focus();
+	     return false;
+	    }
+	   if(document.formulaire.adr.value == "")
+	    {
+	     alert("Veuillez entrer votre adresse!");
+	     document.formulaire.adr.focus();
+	     return false;
+	    }
+	   if(document.formulaire.email.value == "")
+	    {
+	     alert("Veuillez entrer votre adresse électronique!");
+	     document.formulaire.email.focus();
+	     return false;
+	    }
+	   if(document.formulaire.date.value == "")
+	    {
+	     alert("Veuillez entrer votre Date de naissance!");
+	     document.formulaire.date.focus();
+	     return false;
+	    }
+	   if(document.formulaire.tel.value == "")
+	    {
+	     alert("Veuillez entrer votre numèro de téléphone!");
+	     document.formulaire.tel.focus();
+	     return false;
+	    }
+	   if(document.formulaire.email.value.indexOf('@') == -1)
+	    {
+	     alert("Ce n'est pas une adresse électronique valable!");
+	     document.formulaire.email.focus();
+	     return false;
+	    }
+
+	  }
+</script>
+
 </head>
 <body>
-	<form action="#" th:action="employe" th:object="${employe}" method="post">
+    	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Caisse Online</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li ><a href="/home">Home</a></li>
+					<li><a href="/newcat">Getion des produit</a></li>
+					<li><a href="/client">Gestion des Clients</a></li>
+					<li class="active"><a href="/employe">Getion des employés</a></li>
+				</ul>
 
-		<table>
-			<tr>
-				<td>Nom:</td>
-				<td><input type="text" th:field="*{Nom_Employe}" /></td>
-			</tr>
-			<tr>
-				<td>Prenom:</td>
-				<td><input type="text" th:field="*{Prenom_Employe}" /></td>
-			</tr>
-
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" th:field="*{Email_Employe}" /></td>
-			</tr>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
 
 
 
 
+ 	<input type="button" id="voir" value="Ajouter Employé."
+		onClick="divaffiche()" style="display: inline;" />
+
+	<form action="#" th:action="employe" th:object="${employe}"
+		method="post"  onSubmit="return verifform()">
+		<div id="popup" style="display: none;">
+			<table>
+				<tr>
+					<td>Nom:</td>
+					<td><input type="text" name="nom" th:field="*{Nom_Employe}" /></td>
+				</tr>
+				<tr>
+					<td>Prenom:</td>
+					<td><input type="text" name="pre" th:field="*{Prenom_Employe}" /></td>
+				</tr>
+
+				<tr>
+					<td>Date Naissance:</td>
+					<td><input type="text" name="date" th:field="*{Date_Naissance_E}" /></td>
+				</tr>
+				<tr>
+					<td>Sexe</td>
+					<td><label class="radio" for="radios-0"> <input
+							type="radio" name="radios" id="radios-0" value="Homme"
+							checked="checked" th:field="*{Sexe_Employe}" /> Homme
+					</label> <label class="radio" for="radios-1"> <input type="radio"
+							name="radios" id="radios-1" value="Femme"
+							th:field="*{Sexe_Employe}" /> Femme
+					</label></td>
+				</tr>
+				<tr>
+					<td>Telephone:</td>
+					<td><input type="text" name="tel" th:field="*{Telephone_Employe}" /></td>
+				</tr>
+
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" name="email" th:field="*{Email_Employe}" /></td>
+				</tr>
+				<tr>
+					<td>Adress:</td>
+					<td><input type="text" name="adr" th:field="*{Adress_Employe}" /></td>
+				</tr>
+				<tr>
+					<td>Mot de passe:</td>
+					<td><input type="password" name="pwd1" th:field="*{Password}" /></td>
+				</tr>
+				<tr>
+					<td>Confirmation:</td>
+					<td><input type="password" name="pwd2" /></td>
+				</tr>
 
 
-			<tr>
-				<td><input type="submit" value="Valider" /></td>
-				<td><input type="reset" value="Annuler" /></td>
-			</tr>
-		</table>
 
-		<ul>
-			<li th:each="employe : ${employes}">
-			    <span th:text="${employe.Nom_Employe}"></span>
-				<span th:text="${employe.Prenom_Employe}"></span>
-				<span th:text="${employe.Id_Employe}"></span> 
-			</li>
-		</ul>
+
+
+				<tr>
+					<td><input type="submit" value="Valider" /></td>
+					<td><input type="reset" value="Annuler" /></td>
+				</tr>
+			</table>
+		</div>
+
+		<!--   	<ul>
+			<li th:each="employe : ${employes}"><span
+				th:text="${employe.Nom_Employe}"></span> <span
+				th:text="${employe.Prenom_Employe}"></span> <span
+				th:text="${employe.Id_Employe}"></span></li>
+		</ul> -->
+
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prenom</th>
+						<th>Date naissance</th>
+						<th>Sexe</th>
+						<th>Telephone</th>
+						<th>Adresse</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="employe : ${employes}">
+						<td th:text="${employe.Nom_Employe}"></td>
+						<td th:text="${employe.Prenom_Employe}"></td>
+						<td th:text="${employe.Date_Naissance_E}"></td>
+						<td th:text="${employe.Sexe_Employe}"></td>
+						<td th:text="${employe.Telephone_Employe}"></td>
+						<td th:text="${employe.Adress_Employe}"></td>
+						<td th:text="${employe.Email_Employe}"></td>
+						<td><a th:href="@{/edit(Id=${employe.Id_Employe})}">Modifier</a></td>
+						<td><a th:href="@{/delete(Id=${employe.Id_Employe})}">Supprimer</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+		</div>
 
 
 

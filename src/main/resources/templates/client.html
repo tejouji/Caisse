@@ -5,54 +5,136 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Client</title>
+<script type="text/javascript">
+	function divaffiche() {
+		document.getElementById("popup").style.display = "block";
+		document.getElementById("cache").style.display = "inline";
+		document.getElementById("voir").style.display = "none";
+	}
+</script>
+
+
+
 </head>
 <body>
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Caisse Online</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li ><a href="/home">Home</a></li>
+					<li><a href="/newcat">Getion des produit</a></li>
+					<li class="active"><a href="/client">Gestion des Clients</a></li>
+					<li><a href="/employe">Getion des employés</a></li>
+				</ul>
+
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+
+
+	<!--<div th:switch="${client.Id_Client}"></div>  -->
+
+
+	<input type="button" id="voir" value="Ajouter Client."
+		onClick="divaffiche()" style="display: inline;" />
+
+
+
 	<form action="#" th:action="client" th:object="${client}" method="post">
-
-		<table>
-			<tr>
-				<td>Nom:</td>
-				<td><input type="text" th:field="*{Nom}" /></td>
-			</tr>
-			<tr>
-				<td>Prenom:</td>
-				<td><input type="text" th:field="*{Prenom}" /></td>
-			</tr>
-			
-		    <tr>
-				<td>Telephone:</td>
-				<td><input type="text" th:field="*{Telephone}" /></td>
-			</tr>
-
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" th:field="*{Email}" /></td>
-			</tr>
-			
-			<tr>
-				<td>Adress:</td>
-				<td><input type="text" th:field="*{Adress}" /></td>
-			</tr>
+		<div id="popup" style="display: none;">
+			<table>
+				<tr>
+					<td>Nom:</td>
+					<td><input type="text" th:field="*{Nom}" /></td>
+				</tr>
+				<tr>
+					<td>Prenom:</td>
+					<td><input type="text" th:field="*{Prenom}" /></td>
+				</tr>
+				<tr>
+					<td>Date Naissance:</td>
+					<td><input type="text" th:field="*{Date_Naissance}" /></td>
+				</tr>
+				<tr>
+					<td>Sexe</td>
+					<td><label class="radio" for="radios-0"> <input
+							type="radio" name="radios" id="radios-0" value="Homme"
+							checked="checked" th:field="*{Sexe}" /> Homme
+					</label> <label class="radio" for="radios-1"> <input type="radio"
+							name="radios" id="radios-1" value="Femme" th:field="*{Sexe}" />
+							Femme
+					</label></td>
 
 
+				</tr>
+				<tr>
+					<td>Telephone:</td>
+					<td><input type="text" th:field="*{Telephone}" /></td>
+				</tr>
+
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" th:field="*{Email}" /></td>
+				</tr>
+
+				<tr>
+					<td>Adress:</td>
+					<td><input type="text" th:field="*{Adress}" /></td>
+				</tr>
 
 
 
 
-			<tr>
-				<td><input type="submit" value="Valider" /></td>
-				<td><input type="reset" value="Annuler" /></td>
-			</tr>
-		</table>
 
-		<ul>
-			<li th:each="client : ${clients}">
-			    <span th:text="${client.Nom}"></span>
-				<span th:text="${client.Prenom}"></span>
-				<span th:text="${client.Id_Client}"></span> 
-			</li>
-		</ul>
 
+				<tr>
+					<td><input type="submit" value="Valider" /></td>
+					<td><input type="reset" value="Annuler" /></td>
+				</tr>
+			</table>
+
+
+		</div>
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prenom</th>
+						<th>Date naissance</th>
+						<th>Sexe</th>
+						<th>Telephone</th>
+						<th>Adresse</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="client : ${clients}">
+						<td th:text="${client.Nom}"></td>
+						<td th:text="${client.Prenom}"></td>
+						<td th:text="${client.Date_Naissance}"></td>
+						<td th:text="${client.Sexe}"></td>
+						<td th:text="${client.Telephone}"></td>
+						<td th:text="${client.Adress}"></td>
+						<td th:text="${client.Email}"></td>
+						<td><a th:href="@{/edit(Id=${client.Id_Client})}">Modifier</a></td>
+						<td><a th:href="@{/delete(Id=${client.Id_Client})}">Supprimer</a></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
 
 
 	</form>

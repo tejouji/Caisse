@@ -9,10 +9,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Client {
 	@Id
 	@GeneratedValue
-	private Long Id_Client;
+	private Long Id_Client = (long) -1;
 	@NotEmpty
 	private String Nom,Prenom,Email,Adress;
-	
+	private String Date_Naissance,Sexe; 
 	private int Telephone;
 	
 	private int Nbr_point;
@@ -20,6 +20,22 @@ public class Client {
 	
 	
 
+
+	public String getDate_Naissance() {
+		return Date_Naissance;
+	}
+
+	public void setDate_Naissance(String date_Naissance) {
+		Date_Naissance = date_Naissance;
+	}
+
+	public String getSexe() {
+		return Sexe;
+	}
+
+	public void setSexe(String sexe) {
+		Sexe = sexe;
+	}
 
 	public int getNbr_point() {
 		return Nbr_point;
