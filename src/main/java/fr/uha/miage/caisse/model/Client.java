@@ -16,10 +16,19 @@ public class Client {
 	private int Telephone;
 	
 	private int Nbr_point;
+	private long cartefid;
    
 	
 	
 
+
+	public long getCartefid() {
+		return cartefid;
+	}
+
+	public void setCartefid(long cartefid) {
+		this.cartefid = cartefid;
+	}
 
 	public String getDate_Naissance() {
 		return Date_Naissance;

@@ -9,14 +9,34 @@
 	function divaffiche() {
 		document.getElementById("popup").style.display = "block";
 		document.getElementById("cache").style.display = "inline";
-		document.getElementById("voir").style.display = "none";
+		//document.getElementById("voir").style.display = "none";
+	}
+	
+	function check() {
+		if (document.getElementById('fidel').checked)
+			{
+			 document.getElementById('fid').style.visibility = "visible";
+			}
+		else
+			{
+			document.getElementById('fid').style.visibility = "hidden";
+		
+			
+			}
 	}
 </script>
 
-
+<style>
+		
+		fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ width:350px;
+ border:1px solid #DF3F3F;
+ }</style>
 
 </head>
-<body>
+<body >
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -93,10 +113,25 @@
 					<td><input type="text" th:field="*{Adress}" /></td>
 				</tr>
 
+</table>
+<input type="checkbox" name="fidel" value="fidel" id="fidel" onclick= "check();"></input> Program Fidélité
+<div id="fid">
+<fieldset>
+<legend>Program fidelité</legend>
+   
 
 
+<table>
+<tr>
+					<td>Num carte:</td>
+					<td th:field="*{cartefid}" th:text="${client.getCartefid()}"> </td>
+				</tr>
+				</table>
+				
+</fieldset>
+</div>
 
-
+<table>
 
 				<tr>
 					<td><input type="submit" value="Valider" /></td>
