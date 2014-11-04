@@ -2,11 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+  <meta name="keywords" content="jquery,ui,easy,easyui,web"/>     
+	<link rel="stylesheet" type="text/css" href="/plugin/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="/plugin/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="/plugin/easyui.css"/>
+	<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>  
+	<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+	
+
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Nouvelle Catégorie</title>
+<script>
+$(function(){
+	$('#tt').edatagrid({
+		title:'Désignation des Produits',
+		width:950,
+		height:250,
+		singleSelect:true,
+		idField:'id',
+		url:'/loaddata',
+		updateUrl: '/updatedata',
+		destroyUrl: '/deletedata',
+		columns:[[
+			
+			{field:'designation',title:'Désignation',width:100,
+			 editor:{
+type:'validatebox',options:{
+						required:true
+					}
+
+}
+			}]],	
+		
+	});
+});
+	</script> 
+
 </head>
 <body>
-<form action="#" th:action="@{/newcat}"  th:object="${categorieProduit}" method="post">
+
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+<div class="navbar-header">
+<ul class="nav nav-pills" role="tablist">
+  <li role="presentation" ><a href="#">Home</a></li>
+   <li role="presentation" class="active"><a href="#">Catégorie Produit</a></li>
+  <li role="presentation"><a href="/fichepd">Getion des produit</a></li>
+					<li role="presentation"><a href="/client">Gestion des Clients</a></li>
+					<li role="presentation"><a href="/employe">Getion des employés</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<form action="#" th:action="@{/newcat}"  th:object="${categorieProduit}" method="post" >
 	
 	 <table>
     <tr>
@@ -23,16 +76,31 @@
     <td> <a th:href="@{/fichepd}">edit</a></td>
     <td><input type="reset" value="Annuler" /></td>
     </tr>
-    </table>    
-    <table border="2">
-   <th>numéro</th>
-   <th>désignation</th>
-   <tr th:each="categorieProduit : ${categorieProduits}">
-   <td th:text="${categorieProduit.id}"></td>
-    <td th:text="${categorieProduit.designation}"></td>
-   </tr>
-   </table>
+    </table>  
+   <div>
+ 
+	<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+	</table>
+</div>
+<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+		//<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
+		//<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+	</div>
+		
     </form>
+
+
+    <div id="footer">
+<p style="margin:auto;width:25%"> &copy; copyright M2 MIAGE</p>
+</div>      
+            
+    
+    
+            
+            
    
+
 </body>
 </html>

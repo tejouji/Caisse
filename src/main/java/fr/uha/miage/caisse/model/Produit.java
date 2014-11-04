@@ -5,42 +5,43 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(name = "produit")
 public class Produit implements Serializable {
 	
 	@Id
 	@GeneratedValue
+	@Column(name="id")
 	Long id;
 	@NotEmpty
+	@Column(name="designation_pd")
 	String designation_pd;
-	
+	@Column(name="prix_ht")
 	Double prix_ht;
 	
 	 
 	   
-	    
+	@Column(name="quantite")
 	int quantite;
 	
-	 private String name;
-	
-	public String getFilename() {
-		return name;
-	}
-	public void setFilename(String filename) {
-		this.name = filename;
-	}
+	 
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
+	 @JoinColumn(name="id_cat")
 	CategorieProduit categorie ;
 	public CategorieProduit getCategorie() {
 		return categorie;
@@ -48,6 +49,7 @@ public class Produit implements Serializable {
 	public void setCategorie(CategorieProduit categorie) {
 		this.categorie = categorie;
 	}
+	@Column(name="tva")
 	Double tva;
 	public Double getTva() {
 		return tva;

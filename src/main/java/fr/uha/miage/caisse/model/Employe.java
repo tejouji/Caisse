@@ -1,94 +1,92 @@
 package fr.uha.miage.caisse.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Employe {
+	
+
 	@Id
 	@GeneratedValue
-	private Long Id_Employe;
-
-	private String Nom_Employe;
-	private String Prenom_Employe;
-	private String Date_Naissance_E;
-	private String Sexe_Employe;
-	private String Telephone_Employe;
-	private String Email_Employe;
-	private String Adress_Employe;
-	private String Password;
-
-	public String getTelephone_Employe() {
-		return Telephone_Employe;
+	private Long id;
+	@NotEmpty
+	private String nom_emp;
+	private String pre_emp;
+	
+	private String dat_nai_emp;
+	private String sex_emp;
+	private String tel_emp;
+	private String mail_emp;
+	private String adr_emp;
+	private String mp_emp;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNom_emp() {
+		return nom_emp;
+	}
+	public void setNom_emp(String nom_emp) {
+		this.nom_emp = nom_emp;
+	}
+	public String getPre_emp() {
+		return pre_emp;
+	}
+	public void setPre_emp(String pre_emp) {
+		this.pre_emp = pre_emp;
+	}
+	public String getDat_nai_emp() {
+		return dat_nai_emp;
+	}
+	public void setDat_nai_emp(String dat_nai_emp) {
+		this.dat_nai_emp = dat_nai_emp;
+	}
+	public String getSex_emp() {
+		return sex_emp;
+	}
+	public void setSex_emp(String sex_emp) {
+		this.sex_emp = sex_emp;
+	}
+	public String getTel_emp() {
+		return tel_emp;
+	}
+	public void setTel_emp(String tel_emp) {
+		this.tel_emp = tel_emp;
+	}
+	public String getMail_emp() {
+		return mail_emp;
+	}
+	public void setMail_emp(String mail_emp) {
+		this.mail_emp = mail_emp;
+	}
+	public String getAdr_emp() {
+		return adr_emp;
+	}
+	public void setAdr_emp(String adr_emp) {
+		this.adr_emp = adr_emp;
+	}
+	public String getMp_emp() {
+		return mp_emp;
+	}
+	public void setMp_emp(String mp_emp) {
+		this.mp_emp = mp_emp;
+	}
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", nom_emp=" + nom_emp + ", pre_emp="
+				+ pre_emp + ", dat_nai_emp=" + dat_nai_emp + ", sex_emp="
+				+ sex_emp + ", tel_emp=" + tel_emp + ", mail_emp=" + mail_emp
+				+ ", adr_emp=" + adr_emp + ", mp_emp=" + mp_emp + "]";
 	}
 
-	public void setTelephone_Employe(String telephone_Employe) {
-		Telephone_Employe = telephone_Employe;
-	}
-
-	public String getDate_Naissance_E() {
-		return Date_Naissance_E;
-	}
-
-	public void setDate_Naissance_E(String date_Naissance_E) {
-		Date_Naissance_E = date_Naissance_E;
-	}
-
-	public String getSexe_Employe() {
-		return Sexe_Employe;
-	}
-
-	public void setSexe_Employe(String sexe_Employe) {
-		Sexe_Employe = sexe_Employe;
-	}
-
-	public String getAdress_Employe() {
-		return Adress_Employe;
-	}
-
-	public void setAdress_Employe(String adress_Employe) {
-		Adress_Employe = adress_Employe;
-	}
-
-	public String getPassword() {
-		return Password;
-	}
-
-	public void setPassword(String password) {
-		Password = password;
-	}
-
-	public Long getId_Employe() {
-		return Id_Employe;
-	}
-
-	public void setId_Employe(Long id_Employe) {
-		Id_Employe = id_Employe;
-	}
-
-	public String getNom_Employe() {
-		return Nom_Employe;
-	}
-
-	public void setNom_Employe(String nom_Employe) {
-		Nom_Employe = nom_Employe;
-	}
-
-	public String getPrenom_Employe() {
-		return Prenom_Employe;
-	}
-
-	public void setPrenom_Employe(String prenom_Employe) {
-		Prenom_Employe = prenom_Employe;
-	}
-
-	public String getEmail_Employe() {
-		return Email_Employe;
-	}
-
-	public void setEmail_Employe(String email_Employe) {
-		Email_Employe = email_Employe;
-	}
 
 }
