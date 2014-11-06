@@ -3,175 +3,222 @@
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta name="keywords" content="jquery,ui,easy,easyui,web" />
+<link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
+<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Client</title>
-<script type="text/javascript">
-	function divaffiche() {
-		document.getElementById("popup").style.display = "block";
-		document.getElementById("cache").style.display = "inline";
-		//document.getElementById("voir").style.display = "none";
-	}
-	
-	function check() {
-		if (document.getElementById('fidel').checked)
+<script>
+	$(function() {
+		$('#tt').edatagrid({
+			title : 'Liste des clients',
+			width : 950,
+			height : 250,
+			singleSelect : true,
+			idField : 'id',
+			url : '/loaddataClt',
+			updateUrl : '/updatedataClt',
+			destroyUrl : '/deletedataClt',
+			columns : [ [
+
 			{
-			 document.getElementById('fid').style.visibility = "visible";
-			}
-		else
-			{
-			document.getElementById('fid').style.visibility = "hidden";
-		
-			
-			}
-	}
+				field : 'nom',
+				title : 'Nom',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'prenom',
+				title : 'Prénom',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'date_naissance',
+				title : 'Date de naissance',
+				width : 100,
+				editor : {
+					type : 'datebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'sexe',
+				title : 'Sexe',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'telephone',
+				title : 'Télèphone',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'email',
+				title : 'Email',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'adress',
+				title : 'Adresse',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			} ] ],
+
+		});
+	});
 </script>
-
-<style>
-		
-		fieldset {
- padding:0 20px 20px 20px;
- margin-bottom:10px;
- width:350px;
- border:1px solid #DF3F3F;
- }</style>
-
 </head>
-<body >
+<body>
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Caisse Online</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li ><a href="/home">Home</a></li>
-					<li><a href="/newcat">Getion des produit</a></li>
-					<li class="active"><a href="/client">Gestion des Clients</a></li>
-					<li><a href="/employe">Getion des employés</a></li>
+				<ul class="nav nav-pills" role="tablist">
+					<li role="presentation"><a href="#">Home</a></li>
+					<li role="presentation"><a href="/newcat">Catégorie
+							Produit</a></li>
+					<li role="presentation"><a href="/fichepd">Getion des
+							produit</a></li>
+					<li role="presentation" class="active"><a href="/client">Gestion des
+							Clients</a></li>
+					<li role="presentation"><a href="/employe">Getion
+							des employés</a></li>
 				</ul>
-
 			</div>
-			<!--/.nav-collapse -->
 		</div>
 	</div>
 
 
 
-	<!--<div th:switch="${client.Id_Client}"></div>  -->
+	<form action="#" th:action="@{/client}" th:object="${client}"
+		method="post">
+		<table>
+			<tr>
+				<td>Nom:</td>
+				<td><input type="text" name="nom" th:field="*{nom}" /></td>
+				<td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom
+					Error</td>
+			</tr>
+			<tr>
+				<td>Prenom:</td>
+				<td><input type="text" name="pre" th:field="*{prenom}" /></td>
+			</tr>
 
+			<tr>
+				<td>Date Naissance:</td>
+				<td><input type="date" name="date" th:field="*{date_naissance}"
+					max="24-02-2013" min="1920-01-01" /></td>
+			</tr>
+			<tr>
+				<td>Sexe</td>
+				<td><label class="radio" for="radios-0"> <input
+						type="radio" name="radios" id="radios-0" value="Homme"
+						checked="checked" th:field="*{sexe}" /> Homme
+				</label> <label class="radio" for="radios-1"> <input type="radio"
+						name="radios" id="radios-1" value="Femme" th:field="*{sexe}" />
+						Femme
+				</label></td>
+			</tr>
+			<tr>
+				<td>Telephone:</td>
+				<td><input type="text" name="tel" th:field="*{telephone}" /></td>
+			</tr>
 
-	<input type="button" id="voir" value="Ajouter Client."
-		onClick="divaffiche()" style="display: inline;" />
-
-
-
-	<form action="#" th:action="client" th:object="${client}" method="post">
-		<div id="popup" style="display: none;">
-			<table>
-				<tr>
-					<td>Nom:</td>
-					<td><input type="text" th:field="*{Nom}" /></td>
-				</tr>
-				<tr>
-					<td>Prenom:</td>
-					<td><input type="text" th:field="*{Prenom}" /></td>
-				</tr>
-				<tr>
-					<td>Date Naissance:</td>
-					<td><input type="text" th:field="*{Date_Naissance}" /></td>
-				</tr>
-				<tr>
-					<td>Sexe</td>
-					<td><label class="radio" for="radios-0"> <input
-							type="radio" name="radios" id="radios-0" value="Homme"
-							checked="checked" th:field="*{Sexe}" /> Homme
-					</label> <label class="radio" for="radios-1"> <input type="radio"
-							name="radios" id="radios-1" value="Femme" th:field="*{Sexe}" />
-							Femme
-					</label></td>
-
-
-				</tr>
-				<tr>
-					<td>Telephone:</td>
-					<td><input type="text" th:field="*{Telephone}" /></td>
-				</tr>
-
-				<tr>
-					<td>Email:</td>
-					<td><input type="text" th:field="*{Email}" /></td>
-				</tr>
-
-				<tr>
-					<td>Adress:</td>
-					<td><input type="text" th:field="*{Adress}" /></td>
-				</tr>
-
-</table>
-<input type="checkbox" name="fidel" value="fidel" id="fidel" onclick= "check();"></input> Program Fidélité
-<div id="fid">
-<fieldset>
-<legend>Program fidelité</legend>
-   
-
-
-<table>
-<tr>
-					<td>Num carte:</td>
-					<td th:field="*{cartefid}" th:text="${client.getCartefid()}"> </td>
-				</tr>
-				</table>
-				
-</fieldset>
-</div>
-
-<table>
-
-				<tr>
-					<td><input type="submit" value="Valider" /></td>
-					<td><input type="reset" value="Annuler" /></td>
-				</tr>
-			</table>
-
-
-		</div>
-		<div>
-			<table class="table table-striped">
-				<thead>
+			<tr>
+				<td>Email:</td>
+				<td><input type="text" name="email" th:field="*{email}" /></td>
+			</tr>
+			<tr>
+				<td>Adress:</td>
+				<td><input type="text" name="adr" th:field="*{adress}" /></td>
+			</tr>
+		</table>
+		<input type="checkbox" name="fidel" value="fidel" id="fidel"
+			onclick="check();"></input> Program Fidélité
+		<div id="fid">
+			<fieldset>
+				<legend>Program fidelité</legend>
+				<table>
 					<tr>
-						<th>Nom</th>
-						<th>Prenom</th>
-						<th>Date naissance</th>
-						<th>Sexe</th>
-						<th>Telephone</th>
-						<th>Adresse</th>
-						<th>Email</th>
+						<td>Num carte:</td>
+						<td th:field="*{cartefid}" th:text="${client.getCartefid()}">
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="client : ${clients}">
-						<td th:text="${client.Nom}"></td>
-						<td th:text="${client.Prenom}"></td>
-						<td th:text="${client.Date_Naissance}"></td>
-						<td th:text="${client.Sexe}"></td>
-						<td th:text="${client.Telephone}"></td>
-						<td th:text="${client.Adress}"></td>
-						<td th:text="${client.Email}"></td>
-						<td><a th:href="@{/edit(Id=${client.Id_Client})}">Modifier</a></td>
-						<td><a th:href="@{/delete(Id=${client.Id_Client})}">Supprimer</a></td>
-					</tr>
+				</table>
 
-				</tbody>
+			</fieldset>
+		</div>
+		<table>
+			<tr>
+				<td><input type="submit" value="Valider" /></td>
+				<td><input type="reset" value="Annuler" /></td>
+			</tr>
+		</table>
+		<div>
+
+			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
+				fitColumns="true">
 			</table>
 		</div>
-
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+				onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a> <a
+				href="#" class="easyui-linkbutton" iconCls="icon-remove"
+				plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+			//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
+				plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
+			//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
+				plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+		</div>
 
 	</form>
+
+
+	<div id="footer">
+		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
+	</div>
+
 </body>
 </html>

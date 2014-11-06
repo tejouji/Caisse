@@ -12,10 +12,10 @@ import fr.uha.miage.caisse.model.Produit;
 import fr.uha.miage.caisse.model.ProduitCat;
 
 public interface ProduitRepository extends CrudRepository<Produit, Long> {
-	public final static String FIND_BY_ALL_QUERY="SELECT  p.id,p.designation_pd,p.prix_ht"
+	/*public final static String FIND_BY_ALL_QUERY="SELECT  p.id,p.designation_pd,p.prix_ht"
 	 		+ ",p.quantite FROM  Produit p  left join  fr.uha.miage.caisse.model.CategorieProduit on c.id=p.id_cat  ";
 	@Query(FIND_BY_ALL_QUERY)
-	 public List<ProduitCat> FIND_BY_ALL();
+	 public List<ProduitCat> FIND_BY_ALL();*/
 
 	
 }

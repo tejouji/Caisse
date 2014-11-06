@@ -20,36 +20,43 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "produit")
+//@Table(name = "Produit")
 public class Produit implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	//@Column(name="id")
 	Long id;
 	@NotEmpty
-	@Column(name="designation_pd")
+	//@Column(name="designation_pd")
 	String designation_pd;
-	@Column(name="prix_ht")
+	//@Column(name="prix_ht")
 	Double prix_ht;
 	
 	 
 	   
-	@Column(name="quantite")
+	//@Column(name="quantite")
 	int quantite;
 	
 	 
 
-	@ManyToOne (fetch = FetchType.LAZY)
-	 @JoinColumn(name="id_cat")
+	@ManyToOne //(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_cat")
 	CategorieProduit categorie ;
+	String cat;
+	public String getCat() {
+		return categorie.getDesignation();
+	}
+	public void setCat(String cat) {
+		this.cat = cat;
+	}
 	public CategorieProduit getCategorie() {
 		return categorie;
 	}
 	public void setCategorie(CategorieProduit categorie) {
 		this.categorie = categorie;
 	}
-	@Column(name="tva")
+	//@Column(name="tva")
 	Double tva;
 	public Double getTva() {
 		return tva;

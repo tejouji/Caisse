@@ -9,18 +9,84 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Client {
 	@Id
 	@GeneratedValue
-	private Long Id_Client = (long) -1;
+	private Long id = (long) -1;
 	@NotEmpty
-	private String Nom,Prenom,Email,Adress;
-	private String Date_Naissance,Sexe; 
-	private int Telephone;
+	private String nom,prenom,email,adress;
+	private String date_naissance,sexe; 
+	private int telephone;
 	
-	private int Nbr_point;
+	private int nbr_point;
 	private long cartefid;
    
 	
 	
 
+
+	
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	public String getDate_naissance() {
+		return date_naissance;
+	}
+
+	public void setDate_naissance(String date_naissance) {
+		this.date_naissance = date_naissance;
+	}
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public int getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(int telephone) {
+		this.telephone = telephone;
+	}
+
+	public int getNbr_point() {
+		return nbr_point;
+	}
+
+	public void setNbr_point(int nbr_point) {
+		this.nbr_point = nbr_point;
+	}
 
 	public long getCartefid() {
 		return cartefid;
@@ -30,77 +96,14 @@ public class Client {
 		this.cartefid = cartefid;
 	}
 
-	public String getDate_Naissance() {
-		return Date_Naissance;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDate_Naissance(String date_Naissance) {
-		Date_Naissance = date_Naissance;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getSexe() {
-		return Sexe;
-	}
 
-	public void setSexe(String sexe) {
-		Sexe = sexe;
-	}
-
-	public int getNbr_point() {
-		return Nbr_point;
-	}
-
-	public void setNbr_point(int nbr_point) {
-		Nbr_point = nbr_point;
-	}
-
-	public Long getId_Client() {
-		return Id_Client;
-	}
-
-	public void setId_Client(Long id_Client) {
-		Id_Client = id_Client;
-	}
-
-	public String getNom() {
-		return Nom;
-	}
-
-	public void setNom(String nom) {
-		Nom = nom;
-	}
-
-	public String getPrenom() {
-		return Prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		Prenom = prenom;
-	}
-
-	public String getAdress() {
-		return Adress;
-	}
-
-	public void setAdress(String adress) {
-		Adress = adress;
-	}
-
-	public int getTelephone() {
-		return Telephone;
-	}
-
-	public void setTelephone(int telephone) {
-		Telephone = telephone;
-	}
-
-	public String getEmail() {
-		return Email;
-	}
-
-	public void setEmail(String email) {
-		Email = email;
-	}
-	
 	
 }
