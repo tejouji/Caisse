@@ -1,6 +1,11 @@
 package fr.uha.miage.caisse.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.validation.Valid;
 
@@ -21,8 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fr.uha.miage.caisse.model.CategorieProduit;
 import fr.uha.miage.caisse.model.Produit;
+import fr.uha.miage.caisse.model.ProduitCat;
 import fr.uha.miage.caisse.repository.CategorieProduitRepository;
-
 import fr.uha.miage.caisse.repository.ProduitRepository;
 
 @Controller
@@ -63,9 +68,35 @@ public class ProduitController {
 
 	   
 
-	    public List<Produit> allPhones() {
-	List<Produit> json = (List<Produit>) prodRepository.findAll() ;
-		return json;
+	    public List<ProduitCat> allPhones() {
+	//List<Produit> json = (List<Produit>) prodRepository.findAll() ;
+	List<ProduitCat> json1 = new ArrayList<ProduitCat>() ;
+		
+		
+		
+	Object[] tab= new Object[7];
+	 List<Object[]> groupList = (List<Object[]>) prodRepository.FIND_BY_ALL() ;
+	 
+
+	for(int i=0;i<groupList.size();i++)
+	{tab=groupList.get(i);
+	//Double d = (Double) tab[2];
+	Long id=Long.parseLong(tab[0].toString());
+	String designation_pd=String.valueOf(tab[1]);
+	Double prix_ht=Double.parseDouble(String.valueOf(tab[2]));
+	int quantite=Integer.parseInt(String.valueOf(tab[3]));
+	String categorie=String.valueOf(tab[6]);
+Double tva=Double.parseDouble(String.valueOf(tab[4]));
+	
+	Long idcat=Long.parseLong(String.valueOf(tab[5]));
+	
+	ProduitCat pc= new ProduitCat(id, designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	json1.add(pc);
+	
+	}
+	
+	System.out.println(json1);
+		return json1;
 	    }
 		  
 		 

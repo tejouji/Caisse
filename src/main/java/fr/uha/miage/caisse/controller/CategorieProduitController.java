@@ -1,5 +1,6 @@
 package fr.uha.miage.caisse.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.uha.miage.caisse.model.CategorieProduit;
+import fr.uha.miage.caisse.model.Produit;
+import fr.uha.miage.caisse.model.ProduitCat;
 import fr.uha.miage.caisse.repository.CategorieProduitRepository;
 
 @Controller
@@ -94,4 +97,31 @@ List<CategorieProduit> json = (List<CategorieProduit>) catProdRepository.findAll
 		return json;
 	    }
 
+	 
+	 
+	 
+	 
+	 @ResponseBody
+		@RequestMapping(value = "/getcat", method = RequestMethod.POST,
+				
+				
+				headers="Accept=application/json")
+
+	   
+
+	    public List<CategorieProduit> allcat() {
+	
+		
+		
+		
+	
+			List<CategorieProduit> json1 = (List<CategorieProduit>) catProdRepository.findAll() ;
+	 
+			System.out.println(json1);
+	
+		return json1;
+	    }
+		  
+		 
+		
 }

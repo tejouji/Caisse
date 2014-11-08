@@ -51,9 +51,13 @@ type:'validatebox',options:{
 
 }
 			},
-				{field:'cat',title:'Catégorie',width:100,
+				{field:'categorie',title:'Catégorie',width:100,
 			 editor:{
-type:'validatebox',options:{
+				 type:'combobox',
+					options:{
+						valueField:'designation',
+						textField:'designation',
+						url:"/getcat",
 						required:true
 					}
 

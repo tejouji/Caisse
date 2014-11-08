@@ -11,11 +11,10 @@ import org.springframework.data.repository.CrudRepository;
 import fr.uha.miage.caisse.model.Produit;
 import fr.uha.miage.caisse.model.ProduitCat;
 
-public interface ProduitRepository extends CrudRepository<Produit, Long> {
-	/*public final static String FIND_BY_ALL_QUERY="SELECT  p.id,p.designation_pd,p.prix_ht"
-	 		+ ",p.quantite FROM  Produit p  left join  fr.uha.miage.caisse.model.CategorieProduit on c.id=p.id_cat  ";
+public interface ProduitRepository extends JpaRepository<Produit, Long> {
+	public final static String FIND_BY_ALL_QUERY="SELECT p.id,p.designation_pd,p.prix_ht,p.quantite,p.tva,c.id,c.designation from Produit p ,CategorieProduit c where p.categorie=c";
 	@Query(FIND_BY_ALL_QUERY)
-	 public List<ProduitCat> FIND_BY_ALL();*/
+	 public List<Object[]> FIND_BY_ALL();
 
 	
 }
