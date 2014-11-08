@@ -121,10 +121,10 @@
 							Produit</a></li>
 					<li role="presentation"><a href="/fichepd">Getion des
 							produit</a></li>
-					<li role="presentation" class="active"><a href="/client">Gestion des
-							Clients</a></li>
-					<li role="presentation"><a href="/employe">Getion
-							des employés</a></li>
+					<li role="presentation" class="active"><a href="/client">Gestion
+							des Clients</a></li>
+					<li role="presentation"><a href="/employe">Getion des
+							employés</a></li>
 				</ul>
 			</div>
 		</div>
@@ -134,68 +134,78 @@
 
 	<form action="#" th:action="@{/client}" th:object="${client}"
 		method="post">
-		<table>
-			<tr>
-				<td>Nom:</td>
-				<td><input type="text" name="nom" th:field="*{nom}" /></td>
-				<td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom
-					Error</td>
-			</tr>
-			<tr>
-				<td>Prenom:</td>
-				<td><input type="text" name="pre" th:field="*{prenom}" /></td>
-			</tr>
-
-			<tr>
-				<td>Date Naissance:</td>
-				<td><input type="date" name="date" th:field="*{date_naissance}"
-					max="24-02-2013" min="1920-01-01" /></td>
-			</tr>
-			<tr>
-				<td>Sexe</td>
-				<td><label class="radio" for="radios-0"> <input
-						type="radio" name="radios" id="radios-0" value="Homme"
-						checked="checked" th:field="*{sexe}" /> Homme
-				</label> <label class="radio" for="radios-1"> <input type="radio"
-						name="radios" id="radios-1" value="Femme" th:field="*{sexe}" />
-						Femme
-				</label></td>
-			</tr>
-			<tr>
-				<td>Telephone:</td>
-				<td><input type="text" name="tel" th:field="*{telephone}" /></td>
-			</tr>
-
-			<tr>
-				<td>Email:</td>
-				<td><input type="text" name="email" th:field="*{email}" /></td>
-			</tr>
-			<tr>
-				<td>Adress:</td>
-				<td><input type="text" name="adr" th:field="*{adress}" /></td>
-			</tr>
-		</table>
-		<input type="checkbox" name="fidel" value="fidel" id="fidel"
-			onclick="check();"></input> Program Fidélité
-		<div id="fid">
-			<fieldset>
-				<legend>Program fidelité</legend>
+		<fieldset>
+			<legend>Nouevau client</legend>
+			<ol>
 				<table>
 					<tr>
-						<td>Num carte:</td>
-						<td th:field="*{cartefid}" th:text="${client.getCartefid()}">
-						</td>
+						<td>Nom:</td>
+						<td><input type="text" name="nom" th:field="*{nom}"
+							required="required" /></td>
+						<td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom
+							Error</td>
+					</tr>
+					<tr>
+						<td>Prenom:</td>
+						<td><input type="text" name="pre" th:field="*{prenom}"
+							required="required" /></td>
+					</tr>
+
+					<tr>
+						<td>Date Naissance:</td>
+						<td><input type="date" name="date"
+							th:field="*{date_naissance}" max="24-02-2013" min="1920-01-01" /></td>
+					</tr>
+					<tr>
+						<td>Sexe</td>
+						<td><label class="radio" for="radios-0"> <input
+								type="radio" name="radios" id="radios-0" value="Homme"
+								checked="checked" th:field="*{sexe}" /> Homme
+						</label> <label class="radio" for="radios-1"> <input type="radio"
+								name="radios" id="radios-1" value="Femme" th:field="*{sexe}" />
+								Femme
+						</label></td>
+					</tr>
+					<tr>
+						<td>Telephone:</td>
+						<td><input type="text" name="tel" th:field="*{telephone}"
+							required="required" /></td>
+					</tr>
+
+					<tr>
+						<td>Email:</td>
+						<td><input type="email" name="email" th:field="*{email}"
+							required="required" /></td>
+					</tr>
+					<tr>
+						<td>Adress:</td>
+						<td><input type="text" name="adr" th:field="*{adress}"
+							required="required" /></td>
 					</tr>
 				</table>
+				<input type="checkbox" name="fidel" value="fidel" id="fidel"
+					onclick="check();"></input> Program Fidélité
+				<div id="fid">
+					<fieldset>
+						<legend>Program fidelité</legend>
+						<table>
+							<tr>
+								<td>Num carte:</td>
+								<td th:field="*{cartefid}" th:text="${client.getCartefid()}">
+								</td>
+							</tr>
+						</table>
 
-			</fieldset>
-		</div>
-		<table>
-			<tr>
-				<td><input type="submit" value="Valider" /></td>
-				<td><input type="reset" value="Annuler" /></td>
-			</tr>
-		</table>
+					</fieldset>
+				</div>
+				<table>
+					<tr>
+						<td><input type="submit" value="Valider" /></td>
+						<td><input type="reset" value="Annuler" /></td>
+					</tr>
+				</table>
+			</ol>
+		</fieldset>
 		<div>
 
 			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
@@ -212,7 +222,6 @@
 			//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
 				plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
 		</div>
-
 	</form>
 
 

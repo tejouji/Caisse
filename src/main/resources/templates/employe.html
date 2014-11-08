@@ -1,198 +1,255 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
-  <meta name="keywords" content="jquery,ui,easy,easyui,web"/>     
-	<link rel="stylesheet" type="text/css" href="/plugin/icon.css"/>
-	<link rel="stylesheet" type="text/css" href="/plugin/demo.css"/>
-	<link rel="stylesheet" type="text/css" href="/plugin/easyui.css"/>
-	<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>  
-	<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
-	<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
-	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta name="keywords" content="jquery,ui,easy,easyui,web" />
+<link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
+<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+document.getElementById("mdp1").onchange = validatePassword;
+document.getElementById("mdp2").onchange = validatePassword;
+}
+function validatePassword(){
+var pass2=document.getElementById("mdp2").value;
+var pass1=document.getElementById("mdp1").value;
+if(pass1!=pass2)
+document.getElementById("mdp2").setCustomValidity("Passwords Don't Match");
+else
+document.getElementById("mdp2").setCustomValidity('');
+//empty string means no validation error
+}
+</script>
 
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Nouvelle Catégorie</title>
 <script>
+	$(function() {
+		$('#tt').edatagrid({
+			title : 'Liste des employés',
+			width : 950,
+			height : 250,
+			singleSelect : true,
+			idField : 'id',
+			url : '/loaddataem',
+			updateUrl : '/updatedataem',
+			destroyUrl : '/deletedataem',
+			columns : [ [
 
-$(function(){
-	$('#tt').edatagrid({
-		title:'Liste des employés',
-		width:950,
-		height:250,
-		singleSelect:true,
-		idField:'id',
-		url:'/loaddataem',
-		updateUrl: '/updatedataem',
-		destroyUrl: '/deletedataem',
-		columns:[[
-			
-			{field:'nom_emp',title:'Nom',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
-					}
-
-}
-			},
-				{field:'pre_emp',title:'Prénom',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
-					}
-
-}
-			},
-				{field:'dat_nai_emp',title:'Date de naissance',width:100,
-				editor:{
-					type:'datebox',
-					options:{
-						required:true
+			{
+				field : 'nom_emp',
+				title : 'Nom',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
 					}
 
 				}
-			},
-				{field:'sex_emp',title:'Sexe',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
+			}, {
+				field : 'pre_emp',
+				title : 'Prénom',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
 					}
 
-}
-			},
-				{field:'tel_emp',title:'Télèphone',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
+				}
+			}, {
+				field : 'dat_nai_emp',
+				title : 'Date de naissance',
+				width : 100,
+				editor : {
+					type : 'datebox',
+					options : {
+						required : true
 					}
 
-}
-			},
-				{field:'mail_emp',title:'Email',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
+				}
+			}, {
+				field : 'sex_emp',
+				title : 'Sexe',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
 					}
 
-}
-			},
-				{field:'adr_emp',title:'Adresse',width:100,
-			 editor:{
-type:'validatebox',options:{
-						required:true
+				}
+			}, {
+				field : 'tel_emp',
+				title : 'Télèphone',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
 					}
 
-}
-			}
-			]],	
-		
+				}
+			}, {
+				field : 'mail_emp',
+				title : 'Email',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'adr_emp',
+				title : 'Adresse',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			} ] ],
+
+		});
 	});
-});
-	</script> 
+</script>
 
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
-<div class="navbar-header">
-<ul class="nav nav-pills" role="tablist">
-  <li role="presentation" ><a href="#">Home</a></li>
-   <li role="presentation" ><a href="/newcat">Catégorie Produit</a></li>
-  <li role="presentation"><a href="/fichepd">Getion des produit</a></li>
-					<li role="presentation"><a href="/client">Gestion des Clients</a></li>
-					<li role="presentation" class="active"><a href="/employe">Getion des employés</a></li>
-</ul>
-</div>
-</div>
-</div>
-
-
-
-<form action="#" th:action="@{/employe}" th:object="${employe}" method="post" >
-<table>
-				<tr>
-					<td>Nom:</td>
-					<td><input type="text" name="nom" th:field="*{nom_emp}" /></td>
-					 <td th:if="${#fields.hasErrors('nom_emp')}" th:errors="*{nom_emp}">Nom Error</td>
-				</tr>
-				<tr>
-					<td>Prenom:</td>
-					<td><input type="text" name="pre" th:field="*{pre_emp}" /></td>
-				</tr>
-
-				<tr>
-					<td>Date Naissance:</td>
-					<td><input type="date" name="date" th:field="*{dat_nai_emp}" max="24-02-2013" min="1920-01-01" />
-					
-					</td>
-				</tr>
-				<tr>
-					<td>Sexe</td>
-					<td><label class="radio" for="radios-0"> <input
-							type="radio" name="radios" id="radios-0" value="Homme"
-							checked="checked" th:field="*{sex_emp}" /> Homme
-					</label> <label class="radio" for="radios-1"> <input type="radio"
-							name="radios" id="radios-1" value="Femme" th:field="*{sex_emp}" />
-							Femme
-					</label></td>
-				</tr>
-				<tr>
-					<td>Telephone:</td>
-					<td><input type="text" name="tel" th:field="*{tel_emp}" /></td>
-				</tr>
-
-				<tr>
-					<td>Email:</td>
-					<td><input type="text" name="email" th:field="*{mail_emp}" /></td>
-				</tr>
-				<tr>
-					<td>Adress:</td>
-					<td><input type="text" name="adr" th:field="*{adr_emp}" /></td>
-				</tr>
-				<tr>
-					<td>Mot de passe:</td>
-					<td><input type="password" name="pwd1" th:field="*{mp_emp}" /></td>
-				</tr>
-				<tr>
-					<td>Confirmation:</td>
-					<td><input type="password" name="pwd2" /></td>
-				</tr>
-
-
-
-
-
-				<tr>
-					<td><input type="submit" value="Valider" /></td>
-					<td><input type="reset" value="Annuler" /></td>
-				</tr>
-			</table>
-   <div>
- 
-	<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
-	</table>
-</div>
-<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
-		//<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
-		//<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+			<div class="navbar-header">
+				<ul class="nav nav-pills" role="tablist">
+					<li role="presentation"><a href="#">Home</a></li>
+					<li role="presentation"><a href="/newcat">Catégorie
+							Produit</a></li>
+					<li role="presentation"><a href="/fichepd">Getion des
+							produit</a></li>
+					<li role="presentation"><a href="/client">Gestion des
+							Clients</a></li>
+					<li role="presentation" class="active"><a href="/employe">Getion
+							des employés</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-		
-    </form>
 
 
-    <div id="footer">
-<p style="margin:auto;width:25%"> &copy; copyright M2 MIAGE</p>
-</div>      
-            
-    
-    
-            
-            
-   
+
+	<form action="#" th:action="@{/employe}" th:object="${employe}"
+		method="post" onSubmit=" validatePassword()">
+		<fieldset>
+			<legend>Nouevau employer</legend>
+			<ol>
+				<table>
+					<tr>
+						<td>Nom:</td>
+						<td><input type="text" name="nom" th:field="*{nom_emp}"
+							required="required" /></td>
+						<td th:if="${#fields.hasErrors('nom_emp')}" th:errors="*{nom_emp}">Nom
+							Error</td>
+					</tr>
+					<tr>
+						<td>Prenom:</td>
+						<td><input type="text" name="pre" th:field="*{pre_emp}"
+							required="required" /></td>
+					</tr>
+
+					<tr>
+						<td>Date Naissance:</td>
+						<td><input type="date" name="date" th:field="*{dat_nai_emp}"
+							max="24-02-2013" min="1920-01-01" required="required" /></td>
+					</tr>
+					<tr>
+						<td>Sexe</td>
+						<td><label class="radio" for="radios-0"> <input
+								type="radio" name="radios" id="radios-0" value="Homme"
+								checked="checked" th:field="*{sex_emp}" /> Homme
+						</label> <label class="radio" for="radios-1"> <input type="radio"
+								name="radios" id="radios-1" value="Femme" th:field="*{sex_emp}" />
+								Femme
+						</label></td>
+					</tr>
+					<tr>
+						<td>Telephone:</td>
+						<td><input type="text" name="tel" th:field="*{tel_emp}"
+							required="required" /></td>
+					</tr>
+
+					<tr>
+						<td>Email:</td>
+						<td><input type="email" name="email" th:field="*{mail_emp}"
+							required="required" /></td>
+					</tr>
+					<tr>
+						<td>Adress:</td>
+						<td><input type="text" name="adr" th:field="*{adr_emp}"
+							required="required" /></td>
+					</tr>
+					<tr>
+						<td>Mot de passe:</td>
+						<td><input id='pwd1' type="password" name="pwd1"
+							th:field="*{mp_emp}" required="required" /></td>
+					</tr>
+					<tr>
+						<td>Confirmation:</td>
+						<td><input id='pwd2' type="password" name="pwd2"
+							required="required" /></td>
+					</tr>
+
+
+
+
+
+					<tr>
+						<td><input type="submit" value="Valider" /></td>
+						<td><input type="reset" value="Annuler" /></td>
+					</tr>
+				</table>
+			</ol>
+		</fieldset>
+		<div>
+
+			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
+				fitColumns="true">
+			</table>
+		</div>
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+				onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a> <a
+				href="#" class="easyui-linkbutton" iconCls="icon-remove"
+				plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+			//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
+				plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
+			//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
+				plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+		</div>
+
+	</form>
+
+
+	<div id="footer">
+		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
+	</div>
+
+
+
+
+
+
 
 </body>
 </html>
