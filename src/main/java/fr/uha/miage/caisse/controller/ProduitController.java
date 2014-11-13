@@ -38,6 +38,8 @@ public class ProduitController {
 	@Autowired
 	private CategorieProduitRepository catProdRepository;
 	
+	CategorieProduit cat;
+	
 	@RequestMapping(value = "/fichepd", method = RequestMethod.GET)
 	public String Auth(Model model) {
 	model.addAttribute("produit", new Produit());
@@ -56,7 +58,7 @@ public class ProduitController {
         }
 	model.addAttribute("produit", new Produit());
 	prodRepository.save(produit);
-	System.out.println(produit);
+	//System.out.println(produit);
 	model.addAttribute("produits", prodRepository.findAll());
 		return "fichepd";
 	}	
@@ -95,7 +97,7 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	
 	}
 	
-	System.out.println(json1);
+	//System.out.println(json1);
 		return json1;
 	    }
 		  
@@ -124,11 +126,47 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 
 		   
 
-		    public List<Produit> modifier(@ModelAttribute Produit product, Model model) {
-			prodRepository.save(product);
-		List<Produit> json = (List<Produit>) prodRepository.findAll() ;
+		   
+		 public List<ProduitCat> modifier(@ModelAttribute ProduitCat product, Model model) {
+		System.out.println("test");
+			 System.out.println("test"+product);
+			 
+			 
+		List<ProduitCat> json1 = new ArrayList<ProduitCat>() ;
+		CategorieProduit c=catProdRepository.FIND_BY_des(product.getCategorie());
+		Produit p= new Produit();
+		p.setId(product.getId());
+		p.setCategorie(c);
+	p.setDesignation_pd(product.getDesignation_pd());
+	p.setPrix_ht(product.getPrix_ht());
+	p.setQuantite(product.getQuantite());
+	p.setTva(product.getTva());
+	prodRepository.save(p);
 		
-			return json;
+		
+	Object[] tab= new Object[7];
+	 List<Object[]> groupList = (List<Object[]>) prodRepository.FIND_BY_ALL() ;
+	 
+
+	for(int i=0;i<groupList.size();i++)
+	{tab=groupList.get(i);
+	//Double d = (Double) tab[2];
+	Long id=Long.parseLong(tab[0].toString());
+	String designation_pd=String.valueOf(tab[1]);
+	Double prix_ht=Double.parseDouble(String.valueOf(tab[2]));
+	int quantite=Integer.parseInt(String.valueOf(tab[3]));
+	String categorie=String.valueOf(tab[6]);
+Double tva=Double.parseDouble(String.valueOf(tab[4]));
+	
+	Long idcat=Long.parseLong(String.valueOf(tab[5]));
+	
+	ProduitCat pc= new ProduitCat(id, designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	json1.add(pc);
+	
+	}
+	
+	//System.out.println(json1);
+		return json1;
 		    }
 
 	

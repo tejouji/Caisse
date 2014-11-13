@@ -20,6 +20,9 @@ public class ProduitCat {
 		this.idcat=idcat;
 		this.tva=tva;
 	}
+	 public ProduitCat() {
+		// TODO Auto-generated constructor stub
+	}
 	
 
 	@Override

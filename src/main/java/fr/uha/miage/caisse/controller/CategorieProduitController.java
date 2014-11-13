@@ -117,7 +117,7 @@ List<CategorieProduit> json = (List<CategorieProduit>) catProdRepository.findAll
 	
 			List<CategorieProduit> json1 = (List<CategorieProduit>) catProdRepository.findAll() ;
 	 
-			System.out.println(json1);
+			
 	
 		return json1;
 	    }
