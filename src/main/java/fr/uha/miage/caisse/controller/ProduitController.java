@@ -170,5 +170,32 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 		    }
 
 	
+		 @SuppressWarnings("null")
+			@ResponseBody
+				@RequestMapping(value = "/autoproduit", method = RequestMethod.GET,
+						
+						
+						headers="Accept=application/json")
 
+			   
+
+			    public List<String> allcatauto(@RequestParam("term") String term) {
+			
+				
+				 List<Produit> l = (List<Produit>) prodRepository.FIND_BY_desauto(term) ;
+				
+
+					List<String> json1 =new ArrayList<String>();
+					for(int i=0;i<l.size();i++)
+						
+					{
+						json1.add(l.get(i).getDesignation_pd());
+						
+					}
+					
+					
+					
+			
+				return json1;
+		 }
 }

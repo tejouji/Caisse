@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css"></link>
+ <script>
+  $(function() {
+   
+    $( "#tags" ).autocomplete({
+    	source: "/autoproduit"
+    	
+    });
+  });
+  </script>
+</head>
+<body>
+ 
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags"></input>
+</div>
+ 
+ 
+</body>
+</html>

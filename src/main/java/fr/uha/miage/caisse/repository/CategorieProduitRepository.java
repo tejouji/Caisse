@@ -18,4 +18,8 @@ public interface CategorieProduitRepository extends JpaRepository<CategorieProdu
 	 public CategorieProduit FIND_BY_des(@Param("designation") String designation);
 
 
+
+
+
+
 }
