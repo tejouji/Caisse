@@ -1,27 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css"></link>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <script>
+ function test()
+ {
+if (event.keyCode == 13) 
+	{
+
+document.getElementById('quantit').focus();
+
+$.ajax({  
+    type : 'POST',  
+    url : "/getCode",  
+    data : { "term":$("#prd").val()},  
+    success : function(result) {  
+    	document.getElementById('code').value=result;
+    }  
+});  
+	}
+else
+	{
   $(function() {
    
-    $( "#tags" ).autocomplete({
+    $( "#prd" ).autocomplete({
     	source: "/autoproduit"
     	
     });
   });
+ }
+ }
+  </script>
+  <script>
+ function verif()
+ {
+if (event.keyCode == 13) 
+	{
+
+
+
+$.ajax({  
+    type : 'POST',  
+    url : "/verif",  
+    data : { "term":$("#code").val(),"term1":$("#quantit").val()},  
+    success : function(result) {  
+    	alert(result)
+    }  
+});  
+	}
+
+ }
   </script>
 </head>
 <body>
  
-<div class="ui-widget">
-  <label for="tags">Tags: </label>
-  <input id="tags"></input>
-</div>
- 
- 
+
+
+  <label for="prd">Désignation </label>
+  
+  <input id="prd"  onKeyPress="test();"></input>
+<label> Code</label>
+ <input id="code"></input>
+ <label>Quantité</label>
+ <input id="quantit"  onKeyPress="verif();" ></input>
+
 </body>
 </html>

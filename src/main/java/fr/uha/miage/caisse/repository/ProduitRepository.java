@@ -22,5 +22,13 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 		@Query(FIND_BY_des)
 		
 		 public List<Produit> FIND_BY_desauto(@Param("term") String term);	
+		
+		
+		
+		 public final static String FIND_des="SELECT p from Produit p WHERE p.designation_pd = :term)";
+			
+			@Query(FIND_des)
+			
+			 public Produit FIND_des(@Param("term") String term);	
 
 }
