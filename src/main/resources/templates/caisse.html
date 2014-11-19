@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
- <link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
- <script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
-  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 
 
 <script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
 
- 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- 
- <script>
- function test()
- {
-if (event.keyCode == 13) 
-	{
 
-document.getElementById('quantit').focus();
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-$.ajax({  
-    type : 'POST',  
-    url : "/getCode",  
-    data : { "term":$("#prd").val()},  
-    success : function(result) {  
-    	document.getElementById('code').value=result;
-    }  
-});  
-	}
-else
-	{
-  $(function() {
-   
-    $( "#prd" ).autocomplete({
-    	source: "/autoproduit"
-    	
-    });
-  });
- }
- }
-  </script>
-  <script>
- function verif()
- {
-if (event.keyCode == 13) 
-	{
+<script>
+	function test() {
+		if (event.keyCode == 13) {
 
-if(document.getElementById('code').value.toString()=="0")
-	{
-	alert("Produit inexistant");
-	}
-else
-	{
-	if(document.getElementById('quantit').value.toString()=="")
-		{
-		alert("Donnez une quantité");
+			document.getElementById('quantit').focus();
+
+			$.ajax({
+				type : 'POST',
+				url : "/getCode",
+				data : {
+					"term" : $("#prd").val()
+				},
+				success : function(result) {
+					document.getElementById('code').value = result;
+				}
+			});
+		} else {
+			$(function() {
+
+				$("#prd").autocomplete({
+					source : "/autoproduit"
+
+				});
+			});
 		}
-	else
-		{
-$.ajax({  
-    type : 'POST',  
-    url : "/verif",  
-    data : { "term":$("#code").val(),"term1":$("#quantit").val()},  
-    success : function(result) {  
-    	if(result=="passe")
-    		{
-    		alert("bien");
-    	location.reload();
-    		}
-    	else
-    		alert(result);
-    }  
-});  
 	}
+</script>
+<script>
+	function verif() {
+		if (event.keyCode == 13) {
+
+			if (document.getElementById('code').value.toString() == "0") {
+				alert("Produit inexistant");
+			} else {
+				if (document.getElementById('quantit').value.toString() == "") {
+					alert("Donnez une quantité");
+				} else {
+					$.ajax({
+						type : 'POST',
+						url : "/verif",
+						data : {
+							"term" : $("#code").val(),
+							"term1" : $("#quantit").val()
+						},
+						success : function(result) {
+							if (result == "passe") {
+								alert("bien");
+								location.reload();
+							} else
+								alert(result);
+						}
+					});
+				}
+			}
+		}
 	}
-	}
- }
-  </script>
-  <script>
+</script>
+<script>
 	$(function() {
 		$('#tt').edatagrid({
 			title : 'Commande',
@@ -91,35 +85,26 @@ $.ajax({
 			singleSelect : true,
 			idField : 'id',
 			url : '/loaddatacmd',
-			
-			columns : [ [
-{
+
+			columns : [ [ {
 				field : 'categorie',
 				title : 'Catégorie',
 				width : 100
-},
- {
+			}, {
 				field : 'id',
 				title : 'Code',
 				width : 100
-				
 
-				
-			},
-			{
+			}, {
 				field : 'designation_pd',
 				title : 'Désignation',
 				width : 100
-				
 
-				
-			},{
+			}, {
 				field : 'prix_ht',
 				title : 'Prix HT',
 				width : 100
-				
 
-				
 			}, {
 				field : 'quantite',
 				title : 'Quantité',
@@ -136,36 +121,54 @@ $.ajax({
 		});
 	});
 </script>
-  
+
 </head>
 <body>
-
-
-
-  <label for="prd">Désignation </label>
-  
-  <input id="prd"  onKeyPress="test();"></input>
-<label> Code</label>
- <input id="code"></input>
- <label>Quantité</label>
- <input id="quantit"  onKeyPress="verif();" ></input>
- 
- <br/><br/><br/>
- 	<div>
-
-			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
-				fitColumns="true">
-			</table>
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<ul class="nav nav-pills" role="tablist">
+					<li role="presentation" class="active"><a href="/caisse">Home</a></li>
+					<li role="presentation"><a href="/newcat">Catégorie
+							Produit</a></li>
+					<li role="presentation"><a href="/fichepd">Getion des
+							produit</a></li>
+					<li role="presentation"><a href="/client">Gestion des
+							Clients</a></li>
+					<li role="presentation"><a href="/employe">Getion des
+							employés</a></li>
+				</ul>
+			</div>
 		</div>
-		<div id="toolbar">
-			 <a
-				href="#" class="easyui-linkbutton" iconCls="icon-remove"
-				plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-save"
-				plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
-				plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
-		</div>
+	</div>
+
+
+
+	<label for="prd">Désignation </label>
+
+	<input id="prd" onKeyPress="test();"></input>
+	<label> Code</label>
+	<input id="code"></input>
+	<label>Quantité</label>
+	<input id="quantit" onKeyPress="verif();"></input>
+
+	<br />
+	<br />
+	<br />
+	<div>
+
+		<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
+			fitColumns="true">
+		</table>
+	</div>
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
+			plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+			onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a> <a
+			href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+			onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+	</div>
 
 </body>
 </html>

@@ -12,18 +12,24 @@
 <script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
 <script type="text/javascript">
-window.onload = function () {
-document.getElementById("mdp1").onchange = validatePassword;
-document.getElementById("mdp2").onchange = validatePassword;
-}
-function validatePassword(){
-var pass2=document.getElementById("mdp2").value;
-var pass1=document.getElementById("mdp1").value;
-if(pass1!=pass2)
-document.getElementById("mdp2").setCustomValidity("Passwords Don't Match");
-else
-document.getElementById("mdp2").setCustomValidity('');
-//empty string means no validation error
+function validation(f) {
+	  if (f.pwd1.value == '' || f.pwd2.value == '') {
+	    alert('Tous les champs ne sont pas remplis');
+	    f.mdp1.focus();
+	    return false;
+	    }
+	  else if (f.pwd1.value != f.pwd2.value) {
+	    alert('Ce ne sont pas les mêmes mots de passe!');
+	    f.mdp1.focus();
+	    return false;
+	    }
+	  else if (f.pwd1.value == f.pwd2.value) {
+	    return true;
+	    }
+	  else {
+	    f.pwd1.focus();
+	    return false;
+	    }
 }
 </script>
 
@@ -133,7 +139,7 @@ document.getElementById("mdp2").setCustomValidity('');
 		<div class="container">
 			<div class="navbar-header">
 				<ul class="nav nav-pills" role="tablist">
-					<li role="presentation"><a href="#">Home</a></li>
+					<li role="presentation"><a href="/caisse">Home</a></li>
 					<li role="presentation"><a href="/newcat">Catégorie
 							Produit</a></li>
 					<li role="presentation"><a href="/fichepd">Getion des
@@ -150,7 +156,7 @@ document.getElementById("mdp2").setCustomValidity('');
 
 
 	<form action="#" th:action="@{/employe}" th:object="${employe}"
-		method="post" onSubmit=" validatePassword()">
+		method="post" onSubmit="return validation(this)">
 		<fieldset>
 			<legend>Nouevau employer</legend>
 			<ol>
