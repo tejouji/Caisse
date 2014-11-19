@@ -60,6 +60,7 @@ public class ProduitController {
 	prodRepository.save(produit);
 	//System.out.println(produit);
 	model.addAttribute("produits", prodRepository.findAll());
+	model.addAttribute("categorieProduits",catProdRepository.findAll());
 		return "fichepd";
 	}	
 	 @ResponseBody

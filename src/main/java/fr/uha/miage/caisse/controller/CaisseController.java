@@ -42,11 +42,18 @@ CommandeVirRepository cmdVirRepository;
    
 
     public Long modifier(@RequestParam("term") String term, Model model) {
-	
+	long l=0;
+		try{
 Produit json = (Produit) prodRepository.FIND_des(term);
-
-	return json.getId();
+l=json.getId();
+	}
+	catch(Exception e)
+	{
+		
+	}
+	return l;
     }
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/verif", method = RequestMethod.POST)
@@ -55,9 +62,30 @@ Produit json = (Produit) prodRepository.FIND_des(term);
 
     public String verif(@RequestParam("term") Long term,@RequestParam("term1") int quantite, Model model) {
 	String s=null;
+	try
+	{
 Produit p = (Produit) caisseRepository.FIND_quant(term);
+boolean testadd=true,testmodif=true;
+
+List<CommandeVirt> lcv =(List<CommandeVirt>) cmdVirRepository.findAll();
+int i=0;
+while(lcv.size()>i && testadd==true)
+
+{
+	if(lcv.get(i).getId()==term)
+	{
+	testadd=false;
+	if(lcv.get(i).getQuantite()+term>p.getQuantite())
+		testmodif=false;
+	else
+		quantite=lcv.get(i).getQuantite()+quantite;
+	}
+	i++;
+}
+	
 if(p.getQuantite()>quantite)
 {
+	
 	CommandeVirt cmd= new CommandeVirt();
 	cmd.setCategorie(p.getCategorie().getDesignation());
 	cmd.setId(term);
@@ -66,10 +94,15 @@ if(p.getQuantite()>quantite)
 	cmd.setQuantite(quantite);
 	cmdVirRepository.save(cmd);
 s="passe";
+	
 }
 else
-	s="nn";
-
+	s="Quantité supérieur";
+	}
+	catch(Exception e)
+	{
+		s="Saisir de nouveau la désignation ou le code du produit";
+	}
 	return s;
     }
 	

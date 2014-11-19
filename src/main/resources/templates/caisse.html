@@ -51,8 +51,18 @@ else
 if (event.keyCode == 13) 
 	{
 
-
-
+if(document.getElementById('code').value.toString()=="0")
+	{
+	alert("Produit inexistant");
+	}
+else
+	{
+	if(document.getElementById('quantit').value.toString()=="")
+		{
+		alert("Donnez une quantité");
+		}
+	else
+		{
 $.ajax({  
     type : 'POST',  
     url : "/verif",  
@@ -64,11 +74,12 @@ $.ajax({
     	location.reload();
     		}
     	else
-    		alert("merde");
+    		alert(result);
     }  
 });  
 	}
-
+	}
+	}
  }
   </script>
   <script>
