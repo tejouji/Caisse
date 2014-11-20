@@ -12,31 +12,33 @@
 <script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
 <script type="text/javascript">
-function validation(f) {
-	  if (f.pwd1.value == '' || f.pwd2.value == '') {
-	    alert('Tous les champs ne sont pas remplis');
-	    f.mdp1.focus();
-	    return false;
-	    }
-	  else if (f.pwd1.value != f.pwd2.value) {
-	    alert('Ce ne sont pas les mêmes mots de passe!');
-	    f.mdp1.focus();
-	    return false;
-	    }
-	  else if (f.pwd1.value == f.pwd2.value) {
-	    return true;
-	    }
-	  else {
-	    f.pwd1.focus();
-	    return false;
-	    }
-}
+	function validation(f) {
+		if (f.pwd1.value == '' || f.pwd2.value == '') {
+			alert('Tous les champs ne sont pas remplis');
+			f.mdp1.focus();
+			return false;
+		} else if (f.pwd1.value != f.pwd2.value) {
+			alert('Ce ne sont pas les mêmes mots de passe!');
+			f.mdp1.focus();
+			return false;
+		} else if (f.pwd1.value == f.pwd2.value) {
+			return true;
+		} else {
+			f.pwd1.focus();
+			return false;
+		}
+	}
 </script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Nouvelle Catégorie</title>
 <script>
+	function divaffiche() {
+		document.getElementById("popup").style.display = "block";
+		document.getElementById("cache").style.display = "inline";
+		document.getElementById("voir").style.display = "none";
+	}
 	$(function() {
 		$('#tt').edatagrid({
 			title : 'Liste des employés',
@@ -153,80 +155,84 @@ function validation(f) {
 		</div>
 	</div>
 
-
+	<input type="button" id="voir" value="Ajouter Employé."
+		onClick="divaffiche()" style="display: inline;" />
 
 	<form action="#" th:action="@{/employe}" th:object="${employe}"
 		method="post" onSubmit="return validation(this)">
-		<fieldset>
-			<legend>Nouevau employer</legend>
-			<ol>
-				<table>
-					<tr>
-						<td>Nom:</td>
-						<td><input type="text" name="nom" th:field="*{nom_emp}"
-							required="required" /></td>
-						<td th:if="${#fields.hasErrors('nom_emp')}" th:errors="*{nom_emp}">Nom
-							Error</td>
-					</tr>
-					<tr>
-						<td>Prenom:</td>
-						<td><input type="text" name="pre" th:field="*{pre_emp}"
-							required="required" /></td>
-					</tr>
+		<div id="popup" style="display: none;">
+			<fieldset>
+				<legend>Nouevau employer</legend>
+				<ol>
+					<table>
+						<tr>
+							<td>Nom:</td>
+							<td><input type="text" name="nom" th:field="*{nom_emp}"
+								required="required" /></td>
+							<td th:if="${#fields.hasErrors('nom_emp')}"
+								th:errors="*{nom_emp}">Nom Error</td>
+						</tr>
+						<tr>
+							<td>Prenom:</td>
+							<td><input type="text" name="pre" th:field="*{pre_emp}"
+								required="required" /></td>
+						</tr>
 
-					<tr>
-						<td>Date Naissance:</td>
-						<td><input type="date" name="date" th:field="*{dat_nai_emp}"
-							max="24-02-2013" min="1920-01-01" required="required" /></td>
-					</tr>
-					<tr>
-						<td>Sexe</td>
-						<td><label class="radio" for="radios-0"> <input
-								type="radio" name="radios" id="radios-0" value="Homme"
-								checked="checked" th:field="*{sex_emp}" /> Homme
-						</label> <label class="radio" for="radios-1"> <input type="radio"
-								name="radios" id="radios-1" value="Femme" th:field="*{sex_emp}" />
-								Femme
-						</label></td>
-					</tr>
-					<tr>
-						<td>Telephone:</td>
-						<td><input type="text" name="tel" th:field="*{tel_emp}"
-							required="required" /></td>
-					</tr>
+						<tr>
+							<td>Date Naissance:</td>
+							<td><input type="date" name="date" th:field="*{dat_nai_emp}"
+								max="24-02-2013" min="1920-01-01" required="required" /></td>
+						</tr>
+						<tr>
+							<td>Sexe</td>
+							<td><label class="radio" for="radios-0"> <input
+									type="radio" name="radios" id="radios-0" value="Homme"
+									checked="checked" th:field="*{sex_emp}" /> Homme
+							</label> <label class="radio" for="radios-1"> <input type="radio"
+									name="radios" id="radios-1" value="Femme" th:field="*{sex_emp}" />
+									Femme
+							</label></td>
+						</tr>
+						<tr>
+							<td>Telephone:</td>
+							<td><input type="text" name="tel" th:field="*{tel_emp}"
+								required="required" /></td>
+						</tr>
 
-					<tr>
-						<td>Email:</td>
-						<td><input type="email" name="email" th:field="*{mail_emp}"
-							required="required" /></td>
-					</tr>
-					<tr>
-						<td>Adress:</td>
-						<td><input type="text" name="adr" th:field="*{adr_emp}"
-							required="required" /></td>
-					</tr>
-					<tr>
-						<td>Mot de passe:</td>
-						<td><input id='pwd1' type="password" name="pwd1"
-							th:field="*{mp_emp}" required="required" /></td>
-					</tr>
-					<tr>
-						<td>Confirmation:</td>
-						<td><input id='pwd2' type="password" name="pwd2"
-							required="required" /></td>
-					</tr>
-
-
-
+						<tr>
+							<td>Email:</td>
+							<td><input type="email" name="email" th:field="*{mail_emp}"
+								required="required" /></td>
+						</tr>
+						<tr>
+							<td>Adress:</td>
+							<td><input type="text" name="adr" th:field="*{adr_emp}"
+								required="required" /></td>
+						</tr>
+						<tr>
+							<td>Mot de passe:</td>
+							<td><input id='pwd1' type="password" name="pwd1"
+								th:field="*{mp_emp}" required="required" /></td>
+						</tr>
+						<tr>
+							<td>Confirmation:</td>
+							<td><input id='pwd2' type="password" name="pwd2"
+								required="required" /></td>
+						</tr>
 
 
-					<tr>
-						<td><input type="submit" value="Valider" /></td>
-						<td><input type="reset" value="Annuler" /></td>
-					</tr>
-				</table>
-			</ol>
-		</fieldset>
+
+
+
+						<tr>
+							<td><input type="submit" value="Valider" /></td>
+							<td><input type="reset" value="Annuler" /></td>
+						</tr>
+					</table>
+				</ol>
+			</fieldset>
+
+		</div>
 		<div>
 
 			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"

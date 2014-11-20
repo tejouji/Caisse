@@ -16,6 +16,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Nouvelle Catégorie</title>
 <script>
+	function divaffiche() {
+		document.getElementById("popup").style.display = "block";
+		document.getElementById("cache").style.display = "inline";
+		document.getElementById("voir").style.display = "none";
+	}
 	$(function() {
 		$('#tt').edatagrid({
 			title : 'Désignation des Produits',
@@ -66,29 +71,33 @@
 		</div>
 	</div>
 
-
+	<input type="button" id="voir" value="Ajouter Désignation."
+		onClick="divaffiche()" style="display: inline;" />
 
 	<form action="#" th:action="@{/newcat}" th:object="${categorieProduit}"
-		method="post">
-		<fieldset>
-			<legend>Nouvelle catègorie</legend>
-			<ol>
-				<table>
-					<tr>
-						<td>Désignation:</td>
-						<td><input type="text" th:field="*{designation}"
-							required="required" /></td>
-						<td th:if="${#fields.hasErrors('designation')}"
-							th:errors="*{designation}">designation Error</td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="Valider" /></td>
-						<!-- <td><a th:href="@{/fichepd}">edit</a></td>--> 
-						<td><input type="reset" value="Annuler" /></td>
-					</tr>
-				</table>
-			</ol>
-		</fieldset>
+		method="post" onsubmit="divaffiche()">
+		<div id="popup" style="display: none;">
+			<fieldset>
+				<legend>Nouvelle catègorie</legend>
+				<ol>
+					<table>
+						<tr>
+							<td>Désignation:</td>
+							<td><input type="text" th:field="*{designation}"
+								required="required" /></td>
+							<td th:if="${#fields.hasErrors('designation')}"
+								th:errors="*{designation}">designation Error</td>
+						</tr>
+						<tr>
+							<td><input type="submit" value="Valider"/></td>
+							<!-- <td><a th:href="@{/fichepd}">edit</a></td>-->
+							<td><input type="reset" value="Annuler" /></td>
+						</tr>
+					</table>
+				</ol>
+			</fieldset>
+
+		</div>
 		<div>
 
 			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
