@@ -19,7 +19,7 @@ public class CommandeVirt {
 	
 	int quantite;
 	
-	 
+	 double total;
 
 	
 	String categorie ;
@@ -55,5 +55,12 @@ public class CommandeVirt {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
 
 }

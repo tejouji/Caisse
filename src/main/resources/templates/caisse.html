@@ -64,9 +64,12 @@
 							"term1" : $("#quantit").val()
 						},
 						success : function(result) {
-							if (result == "passe") {
-								alert("bien");
-								location.reload();
+							if (result != "Quantité supérieur"||result!="Saisir de nouveau la désignation ou le code du produit") {
+								
+							
+							location.reload();
+								
+								
 							} else
 								alert(result);
 						}
@@ -116,14 +119,31 @@
 					}
 
 				}
+			}, {
+				field : 'total',
+				title : 'Total',
+				width : 100
+				
 			} ] ],
 
 		});
 	});
+	function Affichesum()
+	{
+		$.ajax({
+			type : 'POST',
+			url : "/getsum",
+			
+			success : function(result) {
+				
+				document.getElementById('tota').innerHTML = result;
+			}
+		});
+	}
 </script>
 
 </head>
-<body>
+<body onload="Affichesum();">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -169,6 +189,6 @@
 			href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
 			onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
 	</div>
-
+<b style="color: blue;font-size: x-large;">Total: </b><b id="tota" style="color: blue;font-size: x-large;"></b><b style="color: blue;font-size: x-large;"> euros</b>
 </body>
 </html>

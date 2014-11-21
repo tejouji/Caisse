@@ -92,8 +92,14 @@ if(p.getQuantite()>quantite)
 	cmd.setDesignation_pd(p.getDesignation_pd());
 	cmd.setPrix_ht(p.getPrix_ht());
 	cmd.setQuantite(quantite);
+	 double  p1 = Math.pow(10.0, 2);
+	 
+	double total=quantite*p.getPrix_ht()*(1+p.getTva()/100);
+	total=Math.floor(total*p1)/p1;
+	cmd.setTotal(total);
 	cmdVirRepository.save(cmd);
-s="passe";
+	
+s="bien";
 	
 }
 else
@@ -119,5 +125,25 @@ else
 List<CommandeVirt> json = (List<CommandeVirt>) cmdVirRepository.findAll() ;
 
 	return json;
+    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/getsum", method = RequestMethod.POST)
+
+   
+
+    public String verif( Model model)
+    {
+		double tot=0;
+    
+		try
+		{
+		
+		tot=cmdVirRepository.FIND_total();
+		}
+		catch(Exception e)
+		{}
+		return String.valueOf(tot);
+		
     }
 }
