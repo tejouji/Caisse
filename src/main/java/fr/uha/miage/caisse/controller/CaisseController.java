@@ -92,6 +92,7 @@ if(p.getQuantite()>quantite)
 	cmd.setDesignation_pd(p.getDesignation_pd());
 	cmd.setPrix_ht(p.getPrix_ht());
 	cmd.setQuantite(quantite);
+	cmd.setTva(p.getTva());
 	 double  p1 = Math.pow(10.0, 2);
 	 
 	double total=quantite*p.getPrix_ht()*(1+p.getTva()/100);
@@ -146,4 +147,29 @@ List<CommandeVirt> json = (List<CommandeVirt>) cmdVirRepository.findAll() ;
 		return String.valueOf(tot);
 		
     }
+	
+	 @ResponseBody
+		@RequestMapping(value = "/updatecmd", method = RequestMethod.POST,
+				
+				
+				headers="Accept=application/json")
+
+	   
+
+	    public List<CommandeVirt> modifier(@ModelAttribute CommandeVirt cmd, Model model) {
+		 
+		 Produit p = (Produit) caisseRepository.FIND_quant(cmd.getId());
+		 if(p.getQuantite()>cmd.getQuantite())
+		 {
+		 double  p1 = Math.pow(10.0, 2);
+		 
+			double total=cmd.getQuantite()*cmd.getPrix_ht()*(1+cmd.getTva()/100);
+			total=Math.floor(total*p1)/p1;
+			cmd.setTotal(total);
+		cmdVirRepository.save(cmd);
+		 }
+	List<CommandeVirt> json = (List<CommandeVirt>) cmdVirRepository.findAll() ;
+	
+		return json;
+	    }
 }

@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
+<meta name="keywords" content="jquery,ui,easy,easyui,web" />
 <link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
+<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+<script type="text/javascript">
+
+var j=jQuery.noConflict();
+</script>
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
 
 
-<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -25,11 +35,11 @@
 
 			document.getElementById('quantit').focus();
 
-			$.ajax({
+			j.ajax({
 				type : 'POST',
 				url : "/getCode",
 				data : {
-					"term" : $("#prd").val()
+					"term" : j("#prd").val()
 				},
 				success : function(result) {
 					document.getElementById('code').value = result;
@@ -56,12 +66,12 @@
 				if (document.getElementById('quantit').value.toString() == "") {
 					alert("Donnez une quantité");
 				} else {
-					$.ajax({
+					j.ajax({
 						type : 'POST',
 						url : "/verif",
 						data : {
-							"term" : $("#code").val(),
-							"term1" : $("#quantit").val()
+							"term" : j("#code").val(),
+							"term1" : j("#quantit").val()
 						},
 						success : function(result) {
 							if (result != "Quantité supérieur"||result!="Saisir de nouveau la désignation ou le code du produit") {
@@ -71,7 +81,7 @@
 								
 								
 							} else
-								alert(result);
+								alert("Données incorrectes");
 						}
 					});
 				}
@@ -80,14 +90,15 @@
 	}
 </script>
 <script>
-	$(function() {
-		$('#tt').edatagrid({
+	j(function() {
+		j('#tt').edatagrid({
 			title : 'Commande',
 			width : 950,
 			height : 250,
 			singleSelect : true,
 			idField : 'id',
 			url : '/loaddatacmd',
+			updateUrl : '/updatecmd',
 
 			columns : [ [ {
 				field : 'categorie',
@@ -130,7 +141,7 @@
 	});
 	function Affichesum()
 	{
-		$.ajax({
+		j.ajax({
 			type : 'POST',
 			url : "/getsum",
 			
@@ -141,7 +152,14 @@
 		});
 	}
 </script>
+<script type="text/javascript">
+function updaterow()
+{
+	j('#tt').edatagrid('saveRow');
+	location.reload();
+	}
 
+</script>
 </head>
 <body onload="Affichesum();">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -183,11 +201,11 @@
 	</div>
 	<div id="toolbar">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
-			plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+			plain="true" onClick="javascript:j('#tt').edatagrid('destroyRow')">Supprimer</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-			onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a> <a
+			onClick="updaterow();">Enregistrer</a> <a
 			href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
-			onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+			onClick="javascript:j('#tt').edatagrid('cancelRow')">Annuler</a>
 	</div>
 <b style="color: blue;font-size: x-large;">Total: </b><b id="tota" style="color: blue;font-size: x-large;"></b><b style="color: blue;font-size: x-large;"> euros</b>
 </body>

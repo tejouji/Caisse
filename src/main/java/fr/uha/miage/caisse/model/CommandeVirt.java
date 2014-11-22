@@ -2,7 +2,6 @@ package fr.uha.miage.caisse.model;
 
 
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 
 
@@ -23,6 +22,13 @@ public class CommandeVirt {
 
 	
 	String categorie ;
+	Double tva;
+	public Double getTva() {
+		return tva;
+	}
+	public void setTva(Double tva) {
+		this.tva = tva;
+	}
 	
 	public String getCategorie() {
 		return categorie;
