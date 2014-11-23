@@ -31,7 +31,7 @@ CommandeVirRepository cmdVirRepository;
 
 	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
 	public String getCaisse(Model model) {
-	
+		
 		return "caisse";
 	}
 	

@@ -150,6 +150,7 @@ var j=jQuery.noConflict();
 				document.getElementById('tota').innerHTML = result;
 			}
 		});
+		
 	}
 </script>
 <script type="text/javascript">
@@ -193,7 +194,10 @@ function updaterow()
 	<br />
 	<br />
 	<br />
-	<div>
+	<table>
+	<tr>
+	
+	<td style="margin-bottom: 250px"><div>
 
 		<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
 			fitColumns="true">
@@ -206,7 +210,29 @@ function updaterow()
 			onClick="updaterow();">Enregistrer</a> <a
 			href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
 			onClick="javascript:j('#tt').edatagrid('cancelRow')">Annuler</a>
+	</div></td>
+	<td width="20px"> </td>
+	<td style="margin-top: -50px">
+	<div style="background-color: aqua;width: 400px;height: 400px" id="sanscode">
+	<table>
+	<tr>
+	<td width="40px"></td>
+	<td height="80" width="100"><input type="button" title="carotte" value="carotte" style="height: 80px;width: 100px;"/></td>
+	<td width="10px"></td>
+	<td height="80" width="100"><input type="button" title="pain" style="height: 80px;width: 100px;"/></td>
+	<td width="10px"></td>
+	<td height="80" width="100"><input type="button" title="baguette" style="height: 80px;width: 100px;"/></td>
+	</tr>
+	
+	</table>
+	
+	
 	</div>
+	</td>
+	</tr>
+	</table>
+	
+	
 <b style="color: blue;font-size: x-large;">Total: </b><b id="tota" style="color: blue;font-size: x-large;"></b><b style="color: blue;font-size: x-large;"> euros</b>
 </body>
 </html>

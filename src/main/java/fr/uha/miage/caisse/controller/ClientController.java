@@ -2,16 +2,20 @@ package fr.uha.miage.caisse.controller;
 
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -171,6 +175,44 @@ public class ClientController {
 		List<Client> json = (List<Client>) clientrepository.findAll();
 
 		return json;
+	}
+	private MailSender mailSender;
+	@ResponseBody
+	@RequestMapping(value = "/sendmail", method = RequestMethod.POST)
+	public String sendmail() {
+		JavaMailSenderImpl j= new JavaMailSenderImpl();
+		
+	
+		String s="";
+		
+		try
+		{
+			j.setHost("smtp.free.fr");
+		
+		MimeMessage message = j.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message);	 
+		helper.setTo("b.tedjeddine@gmail.com ");
+		helper.setFrom("mohamed.benattouche@gmail.com","MagasinXXX");
+		helper.setSubject("sujet");
+		 String text="<img  src='http://www.ciga.fr/assets/shop_resources/79/docs/carte-fidelite_1.jpg' style='width: 200px;height: 200px'/><b style='color:#000066;font-size:48px;font-family: fantasy;'> Magasin CIGA</b>"+
+		 "<p style='color: #003399;font-family: monospace;font-size: 36px'> Bonjour Mr</p>"
+		+" <p style='color: #003399;font-family: monospace;font-size: 36px'> Grâce à votre fidélité vous avez atteint XX d’une valeur de XX euros</p>"+
+		" <img  src='http://www.lactolerance.fr/img/bloc%20fidelite.jpg' style='display: block; margin-left: auto; margin-right: auto;width: 400px;height: 150px;'/>"
+		+" <p style='color: #003399;font-family: monospace;font-size: 36px'> Merci pour votre confiance à bientôt</p>";
+		helper.setText(text,true);
+
+		j.send(message);
+		s="mail envoyé";
+		}
+		catch(Exception e)
+		{ s=e.getMessage();}
+		System.out.println(s);
+		return s;
+	}
+	@RequestMapping(value = "/sendmail", method = RequestMethod.GET)
+	public String getCaisse(Model model) {
+		
+		return "sendmail";
 	}
 
 }

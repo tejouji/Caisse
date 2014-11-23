@@ -1,21 +1,37 @@
 package fr.uha.miage.caisse.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 @Entity
+@Table(name = "Client")
 public class Client {
 	@Id
 	@GeneratedValue
-	private Long id = (long) -1;
+	@Column(name="id_clt")
+	private Long id ;
 	@NotEmpty
-	private String nom,prenom,email,adress;
-	private String date_naissance,sexe; 
+	@Column(name="nom")
+	private String nom;
+	@Column(name="prenom")
+	private String prenom;
+	@Column(name="email")
+		private String email;
+		@Column(name="adress")
+	private String adress;
+	@Column(name="date_naissance")
+	private String date_naissance;
+	@Column(name="sexe")
+	private String sexe;
+	@Column(name="telephone")
 	private int telephone;
-	
+	@Column(name="nbr_point")
 	private int nbr_point;
+	@Column(name="cartefid")
 	private long cartefid;
    
 	

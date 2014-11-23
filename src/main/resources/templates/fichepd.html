@@ -137,12 +137,20 @@
 								th:errors="*{designation_pd}">tva Error</td>
 						</tr>
 						<tr>
+							<td>codbar</td>
+							<td><input type="text" th:field="*{codbar}"
+								required="required" /></td>
+							<td th:if="${#fields.hasErrors('codbar')}"
+								th:errors="*{codbar}">tva Error</td>
+						</tr>
+						<tr>
 							<td>prix_ht</td>
 							<td><input type="text" th:field="*{prix_ht}"
 								required="required" /></td>
 							<td th:if="${#fields.hasErrors('prix_ht')}"
 								th:errors="*{prix_ht}">tva Error</td>
 						</tr>
+						
 						<tr>
 							<td>Quantité</td>
 							<td><input type="text" th:field="*{quantite}"

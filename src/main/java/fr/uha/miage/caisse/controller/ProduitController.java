@@ -57,8 +57,12 @@ public class ProduitController {
             return "fichepd";
         }
 	model.addAttribute("produit", new Produit());
+	if(produit.getCodbar()==0)
+	produit.setTestcb("non");
+	else
+		produit.setTestcb("oui");
 	prodRepository.save(produit);
-	//System.out.println(produit);
+	System.out.println(produit);
 	model.addAttribute("produits", prodRepository.findAll());
 	model.addAttribute("categorieProduits",catProdRepository.findAll());
 		return "fichepd";

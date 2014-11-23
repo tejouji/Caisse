@@ -32,7 +32,11 @@ public class Produit implements Serializable {
 	String designation_pd;
 	@Column(name="prix_ht")
 	Double prix_ht;
+	@Column(name="codbar")
+	long codbar;
 	
+	@Column(name="testcb")
+	String testcb;
 	 
 	   
 	@Column(name="quantite")
@@ -85,8 +89,21 @@ public class Produit implements Serializable {
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation_pd=" + designation_pd
-				+ ", prix_ht=" + prix_ht + ", quantite=" + quantite
-				+ ", categorie=" + categorie + ", tva=" + tva + "]";
+				+ ", prix_ht=" + prix_ht + ", codbar=" + codbar + ", testcb="
+				+ testcb + ", quantite=" + quantite + ", categorie="
+				+ categorie + ", tva=" + tva + "]";
+	}
+	public long getCodbar() {
+		return codbar;
+	}
+	public void setCodbar(long codbar) {
+		this.codbar = codbar;
+	}
+	public String getTestcb() {
+		return testcb;
+	}
+	public void setTestcb(String testcb) {
+		this.testcb = testcb;
 	}
 	
 
