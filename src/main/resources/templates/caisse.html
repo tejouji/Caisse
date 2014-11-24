@@ -29,7 +29,8 @@ var j=jQuery.noConflict();
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<script>
+<script >
+
 	function test() {
 		if (event.keyCode == 13) {
 
@@ -55,6 +56,8 @@ var j=jQuery.noConflict();
 			});
 		}
 	}
+
+
 </script>
 <script>
 	function verif() {
@@ -159,10 +162,45 @@ function updaterow()
 	j('#tt').edatagrid('saveRow');
 	location.reload();
 	}
+</script>
+<script type="text/javascript">
+
+function getsans()
+{
+	j.ajax({
+		type : 'POST',
+		url : "/getprdsanscb",
+		
+		success : function(result) {
+		var t = new Array();
+			var t = result;
+			
+			alert(t.length);
+			var l=document.getElementById("sanscode");
+			var input = document.createElement("input");
+	        input.setAttribute("name",t[0]);
+	        input.setAttribute("value",t[0]");
+
+	        		input.setAttribute("type","button");
+	        l.appendChild(input);
+			/*
+	        <![CDATA[
+			
+			  for (var r = 0, n = t.length; r < n; r++)
+			  {
+				  alert(t(r));
+				  
+				  
+			  }
+			  ]]>	
+			  */
+		}
+	});
+	}
 
 </script>
 </head>
-<body onload="Affichesum();">
+<body onload="Affichesum();getsans();">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -213,19 +251,8 @@ function updaterow()
 	</div></td>
 	<td width="20px"> </td>
 	<td style="margin-top: -50px">
-	<div style="background-color: aqua;width: 400px;height: 400px" id="sanscode">
-	<table>
-	<tr>
-	<td width="40px"></td>
-	<td height="80" width="100"><input type="button" title="carotte" value="carotte" style="height: 80px;width: 100px;"/></td>
-	<td width="10px"></td>
-	<td height="80" width="100"><input type="button" title="pain" style="height: 80px;width: 100px;"/></td>
-	<td width="10px"></td>
-	<td height="80" width="100"><input type="button" title="baguette" style="height: 80px;width: 100px;"/></td>
-	</tr>
-	
-	</table>
-	
+	<div style=" border: 2px solid red;width: 400px;height: 400px; " id="sanscode">
+
 	
 	</div>
 	</td>

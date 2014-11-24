@@ -203,4 +203,29 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 			
 				return json1;
 		 }
+	
+			@ResponseBody
+				@RequestMapping(value = "/getprdsanscb", method = RequestMethod.POST)
+
+			   
+
+			    public List<String> getSanscb() {
+			
+				
+				 List<Produit> l = (List<Produit>) prodRepository.FIND_SANS_CB() ;
+				
+
+					List<String> json1 =new ArrayList<String>();
+					for(int i=0;i<l.size();i++)
+						
+					{
+						json1.add(l.get(i).getDesignation_pd());
+						
+					}
+					
+					
+					
+			
+				return json1;
+		 }
 }

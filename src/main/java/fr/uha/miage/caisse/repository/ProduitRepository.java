@@ -32,10 +32,10 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 			 public Produit FIND_des(@Param("term") String term);	
 			
 			
-			 public final static String FIND_SANS_CB="SELECT p from Produit p WHERE p.codbar = 'non')";
+			 public final static String FIND_SANS_CB="SELECT p from Produit p WHERE p.testcb = 'non')";
 				
 				@Query(FIND_SANS_CB)
 				
-				 public Produit FIND_SANS_CB();	
+				 public List<Produit> FIND_SANS_CB();	
 
 }

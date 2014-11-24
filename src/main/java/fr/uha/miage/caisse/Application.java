@@ -49,7 +49,9 @@ public class Application {
 		CategorieProduit cr=new CategorieProduit(1, "sport", null);
 		catprdRepository.save(cr);
 		Produit p= new Produit("addidas", (double) 11, 0, "non", 5, cr, null, 15.00);
+		Produit p1= new Produit("nike", (double) 11, 0, "non", 4, cr, null, 11.00);
 		prdRepository.save(p);
+		prdRepository.save(p1);
 		Commande cmd= new Commande(null, c, em, "12/09/2014", (double)444);
 		cmdrep.save(cmd);
 		LigneCommande lcmd=new LigneCommande(14, (double)100, p, cmd);
