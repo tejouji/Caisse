@@ -176,6 +176,8 @@ public class ClientController {
 
 		return json;
 	}
+	
+	
 	private MailSender mailSender;
 	@ResponseBody
 	@RequestMapping(value = "/sendmail", method = RequestMethod.POST)

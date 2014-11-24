@@ -1,5 +1,6 @@
 package fr.uha.miage.caisse.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -14,11 +15,17 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="employe")
-public class Employe {
+public class Employe implements Serializable {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Column(name="id_emp")
@@ -40,6 +47,7 @@ public class Employe {
 	private String adr_emp;
 	@Column(name="mp_emp")
 	private String mp_emp;
+	 @JsonManagedReference
 	@OneToMany(mappedBy="employe",cascade=CascadeType.ALL)
 	private Collection<Commande> commande ;
 	

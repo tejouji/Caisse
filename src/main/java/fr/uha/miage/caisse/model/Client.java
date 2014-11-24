@@ -1,5 +1,6 @@
 package fr.uha.miage.caisse.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -11,9 +12,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "Client")
-public class Client {
+public class Client implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Column(name="id_clt")
@@ -66,6 +73,7 @@ public class Client {
 	private int nbr_point;
 	@Column(name="cartefid")
 	private long cartefid;
+	 @JsonManagedReference
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL)
 	private Collection<Commande> commande ;
 	

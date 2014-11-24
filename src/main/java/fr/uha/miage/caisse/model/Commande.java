@@ -1,5 +1,6 @@
 package fr.uha.miage.caisse.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -13,19 +14,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Commande")
-public class Commande {
+public class Commande implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Column(name="id_cm")
 	private long id;
+	 @JsonManagedReference
 	@OneToMany(fetch = FetchType.EAGER,mappedBy="commande",cascade=CascadeType.ALL)
 	private Collection<LigneCommande> ligne ;
+	@JsonBackReference
 	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_clt")
 	Client client ;
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="id_emp")
 	private Employe employe;

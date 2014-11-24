@@ -6,12 +6,15 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "categorie")
@@ -26,8 +29,8 @@ public class CategorieProduit implements Serializable {
 	@NotEmpty
 	@Column(name="designation")
 	private String designation;
-	
-	@OneToMany(mappedBy="categorie",cascade=CascadeType.ALL)
+	 @JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="categorie",cascade=CascadeType.ALL)
 	private Collection<Produit> produit ;
 	
 	

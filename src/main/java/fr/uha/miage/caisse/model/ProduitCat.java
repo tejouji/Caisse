@@ -1,6 +1,12 @@
 package fr.uha.miage.caisse.model;
 
-public class ProduitCat {
+import java.io.Serializable;
+
+public class ProduitCat implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Long id;
 	String designation_pd;
 	Double prix_ht;

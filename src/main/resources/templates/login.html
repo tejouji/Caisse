@@ -1,20 +1,59 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Authentification </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="login"/> </label></div>
-            <div><label> Password: <input type="password" name="pwd"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Authentification</title>
+<meta charset="utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+	<div th:if="${param.error}">Invalid username and password.</div>
+	<div th:if="${param.logout}">You have been logged out.</div>
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<ul class="nav nav-pills" role="tablist">
+					<li role="presentation"><a href="#">Home</a></li>
+					<li role="presentation"><a href="#">Catégorie Produit</a></li>
+					<li role="presentation"><a href="#">Getion des produit</a></li>
+					<li role="presentation"><a href="#">Gestion des Clients</a></li>
+					<li role="presentation"><a href="#">Getion des employés</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<form th:action="@{/login}" method="post">
+			<fieldset>
+			 <legend>Authentication</legend>
+				<table>
+					<tr>
+						<td><label> User Name :</label></td>
+						<td><input type="text" name="login" /></td>
+					</tr>
+					<tr>
+						<td><label> Password:</label></td>
+						<td><input type="password" name="pwd" /></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="Sign In" /></td>
+					</tr>
+				</table>
+			</fieldset>
+
+		</form>
+
+
+
+	</div>
+
+
+
+
+
+
+</body>
 </html>

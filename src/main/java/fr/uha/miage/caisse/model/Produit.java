@@ -21,6 +21,9 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Produit")
@@ -46,7 +49,7 @@ public class Produit implements Serializable {
 	int quantite;
 	
 	
-
+	@JsonBackReference
 	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_cat")
 	CategorieProduit categorie ;
@@ -76,7 +79,8 @@ public class Produit implements Serializable {
 	public void setCategorie(CategorieProduit categorie) {
 		this.categorie = categorie;
 	}
-	@OneToMany(mappedBy="produit",cascade=CascadeType.ALL)
+	 @JsonManagedReference
+	@OneToMany(fetch = FetchType.EAGER,mappedBy="produit",cascade=CascadeType.ALL)
 	private Collection<LigneCommande> ligne ;
 	@Column(name="tva")
 	Double tva;

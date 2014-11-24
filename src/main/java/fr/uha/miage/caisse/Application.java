@@ -46,11 +46,11 @@ public class Application {
 		employeRepository.save(new Employe("BenAttouche", "Mohamed",
 				"12/03/1989", "Homme", "05555", "b.med@gmail.com", "mulhouse",
 				"test",null));
-		CategorieProduit cr=new CategorieProduit(1, "lll", null);
+		CategorieProduit cr=new CategorieProduit(1, "sport", null);
 		catprdRepository.save(cr);
-		Produit p= new Produit("bb", (double) 11, 0, "non", 5, cr, null, 15.00);
+		Produit p= new Produit("addidas", (double) 11, 0, "non", 5, cr, null, 15.00);
 		prdRepository.save(p);
-		Commande cmd= new Commande(null, c, em, "02/04/1989", (double)444);
+		Commande cmd= new Commande(null, c, em, "12/09/2014", (double)444);
 		cmdrep.save(cmd);
 		LigneCommande lcmd=new LigneCommande(14, (double)100, p, cmd);
 		lrep.save(lcmd);
