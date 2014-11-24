@@ -1,9 +1,13 @@
 package fr.uha.miage.caisse.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,6 +23,35 @@ public class Client {
 	private String nom;
 	@Column(name="prenom")
 	private String prenom;
+	
+	
+	public Client() {
+		
+	}
+
+	public Client(String nom, String prenom, String email, String adress,
+			String date_naissance, String sexe, int telephone, int nbr_point,
+			Collection<Commande> commande) {
+		
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adress = adress;
+		this.date_naissance = date_naissance;
+		this.sexe = sexe;
+		this.telephone = telephone;
+		this.nbr_point = nbr_point;
+		this.commande = commande;
+	}
+
+	public Collection<Commande> getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Collection<Commande> commande) {
+		this.commande = commande;
+	}
+
 	@Column(name="email")
 		private String email;
 		@Column(name="adress")
@@ -33,7 +66,8 @@ public class Client {
 	private int nbr_point;
 	@Column(name="cartefid")
 	private long cartefid;
-   
+	@OneToMany(mappedBy="client",cascade=CascadeType.ALL)
+	private Collection<Commande> commande ;
 	
 	
 

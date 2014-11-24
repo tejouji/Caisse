@@ -3,8 +3,10 @@ package fr.uha.miage.caisse.model;
 import java.awt.Image;
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Collection;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -25,7 +28,7 @@ public class Produit implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name="id_p")
 	Long id;
 	@NotEmpty
 	@Column(name="designation_pd")
@@ -42,18 +45,39 @@ public class Produit implements Serializable {
 	@Column(name="quantite")
 	int quantite;
 	
-	 
+	
 
 	@ManyToOne //(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_cat")
 	CategorieProduit categorie ;
 	
+	
+	public Produit() {
+		
+	}
+	
+	public Produit(String designation_pd, Double prix_ht, long codbar,
+			String testcb, int quantite, CategorieProduit categorie,
+			Collection<LigneCommande> ligne, Double tva) {
+		super();
+		this.designation_pd = designation_pd;
+		this.prix_ht = prix_ht;
+		this.codbar = codbar;
+		this.testcb = testcb;
+		this.quantite = quantite;
+		this.categorie = categorie;
+		this.ligne = ligne;
+		this.tva = tva;
+	}
+
 	public CategorieProduit getCategorie() {
 		return categorie;
 	}
 	public void setCategorie(CategorieProduit categorie) {
 		this.categorie = categorie;
 	}
+	@OneToMany(mappedBy="produit",cascade=CascadeType.ALL)
+	private Collection<LigneCommande> ligne ;
 	@Column(name="tva")
 	Double tva;
 	public Double getTva() {
@@ -86,6 +110,13 @@ public class Produit implements Serializable {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+	
+	public Collection<LigneCommande> getLigne() {
+		return ligne;
+	}
+	public void setLigne(Collection<LigneCommande> ligne) {
+		this.ligne = ligne;
+	}
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation_pd=" + designation_pd
@@ -105,6 +136,7 @@ public class Produit implements Serializable {
 	public void setTestcb(String testcb) {
 		this.testcb = testcb;
 	}
+	
 	
 
 }

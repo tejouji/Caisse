@@ -29,6 +29,19 @@ public class CategorieProduit implements Serializable {
 	
 	@OneToMany(mappedBy="categorie",cascade=CascadeType.ALL)
 	private Collection<Produit> produit ;
+	
+	
+	
+	public CategorieProduit() {
+		
+	}
+	public CategorieProduit(long id, String designation,
+			Collection<Produit> produit) {
+		
+		this.id = id;
+		this.designation = designation;
+		this.produit = produit;
+	}
 	public long getId() {
 		return id;
 	}
@@ -43,6 +56,12 @@ public class CategorieProduit implements Serializable {
 	}
 	
 	
+	public Collection<Produit> getProduit() {
+		return produit;
+	}
+	public void setProduit(Collection<Produit> produit) {
+		this.produit = produit;
+	}
 	@Override
 	public String toString() {
 		return "CategorieProduit [id=" + id + ", designation=" + designation

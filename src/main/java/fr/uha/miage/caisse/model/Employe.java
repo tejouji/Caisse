@@ -1,31 +1,67 @@
 package fr.uha.miage.caisse.model;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name="employe")
 public class Employe {
 	
 
 	@Id
 	@GeneratedValue
+	@Column(name="id_emp")
 	private Long id;
 	@NotEmpty
+	@Column(name="nom_emp")
 	private String nom_emp;
+	@Column(name="pre_emp")
 	private String pre_emp;
-	
+	@Column(name="dat_nai_emp")
 	private String dat_nai_emp;
+	@Column(name="sex_emp")
 	private String sex_emp;
+	@Column(name="tel_emp")
 	private String tel_emp;
+	@Column(name="mail_emp")
 	private String mail_emp;
+	@Column(name="adr_emp")
 	private String adr_emp;
+	@Column(name="mp_emp")
 	private String mp_emp;
+	@OneToMany(mappedBy="employe",cascade=CascadeType.ALL)
+	private Collection<Commande> commande ;
+	
+	public Employe() {
+		
+	}
+	
+	public Employe(String nom_emp, String pre_emp, String dat_nai_emp,
+			String sex_emp, String tel_emp, String mail_emp, String adr_emp,
+			String mp_emp, Collection<Commande> commande) {
+	
+		this.nom_emp = nom_emp;
+		this.pre_emp = pre_emp;
+		this.dat_nai_emp = dat_nai_emp;
+		this.sex_emp = sex_emp;
+		this.tel_emp = tel_emp;
+		this.mail_emp = mail_emp;
+		this.adr_emp = adr_emp;
+		this.mp_emp = mp_emp;
+		this.commande = commande;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +115,13 @@ public class Employe {
 	}
 	public void setMp_emp(String mp_emp) {
 		this.mp_emp = mp_emp;
+	}
+	
+	public Collection<Commande> getCommande() {
+		return commande;
+	}
+	public void setCommande(Collection<Commande> commande) {
+		this.commande = commande;
 	}
 	@Override
 	public String toString() {
