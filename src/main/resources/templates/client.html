@@ -110,7 +110,15 @@
 					}
 
 				}
-			} ] ],
+			} , {
+				field : 'cartefid',
+				title : 'Num carte',
+				width : 100
+
+				}
+			
+			
+			] ],
 
 		});
 	});
@@ -198,7 +206,7 @@
 							<table>
 								<tr>
 									<td>Num carte:</td>
-									<td th:field="*{cartefid}" th:text="${client.getCartefid()}">
+									<td th:field="*{cartefid}"  th:text="${client.getCartefid()}">
 									</td>
 								</tr>
 							</table>

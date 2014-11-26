@@ -15,10 +15,10 @@ public class ProduitCat implements Serializable {
 	Double tva;
 	Long idcat;
 	
-	public ProduitCat(Long id, String designation_pd, Double prix_ht,
+	public ProduitCat( String designation_pd, Double prix_ht,
 			int quantite,Double tva, Long idcat,String categorie) {
 	
-		this.id = id;
+
 		this.designation_pd = designation_pd;
 		this.prix_ht = prix_ht;
 		this.quantite = quantite;

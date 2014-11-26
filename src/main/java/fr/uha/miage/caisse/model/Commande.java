@@ -29,7 +29,7 @@ public class Commande implements Serializable {
 	@Column(name="id_cm")
 	private long id;
 	 @JsonManagedReference
-	@OneToMany(fetch = FetchType.EAGER,mappedBy="commande",cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="commande",cascade=CascadeType.ALL)
 	private Collection<LigneCommande> ligne ;
 	@JsonBackReference
 	@ManyToOne //(fetch = FetchType.LAZY)
@@ -93,12 +93,12 @@ public class Commande implements Serializable {
 		this.ligne = ligne;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", ligne=" + ligne + ", client=" + client
 				+ ", employe=" + employe + ", date=" + date + ", montant="
 				+ montant + "]";
-	}*/
+	}
 	
 
 }

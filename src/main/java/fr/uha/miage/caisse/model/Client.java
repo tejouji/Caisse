@@ -36,10 +36,11 @@ public class Client implements Serializable{
 		
 	}
 
-	public Client(String nom, String prenom, String email, String adress,
-			String date_naissance, String sexe, int telephone, int nbr_point,
+	public Client(long id,String nom, String prenom, String email, String adress,
+			String date_naissance, String sexe, int telephone, int nbr_point,long cartefid,
 			Collection<Commande> commande) {
-		
+		this.cartefid=cartefid;
+		this.id=id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -162,6 +163,15 @@ public class Client implements Serializable{
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom
+				+ ", email=" + email + ", adress=" + adress
+				+ ", date_naissance=" + date_naissance + ", sexe=" + sexe
+				+ ", telephone=" + telephone + ", nbr_point=" + nbr_point
+				+ ", cartefid=" + cartefid +  "]";
+	}
+    
 
 	
 }

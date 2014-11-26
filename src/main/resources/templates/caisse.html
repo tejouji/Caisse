@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://templateplanet.info/tooltip.js"></script>
+<script src="http://templateplanet.info/modal.js"></script>
 <meta name="keywords" content="jquery,ui,easy,easyui,web" />
 <link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
@@ -11,25 +14,35 @@
 <script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
 <script type="text/javascript">
-
-var j=jQuery.noConflict();
+	var j = jQuery.noConflict();
 </script>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-
-
-
-
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript">
+	function autocarte() {
+		$(function() {
 
-<script >
+
+			$("#carte").autocomplete({
+				source : "/autocarte"
+
+			});
+		});
+	}
+</script>
+<script>
+
+
 
 	function test() {
 		if (event.keyCode == 13) {
@@ -69,27 +82,51 @@ var j=jQuery.noConflict();
 				if (document.getElementById('quantit').value.toString() == "") {
 					alert("Donnez une quantité");
 				} else {
-					j.ajax({
-						type : 'POST',
-						url : "/verif",
-						data : {
-							"term" : j("#code").val(),
-							"term1" : j("#quantit").val()
-						},
-						success : function(result) {
-							if (result != "Quantité supérieur"||result!="Saisir de nouveau la désignation ou le code du produit") {
-								
-							
-							location.reload();
-								
-								
-							} else
-								alert("Données incorrectes");
-						}
-					});
+					j
+							.ajax({
+								type : 'POST',
+								url : "/verif",
+								data : {
+									"term" : j("#code").val(),
+									"term1" : j("#quantit").val()
+								},
+								success : function(result) {
+									if (result != "Quantité supérieur"
+											|| result != "Saisir de nouveau la désignation ou le code du produit") {
+
+										location.reload();
+
+									} else
+										alert("Données incorrectes");
+								}
+							});
 				}
 			}
 		}
+	}
+</script>
+<script type="text/javascript">
+	function valider() {
+		j.ajax({
+			type : 'POST',
+			url : "/valider",
+			data : {
+				"cartefid" : j("#carte").val(),
+				"montant" : document.getElementById('tota').innerHTML
+			},
+			success : function(result) {
+			}
+		});
+
+	}
+</script>
+<script type="text/javascript">
+	function add() {
+		var d = document.getElementById('d').value;
+
+		var mt = document.getElementById('tota').innerHTML;
+
+		document.getElementById('r').value = d - mt;
 	}
 </script>
 <script>
@@ -137,32 +174,392 @@ var j=jQuery.noConflict();
 				field : 'total',
 				title : 'Total',
 				width : 100
-				
+
 			} ] ],
 
 		});
 	});
-	function Affichesum()
-	{
+	function Affichesum() {
 		j.ajax({
 			type : 'POST',
 			url : "/getsum",
-			
+
 			success : function(result) {
-				
+
 				document.getElementById('tota').innerHTML = result;
 			}
 		});
-		
+
 	}
 </script>
 <script type="text/javascript">
-function updaterow()
-{
-	j('#tt').edatagrid('saveRow');
-	location.reload();
+	function updaterow() {
+		j('#tt').edatagrid('saveRow');
+		location.reload();
 	}
+
 </script>
+<script type="text/javascript">
+//<![CDATA[
+function btdroite()
+{var noeud=document.getElementById("sanscode");
+while (noeud.firstChild) {
+	  noeud.removeChild(noeud.firstChild);
+	}
+
+indexpage++;
+
+if(tableau.length>indexpage*12)
+	{
+	document.getElementById("droite").style.visibility="visible";
+document.getElementById("gauche").style.visibility="visible";
+nbtr=4;
+var comm=0
+
+for (var r = 0, n = nbtr; r <  n; r++)
+	
+{
+	 comm++;
+	 var trb=document.createElement("tr");
+		sanscode.appendChild(trb); 
+
+	
+		
+		for(var l = 0, h =3; l < h; l++)
+		{
+			 
+		//ajout
+		var tdd=document.createElement("td");
+			  tdd.setAttribute("width","20px");
+			  trb.appendChild(tdd);
+			 
+			  
+			  var tdb=document.createElement("td");
+			  trb.appendChild(tdb);
+			  
+var input = document.createElement("input");
+var valbv=(l+3*(comm-1))+(indexpage-1)*12;
+input.setAttribute("id",tableau[valbv]);
+input.setAttribute("name",tableau[valbv]);
+input.setAttribute("value",tableau[valbv]);
+
+	input.setAttribute("type","button");
+	tdb.appendChild(input);
+	var desi=document.getElementById(tableau[valbv]).value.toString();
+	
+input.setAttribute("onClick","getmeth('"+desi+"');");
+	document.getElementById(tableau[valbv]).style.width="80px";
+	document.getElementById(tableau[valbv]).style.height="80px";
+		
+		}
+		var br = document.createElement("br");
+			sanscode.appendChild(br);
+		
+}
+	}
+else{
+	//derniere page
+	
+
+document.getElementById("gauche").style.visibility="visible";
+document.getElementById("droite").style.visibility="hidden";
+nbrest=tableau.length-(indexpage-1)*12;
+nbtr=parseInt(Math.round((nbrest/3)-0.5))+1;
+comm=0
+for (var r = 0, n = nbtr; r < n; r++)
+{comm++;
+	 var trb=document.createElement("tr");
+		sanscode.appendChild(trb); 
+	if(r+1==nbtr) 
+		{
+		for(var l = 0, h = (3-(nbtr*3-nbrest)); l < h; l++)
+			{
+			var tdd=document.createElement("td");
+			  tdd.setAttribute("width","20px");
+			  trb.appendChild(tdd);
+			 
+			  
+			  var tdb=document.createElement("td");
+			  trb.appendChild(tdb);
+			  
+var input = document.createElement("input");
+var valbv=(l+3*(comm-1))+(indexpage-1)*12;
+input.setAttribute("id",tableau[valbv]);
+input.setAttribute("name",tableau[valbv]);
+input.setAttribute("value",tableau[valbv]);
+
+
+
+	input.setAttribute("type","button");
+	tdb.appendChild(input);
+	var desi=document.getElementById(tableau[valbv]).value.toString();
+
+input.setAttribute("onClick","getmeth('"+desi+"');");
+
+
+	document.getElementById(tableau[valbv]).style.width="80px";
+	document.getElementById(tableau[valbv]).style.height="80px";
+			indexel++;
+			}
+		}
+	else
+		{
+		for(var l = 0, h =3; l < h; l++)
+		{
+		//ajout
+		var tdd=document.createElement("td");
+			  tdd.setAttribute("width","20px");
+			  trb.appendChild(tdd);
+			 
+			  
+			  var tdb=document.createElement("td");
+			  trb.appendChild(tdb);
+			  
+var input = document.createElement("input");
+
+input.setAttribute("id",tableau[valbv]);
+input.setAttribute("name",tableau[valbv]);
+input.setAttribute("value",tableau[valbv]);
+
+	input.setAttribute("type","button");
+	tdb.appendChild(input);
+	var desi=document.getElementById(tableau[valbv]).value.toString();
+	
+input.setAttribute("onClick","getmeth('"+desi+"');");
+	document.getElementById(tableau[valbv]).style.width="80px";
+	document.getElementById(tableau[valbv]).style.height="80px";
+	
+		}
+		var br = document.createElement("br");
+			sanscode.appendChild(br);
+		}
+}
+
+}
+
+
+	}
+	function btgauche()
+	{
+		var noeud=document.getElementById("sanscode");
+		while (noeud.firstChild) {
+			  noeud.removeChild(noeud.firstChild);
+			}
+		indexpage--;
+		if(indexpage==1)
+			{
+			document.getElementById("gauche").style.visibility="hidden";
+			document.getElementById("droite").style.visibility="visible";
+			}
+		else
+			{
+			document.getElementById("gauche").style.visibility="visible";
+			document.getElementById("droite").style.visibility="visible";
+			
+			}
+		nbtr=4;
+		var comm=0
+
+		for (var r = 0, n = nbtr; r <  n; r++)
+			
+		{
+			 comm++;
+			 var trb=document.createElement("tr");
+				sanscode.appendChild(trb); 
+
+			
+				
+				for(var l = 0, h =3; l < h; l++)
+				{
+					 
+				//ajout
+				var tdd=document.createElement("td");
+					  tdd.setAttribute("width","20px");
+					  trb.appendChild(tdd);
+					 
+					  
+					  var tdb=document.createElement("td");
+					  trb.appendChild(tdb);
+					  
+		var input = document.createElement("input");
+		var valbv=(l+3*(comm-1))+(indexpage-1)*12;
+		input.setAttribute("id",tableau[valbv]);
+		input.setAttribute("name",tableau[valbv]);
+		input.setAttribute("value",tableau[valbv]);
+
+			input.setAttribute("type","button");
+			tdb.appendChild(input);
+			var desi=document.getElementById(tableau[valbv]).value.toString();
+		
+		input.setAttribute("onClick","getmeth('"+desi+"');");
+			document.getElementById(tableau[valbv]).style.width="80px";
+			document.getElementById(tableau[valbv]).style.height="80px";
+				
+				}
+				var br = document.createElement("br");
+					sanscode.appendChild(br);
+				
+		}
+
+	}
+	
+</script>
+<script type="text/javascript">
+
+           indexpage=0
+           tableau= new Array();
+          
+function builddiv(tab)
+{
+
+	
+	tableau=tab;
+	indexel=0;
+	var l=document.getElementById("sanscode");
+	var br = document.createElement("br");
+	sanscode.appendChild(br);
+	nbpage=parseInt(Math.round((tab.length/12)-0.5))+1;
+			
+				if(nbpage>1)
+					{
+					indexpage=1;
+					document.getElementById("gauche").style.visibility="hidden";
+					
+					nbtr=4;
+					
+					 for (var r = 0, n = nbtr; r < n; r++)
+					  {
+						 var trb=document.createElement("tr");
+							sanscode.appendChild(trb); 
+					
+						
+							
+							for(var l = 0, h =3; l < h; l++)
+							{
+							//ajout
+							var tdd=document.createElement("td");
+								  tdd.setAttribute("width","20px");
+								  trb.appendChild(tdd);
+								 
+								  
+								  var tdb=document.createElement("td");
+								  trb.appendChild(tdb);
+								  
+					var input = document.createElement("input");
+					
+					input.setAttribute("id",tableau[indexel]);
+				   input.setAttribute("name",tableau[indexel]);
+				   input.setAttribute("value",tableau[indexel]);
+				  
+				   		input.setAttribute("type","button");
+				   		tdb.appendChild(input);
+				   		var desi=document.getElementById(tableau[indexel]).value.toString();
+				   		
+				   	input.setAttribute("onClick","getmeth('"+desi+"');");
+				   		document.getElementById(tableau[indexel]).style.width="80px";
+				   		document.getElementById(tableau[indexel]).style.height="80px";
+							indexel++;
+							}
+							var br = document.createElement("br");
+								sanscode.appendChild(br);
+							
+					  }
+
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					//////////////////////////
+					}
+				// si le nombre d'element ne dépasse pas la taille de tableau
+				else
+					{
+					document.getElementById("gauche").style.visibility="hidden";
+			document.getElementById("droite").style.visibility="hidden";
+					nbtr=parseInt(Math.round((tab.length/3)-0.5))+1;
+					
+					 for (var r = 0, n = nbtr; r < n; r++)
+					  {
+						 var trb=document.createElement("tr");
+							sanscode.appendChild(trb); 
+						if(r+1==nbtr) 
+							{
+							for(var l = 0, h = (3-(nbtr*3-tab.length)); l < h; l++)
+								{
+								var tdd=document.createElement("td");
+								  tdd.setAttribute("width","20px");
+								  trb.appendChild(tdd);
+								 
+								  
+								  var tdb=document.createElement("td");
+								  trb.appendChild(tdb);
+								  
+					var input = document.createElement("input");
+					input.setAttribute("id",tableau[indexel]);
+				   input.setAttribute("name",tableau[indexel]);
+				   input.setAttribute("value",tableau[indexel]);
+				  
+				  
+
+				   		input.setAttribute("type","button");
+				   		tdb.appendChild(input);
+				   		var desi=document.getElementById(tableau[indexel]).value.toString();
+				   
+				   	input.setAttribute("onClick","getmeth('"+desi+"');");
+
+
+				   		document.getElementById(tableau[indexel]).style.width="80px";
+				   		document.getElementById(tableau[indexel]).style.height="80px";
+								indexel++;
+								}
+							}
+						else
+							{
+							for(var l = 0, h =3; l < h; l++)
+							{
+							//ajout
+							var tdd=document.createElement("td");
+								  tdd.setAttribute("width","20px");
+								  trb.appendChild(tdd);
+								 
+								  
+								  var tdb=document.createElement("td");
+								  trb.appendChild(tdb);
+								  
+					var input = document.createElement("input");
+					
+					input.setAttribute("id",tableau[indexel]);
+				   input.setAttribute("name",tableau[indexel]);
+				   input.setAttribute("value",tableau[indexel]);
+				  
+				   		input.setAttribute("type","button");
+				   		tdb.appendChild(input);
+				   		var desi=document.getElementById(tableau[indexel]).value.toString();
+			   	
+				   	input.setAttribute("onClick","getmeth('"+desi+"');");
+				   		document.getElementById(tableau[indexel]).style.width="80px";
+				   		document.getElementById(tableau[indexel]).style.height="80px";
+							indexel++;
+							}
+							var br = document.createElement("br");
+								sanscode.appendChild(br);
+							}
+					  }
+					
+					}
+				
+	
+	}
+//]]>
+	</script>
 <script type="text/javascript">
 
 function getsans()
@@ -172,34 +569,22 @@ function getsans()
 		url : "/getprdsanscb",
 		
 		success : function(result) {
-		var t = new Array();
-			var t = result;
+			builddiv(result);
 			
-			alert(t.length);
-			var l=document.getElementById("sanscode");
-			var input = document.createElement("input");
-	        input.setAttribute("name",t[0]);
-	        input.setAttribute("value",t[0]");
-
-	        		input.setAttribute("type","button");
-	        l.appendChild(input);
-			/*
-	        <![CDATA[
-			
-			  for (var r = 0, n = t.length; r < n; r++)
-			  {
-				  alert(t(r));
-				  
-				  
-			  }
-			  ]]>	
-			  */
 		}
 	});
+	}
+function getmeth(chaine)
+{
+	document.getElementById('prd').value=chaine;
 	}
 
 </script>
 </head>
+
+
+
+
 <body onload="Affichesum();getsans();">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
@@ -231,35 +616,80 @@ function getsans()
 
 	<br />
 	<br />
+
 	<br />
 	<table>
-	<tr>
-	
-	<td style="margin-bottom: 250px"><div>
+		<tr>
 
-		<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
-			fitColumns="true">
-		</table>
-	</div>
-	<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
-			plain="true" onClick="javascript:j('#tt').edatagrid('destroyRow')">Supprimer</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"
-			onClick="updaterow();">Enregistrer</a> <a
-			href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
-			onClick="javascript:j('#tt').edatagrid('cancelRow')">Annuler</a>
-	</div></td>
-	<td width="20px"> </td>
-	<td style="margin-top: -50px">
-	<div style=" border: 2px solid red;width: 400px;height: 400px; " id="sanscode">
+
+			<td style="margin-bottom: 250px"><div>
+
+					<table id="tt" toolbar="#toolbar" pagination="true"
+						rownumbers="true" fitColumns="true">
+					</table>
+				</div>
+				<div id="toolbar">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
+						plain="true" onClick="javascript:j('#tt').edatagrid('destroyRow')">Supprimer</a>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-save"
+						plain="true" onClick="updaterow();">Enregistrer</a> <a href="#"
+						class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+						onClick="javascript:j('#tt').edatagrid('cancelRow')">Annuler</a>
+				</div></td>
+			<td width="20px"></td>
+			<td style="margin-top: -50px">
+				<div style=" border: 2px solid red;width: 320px;height: 450px;" >
+<table id="sanscode">
+
+</table>
+
+<table id="sss">
+<tr>
+<td>
+<img  src="/icons/gauche.png" style="margin-left: 10px" id="gauche" onClick="btgauche();"/>
+</td>
+<td>
+<img  src="/icons/droite.png" style="margin-left: 200px" id="droite" onClick="btdroite();"/>
+
+	
+</td>
+</tr>
+</table>
 
 	
 	</div>
-	</td>
-	</tr>
+			</td>
+		</tr>
 	</table>
+	<form action="#">
+	
+     <table>
+         <tr>
+		         <td> <label for="prd">Numéro Carte : </label></td>
+		         <td><input type="text" id="carte" onKeyPress="autocarte();" /></td>
+		         <td></td><td></td>
+		         <td><label for="prd">encaisser : </label></td>
+		         <td><input type="text" id="d" required="required" onChange="add();" /></td>
+		         <td></td>
+		         <td><b style="color: blue; font-size: x-large;">Total: </b></td>
+		         <td><b id="tota" style="color: blue; font-size: x-large;"></b></td>
+                 <td><b style="color: blue; font-size: x-large;"> euros</b></td>
+         </tr>
+         <tr>
+		         <td><label for="prd">Rendu : </label></td>
+		         <td><input type="text" id="r"/></td>
+		         <td></td><td></td><td></td>
+		         <td> <a href="/caisse" class="btn btn-success" onClick="valider();">Valider</a></td>
+		        
+         </tr>
+     </table>
+      
+   </form>             	
+
+		
 	
 	
-<b style="color: blue;font-size: x-large;">Total: </b><b id="tota" style="color: blue;font-size: x-large;"></b><b style="color: blue;font-size: x-large;"> euros</b>
+	
+
 </body>
 </html>

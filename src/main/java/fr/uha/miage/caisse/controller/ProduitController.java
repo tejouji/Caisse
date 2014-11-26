@@ -97,7 +97,7 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	
 	Long idcat=Long.parseLong(String.valueOf(tab[5]));
 	
-	ProduitCat pc= new ProduitCat(id, designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	ProduitCat pc= new ProduitCat(designation_pd, prix_ht, quantite, tva, idcat, categorie);
 	json1.add(pc);
 	
 	}
@@ -165,7 +165,7 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	
 	Long idcat=Long.parseLong(String.valueOf(tab[5]));
 	
-	ProduitCat pc= new ProduitCat(id, designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	ProduitCat pc= new ProduitCat(designation_pd, prix_ht, quantite, tva, idcat, categorie);
 	json1.add(pc);
 	
 	}

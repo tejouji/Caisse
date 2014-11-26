@@ -39,13 +39,12 @@ public class LigneCommande implements Serializable{
 	@JoinColumn(name="id_cm")
 	Commande commande ; 
 	public LigneCommande(){}
-	public LigneCommande(long quatite, double montprd, Produit produit,
-			Commande commande) {
+	public LigneCommande(long quatite, double montprd, Produit produit) {
 		
 		this.quatite = quatite;
 		this.montprd = montprd;
 		this.produit = produit;
-		this.commande = commande;
+		
 	}
 	public long getId() {
 		return id;
@@ -77,12 +76,12 @@ public class LigneCommande implements Serializable{
 	public void setMontprd(double montprd) {
 		this.montprd = montprd;
 	}
-	/*@Override
+	@Override
 	public String toString() {
 		return "LigneCommande [id=" + id + ", quatite=" + quatite
 				+ ", montprd=" + montprd + ", produit=" + produit
-				+ ", commande=" + commande + "]";
-	}*/
+				+ "]";
+	}
 	
 	
 

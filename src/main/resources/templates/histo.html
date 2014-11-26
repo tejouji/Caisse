@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+<meta name="keywords" content="jquery,ui,easy,easyui,web" />
+<link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
+<link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
+<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Historique</title>
+<script>
+	$(function() {
+		$('#tt').edatagrid({
+			title : 'Historiques',
+			width : 950,
+			height : 250,
+			singleSelect : true,
+			idField : 'id',
+			url : '/loaddataCMD',
+			columns : [ [
+
+			{
+				field : 'nom_emp',
+				title : 'Employe',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'pre_emp',
+				title : 'Date',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'dat_nai_emp',
+				title : 'Date ',
+				width : 100,
+				editor : {
+					type : 'datebox',
+					options : {
+						required : true
+					}
+
+				}
+			}, {
+				field : 'adr_emp',
+				title : 'Montant',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
+
+				}
+			} ] ],
+
+		});
+	});
+</script>
+
+</head>
+<body>
+
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<ul class="nav nav-pills" role="tablist">
+					<li role="presentation"><a href="/caisse">Home</a></li>
+					<li role="presentation"><a href="/newcat">Catégorie
+							Produit</a></li>
+					<li role="presentation"><a href="/fichepd">Getion des
+							produit</a></li>
+					<li role="presentation"><a href="/client">Gestion des
+							Clients</a></li>
+					<li role="presentation" class="active"><a href="/employe">Getion
+							des employés</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<div>
+
+		<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
+			fitColumns="true">
+		</table>
+	</div>
+	<div id="toolbar">
+		<input type="text" id="em" /> <input type="text" id=date />
+	</div>
+
+
+
+
+	<div id="footer">
+		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
+	</div>
+
+
+
+
+
+
+
+</body>
+</html>

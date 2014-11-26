@@ -30,6 +30,7 @@ public class CategorieProduitController {
 	@RequestMapping(value = "/newcat", method = RequestMethod.GET)
 	public String Auth(Model model) {
 	model.addAttribute("categorieProduit", new CategorieProduit());
+	System.out.println(catProdRepository.findOne((long) 1).getProduit().toString());
 		return "newcat";
 	}	
 	@RequestMapping(value = "/newcat", method = RequestMethod.POST)

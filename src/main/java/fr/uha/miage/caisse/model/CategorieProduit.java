@@ -38,10 +38,10 @@ public class CategorieProduit implements Serializable {
 	public CategorieProduit() {
 		
 	}
-	public CategorieProduit(long id, String designation,
+	public CategorieProduit(String designation,
 			Collection<Produit> produit) {
 		
-		this.id = id;
+		
 		this.designation = designation;
 		this.produit = produit;
 	}
