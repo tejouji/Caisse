@@ -91,15 +91,17 @@ public class CaisseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/getCode", method = RequestMethod.POST)
-	public Long modifier(@RequestParam("term") String term, Model model) {
+	public String[] modifier(@RequestParam("term") String term, Model model) {
 		long l = 0;
+		String[] tab= new String[2];
 		try {
 			Produit json = (Produit) prodRepository.FIND_des(term);
-			l = json.getId();
+			tab[0]=String.valueOf(json.getCodbar());
+			tab[1]=String.valueOf(json.getId());
 		} catch (Exception e) {
 
 		}
-		return l;
+		return tab;
 	}
 
 	@ResponseBody
@@ -136,6 +138,7 @@ public class CaisseController {
 				cmd.setPrix_ht(p.getPrix_ht());
 				cmd.setQuantite(quantite);
 				cmd.setTva(p.getTva());
+				cmd.setCodbar(p.getCodbar());
 				double p1 = Math.pow(10.0, 2);
 
 				double total = quantite * p.getPrix_ht()
@@ -205,7 +208,7 @@ public class CaisseController {
 	@ResponseBody
 	@RequestMapping(value="/valider", method = RequestMethod.POST)
 	public void validerC(@RequestParam("cartefid") String cartefid ,@RequestParam("montant") double montant ,Model model){
-	System.out.println("hhhhhhhhhhhhhhhhh");
+	
 		System.out.println(cartefid);
 		List<CommandeVirt> liste = cmdVirRepository.findAll();
 	Authentication auth = SecurityContextHolder.getContext()

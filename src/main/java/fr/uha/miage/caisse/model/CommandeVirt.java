@@ -19,7 +19,7 @@ public class CommandeVirt {
 	int quantite;
 	
 	 double total;
-
+long codbar;
 	
 	String categorie ;
 	Double tva;
@@ -66,6 +66,12 @@ public class CommandeVirt {
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	public long getCodbar() {
+		return codbar;
+	}
+	public void setCodbar(long codbar) {
+		this.codbar = codbar;
 	}
 	
 

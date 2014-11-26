@@ -62,7 +62,7 @@ public class ProduitController {
 	else
 		produit.setTestcb("oui");
 	prodRepository.save(produit);
-	System.out.println(produit);
+	
 	model.addAttribute("produits", prodRepository.findAll());
 	model.addAttribute("categorieProduits",catProdRepository.findAll());
 		return "fichepd";
@@ -96,13 +96,15 @@ public class ProduitController {
 Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	
 	Long idcat=Long.parseLong(String.valueOf(tab[5]));
+	long cb=Long.parseLong(tab[7].toString());
 	
-	ProduitCat pc= new ProduitCat(designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	ProduitCat pc= new ProduitCat(id,cb,designation_pd, prix_ht, quantite, tva, idcat, categorie);
+
 	json1.add(pc);
 	
 	}
+	System.out.println(json1);
 	
-	//System.out.println(json1);
 		return json1;
 	    }
 		  
@@ -133,8 +135,8 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 
 		   
 		 public List<ProduitCat> modifier(@ModelAttribute ProduitCat product, Model model) {
-		System.out.println("test");
-			 System.out.println("test"+product);
+	
+		
 			 
 			 
 		List<ProduitCat> json1 = new ArrayList<ProduitCat>() ;
@@ -146,6 +148,7 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	p.setPrix_ht(product.getPrix_ht());
 	p.setQuantite(product.getQuantite());
 	p.setTva(product.getTva());
+	p.setCodbar(product.getCodbar());
 	prodRepository.save(p);
 		
 		
@@ -165,12 +168,12 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 	
 	Long idcat=Long.parseLong(String.valueOf(tab[5]));
 	
-	ProduitCat pc= new ProduitCat(designation_pd, prix_ht, quantite, tva, idcat, categorie);
+	ProduitCat pc= new ProduitCat(id,Long.parseLong(tab[7].toString()),designation_pd, prix_ht, quantite, tva, idcat, categorie);
 	json1.add(pc);
 	
 	}
 	
-	//System.out.println(json1);
+	
 		return json1;
 		    }
 
@@ -225,7 +228,7 @@ Double tva=Double.parseDouble(String.valueOf(tab[4]));
 					
 					
 					
-			
+			System.out.println(json1);
 				return json1;
 		 }
 }

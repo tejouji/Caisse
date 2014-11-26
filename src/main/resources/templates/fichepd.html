@@ -32,7 +32,18 @@
 			updateUrl : '/updatedatapd',
 			destroyUrl : '/deletedatapd',
 			columns : [ [
+{
+	field : 'codbar',
+	title : 'Code',
+	width : 100,
+	editor : {
+		type : 'validatebox',
+		options : {
+			required : true
+		}
 
+	}
+},
 			{
 				field : 'designation_pd',
 				title : 'Désignation',

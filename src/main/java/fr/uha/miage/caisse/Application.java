@@ -52,8 +52,8 @@ public class Application {
 		Produit p1= new Produit("nike", (double) 11, 0, "non", 4, cr, null, 11.00);
 		prdRepository.save(p);
 		prdRepository.save(p1);
-		for(int i=0;i<36;i++){
-			prdRepository.save(new Produit("vans"+i, (double) 11, 0, "non", 4, cr, null, 11.00));
+		for(int i=0;i<14;i++){
+			prdRepository.save(new Produit("vans"+i, (double) 11, (long)12365+i, "non", 4, cr, null, 11.00));
 		}
 		Commande cmd= new Commande(null, c, em, "12/09/2014", (double)444);
 		cmdrep.save(cmd);

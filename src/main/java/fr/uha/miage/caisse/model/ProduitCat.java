@@ -14,11 +14,12 @@ public class ProduitCat implements Serializable {
 	String categorie;
 	Double tva;
 	Long idcat;
-	
-	public ProduitCat( String designation_pd, Double prix_ht,
+	long codbar;
+	public ProduitCat( long id,long codbar,String designation_pd, Double prix_ht,
 			int quantite,Double tva, Long idcat,String categorie) {
 	
-
+this.id=id;
+this.codbar=codbar;
 		this.designation_pd = designation_pd;
 		this.prix_ht = prix_ht;
 		this.quantite = quantite;
@@ -90,6 +91,13 @@ public class ProduitCat implements Serializable {
 	public void setIdcat(Long idcat) {
 		this.idcat = idcat;
 	}
+	public long getCodbar() {
+		return codbar;
+	}
+	public void setCodbar(long codbar) {
+		this.codbar = codbar;
+	}
+
 	
 
 }

@@ -29,6 +29,7 @@
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript">
+var identifiant;
 	function autocarte() {
 		$(function() {
 
@@ -56,7 +57,11 @@
 					"term" : j("#prd").val()
 				},
 				success : function(result) {
-					document.getElementById('code').value = result;
+					var resultat=new Array(2);
+					resultat=result;
+					
+				 	document.getElementById('code').value = resultat[0].toString();
+				 	identifiant=resultat[1].toString();
 				}
 			});
 		} else {
@@ -76,7 +81,7 @@
 	function verif() {
 		if (event.keyCode == 13) {
 
-			if (document.getElementById('code').value.toString() == "0") {
+			if (identifiant == "0") {
 				alert("Produit inexistant");
 			} else {
 				if (document.getElementById('quantit').value.toString() == "") {
@@ -87,7 +92,7 @@
 								type : 'POST',
 								url : "/verif",
 								data : {
-									"term" : j("#code").val(),
+									"term" : identifiant,
 									"term1" : j("#quantit").val()
 								},
 								success : function(result) {
@@ -145,7 +150,7 @@
 				title : 'Catégorie',
 				width : 100
 			}, {
-				field : 'id',
+				field : 'codbar',
 				title : 'Code',
 				width : 100
 
@@ -201,6 +206,8 @@
 </script>
 <script type="text/javascript">
 //<![CDATA[
+                 indexpage=0
+           tableau= new Array();
 function btdroite()
 {var noeud=document.getElementById("sanscode");
 while (noeud.firstChild) {
@@ -284,6 +291,7 @@ for (var r = 0, n = nbtr; r < n; r++)
 			  
 var input = document.createElement("input");
 var valbv=(l+3*(comm-1))+(indexpage-1)*12;
+alert(valbv);
 input.setAttribute("id",tableau[valbv]);
 input.setAttribute("name",tableau[valbv]);
 input.setAttribute("value",tableau[valbv]);
@@ -316,7 +324,7 @@ input.setAttribute("onClick","getmeth('"+desi+"');");
 			  trb.appendChild(tdb);
 			  
 var input = document.createElement("input");
-
+var valbv=(l+3*(comm-1))+(indexpage-1)*12;
 input.setAttribute("id",tableau[valbv]);
 input.setAttribute("name",tableau[valbv]);
 input.setAttribute("value",tableau[valbv]);
@@ -406,8 +414,7 @@ input.setAttribute("onClick","getmeth('"+desi+"');");
 </script>
 <script type="text/javascript">
 
-           indexpage=0
-           tableau= new Array();
+     
           
 function builddiv(tab)
 {
@@ -576,15 +583,27 @@ function getsans()
 	}
 function getmeth(chaine)
 {
+	document.getElementById('quantit').focus();
 	document.getElementById('prd').value=chaine;
+	j.ajax({
+		type : 'POST',
+		url : "/getCode",
+		data : {
+			"term" : j("#prd").val()
+		},
+		success : function(result) {
+			var resultat=new Array(2);
+			resultat=result;
+			
+		 	document.getElementById('code').value = resultat[0].toString();
+		 	identifiant=resultat[1].toString();
+		}
+	});
+	
 	}
 
 </script>
 </head>
-
-
-
-
 <body onload="Affichesum();getsans();">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
