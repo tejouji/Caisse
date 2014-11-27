@@ -1,5 +1,8 @@
 package fr.uha.miage.caisse.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -13,8 +16,10 @@ import javax.servlet.http.HttpSession;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
@@ -218,9 +223,13 @@ public class CaisseController {
 	// récupération de l'employe de la session actuelle
 	Employe em =(Employe) employeRepository.FIND_BY_EM(nam);
 	System.out.println(em.toString());
-	System.out.println(new Date().toLocaleString());
+	 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	   //get current date time with Date()
+	   Date date = new Date();
+	String da=   String.valueOf((dateFormat.format(date)));
+	
 	// Création de la commande
-	Commande cmd =new Commande(null, null, em, new Date().toLocaleString(),montant); 
+	Commande cmd =new Commande(null, null, em, da,montant); 
 	cmdrep.save(cmd);
 	System.out.println(cmd);
 	// troucer le dernier enregistrement pour l'ajoute des ligneCommende
@@ -254,7 +263,7 @@ public class CaisseController {
 	}
    cmdrep.save(cmdp);
 cmdVirRepository.deleteAll();
-    System.out.println(cmdp);
+    System.out.println("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah"+cmdp);
     
 		
 	}

@@ -1,82 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head>	
+
+
+
+
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
-<meta name="keywords" content="jquery,ui,easy,easyui,web" />
-<link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
-<link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
-<link rel="stylesheet" type="text/css" href="/plugin/easyui.css" />
-<script type="text/javascript" src="/plugin/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="/plugin/jquery-1.6.min.js"></script>
-<script type="text/javascript" src="/plugin/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/plugin/jquery.edatagrid.js"></script>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
 
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
 
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+ 
+	
+	
+	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Historique</title>
-<script>
-	$(function() {
-		$('#tt').edatagrid({
-			title : 'Historiques',
-			width : 950,
-			height : 250,
-			singleSelect : true,
-			idField : 'id',
-			url : '/loaddataCMD',
-			columns : [ [
 
-			{
-				field : 'nom_emp',
-				title : 'Employe',
-				width : 100,
-				editor : {
-					type : 'validatebox',
-					options : {
-						required : true
-					}
+<script type="text/javascript">
+function verif(){
+	var a = document.getElementById("da").value;
+	var b= document.getElementById("emp").value;
+	alert(a);
+	window.location = "/histo?term="+a+"!"+b;
+}
+</script>
+<script type="text/javascript">
+function autoemp() {
+	jQuery(document).ready(function(){
 
-				}
-			}, {
-				field : 'pre_emp',
-				title : 'Date',
-				width : 100,
-				editor : {
-					type : 'validatebox',
-					options : {
-						required : true
-					}
 
-				}
-			}, {
-				field : 'dat_nai_emp',
-				title : 'Date ',
-				width : 100,
-				editor : {
-					type : 'datebox',
-					options : {
-						required : true
-					}
-
-				}
-			}, {
-				field : 'adr_emp',
-				title : 'Montant',
-				width : 100,
-				editor : {
-					type : 'validatebox',
-					options : {
-						required : true
-					}
-
-				}
-			} ] ],
+		jQuery("#emp").autocomplete({
+			source : "/autoemp"
 
 		});
 	});
+}
 </script>
-
 </head>
 <body>
 
@@ -91,29 +64,57 @@
 							produit</a></li>
 					<li role="presentation"><a href="/client">Gestion des
 							Clients</a></li>
-					<li role="presentation" class="active"><a href="/employe">Getion
-							des employés</a></li>
+					<li role="presentation"><a href="/employe">Getion des
+							employés</a></li>
+					<li role="presentation" class="active"><a href="/histo">Historique</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
+	
+
+		<input type="date" name="date" max="24-02-2013" min="1920-01-01" id="da" />	
+		Employé: <input type="text" name="emp" id="emp"  onkeypress="autoemp();"/>					 
+		<input type="button" value="recherche" onClick="verif();" />
+	
+	<div class="container">
+		<div class="row">
 
 
-	<div>
-
-		<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
-			fitColumns="true">
-		</table>
-	</div>
-	<div id="toolbar">
-		<input type="text" id="em" /> <input type="text" id=date />
-	</div>
+			<div class="col-md-12">
+				<h4>Liste Des ventes</h4>
+				<div class="table-responsive">
 
 
+					<table id="mytable" class="table table-bordred table-striped">
+
+						<thead>
 
 
-	<div id="footer">
-		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
+							<th>id</th>
+							<th>Employe</th>
+							<th>Date</th>
+							<th>Montant</th>
+							<th>Client</th>
+
+
+						</thead>
+						<tbody>
+
+							<tr th:each="cm : ${cms}">
+								<td th:text="${cm.getId()}"></td>
+								<td th:text="${cm.getEmploye().getNom_emp()}"></td>
+								<td th:text="${cm.getDate()}"></td>
+								<td th:text="${cm.getMontant()}"></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 

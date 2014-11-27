@@ -3,6 +3,21 @@
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
+	<script type="text/javascript" language="javascript" src="/plugin/tablefilter.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
 <meta name="keywords" content="jquery,ui,easy,easyui,web" />
 <link rel="stylesheet" type="text/css" href="/plugin/icon.css" />
 <link rel="stylesheet" type="text/css" href="/plugin/demo.css" />
@@ -138,13 +153,14 @@
 							des Clients</a></li>
 					<li role="presentation"><a href="/employe">Getion des
 							employés</a></li>
+					<li role="presentation"><a href="/histo">Historique</a></li>		
 				</ul>
 			</div>
 		</div>
 	</div>
 
 
-	<input type="button" id="voir" value="Ajouter Client."
+	<input type="button" id="voir" value="Ajouter Client."  class="btn btn-success"
 		onClick="divaffiche()" style="display: inline;" />
 	<form action="#" th:action="@{/client}" th:object="${client}"
 		method="post" onsubmit="divaffiche()">

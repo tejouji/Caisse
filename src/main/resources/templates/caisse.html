@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
+	
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://templateplanet.info/tooltip.js"></script>
@@ -291,7 +306,7 @@ for (var r = 0, n = nbtr; r < n; r++)
 			  
 var input = document.createElement("input");
 var valbv=(l+3*(comm-1))+(indexpage-1)*12;
-alert(valbv);
+
 input.setAttribute("id",tableau[valbv]);
 input.setAttribute("name",tableau[valbv]);
 input.setAttribute("value",tableau[valbv]);
@@ -618,6 +633,7 @@ function getmeth(chaine)
 							Clients</a></li>
 					<li role="presentation"><a href="/employe">Getion des
 							employés</a></li>
+					<li role="presentation"><a href="/histo">Historique</a></li>		
 				</ul>
 			</div>
 		</div>
@@ -641,7 +657,7 @@ function getmeth(chaine)
 		<tr>
 
 
-			<td style="margin-bottom: 250px"><div>
+			<td ><div  style="margin-bottom: 270px">
 
 					<table id="tt" toolbar="#toolbar" pagination="true"
 						rownumbers="true" fitColumns="true">
@@ -656,7 +672,7 @@ function getmeth(chaine)
 						onClick="javascript:j('#tt').edatagrid('cancelRow')">Annuler</a>
 				</div></td>
 			<td width="20px"></td>
-			<td style="margin-top: -50px">
+			<td style="margin-top: -30px">
 				<div style=" border: 2px solid red;width: 320px;height: 450px;" >
 <table id="sanscode">
 
@@ -682,7 +698,7 @@ function getmeth(chaine)
 	</table>
 	<form action="#">
 	
-     <table>
+     <table style="margin-top: -200px">
          <tr>
 		         <td> <label for="prd">Numéro Carte : </label></td>
 		         <td><input type="text" id="carte" onKeyPress="autocarte();" /></td>
