@@ -11,7 +11,8 @@
 <!-- Optional theme -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
-	<script type="text/javascript" language="javascript" src="/plugin/tablefilter.js"></script>
+<script type="text/javascript" language="javascript"
+	src="/plugin/tablefilter.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script
@@ -125,19 +126,28 @@
 					}
 
 				}
-			} , {
+			}, {
 				field : 'cartefid',
 				title : 'Num carte',
 				width : 100
 
-				}
-			
-			
+			}
+
 			] ],
 
 		});
 	});
 </script>
+<style>
+#cent {
+position: absolute; 
+left: 10%; 
+margin-left: 40px;
+
+
+}
+</style>
+
 </head>
 <body>
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -153,92 +163,85 @@
 							des Clients</a></li>
 					<li role="presentation"><a href="/employe">Getion des
 							employés</a></li>
-					<li role="presentation"><a href="/histo">Historique</a></li>		
+					<li role="presentation"><a href="/histo">Historique</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-
-	<input type="button" id="voir" value="Ajouter Client."  class="btn btn-success"
-		onClick="divaffiche()" style="display: inline;" />
+<div id="cent">
+	<input type="button" id="voir" value="Ajouter Client."
+		class="btn btn-primary" onClick="divaffiche()"
+		style="display: inline;" />
 	<form action="#" th:action="@{/client}" th:object="${client}"
 		method="post" onsubmit="divaffiche()">
 		<div id="popup" style="display: none;">
-			<fieldset>
-				<legend>Nouevau client</legend>
-				<ol>
-					<table>
-						<tr>
-							<td>Nom:</td>
-							<td><input type="text" name="nom" th:field="*{nom}"
-								required="required" /></td>
-							<td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom
-								Error</td>
-						</tr>
-						<tr>
-							<td>Prenom:</td>
-							<td><input type="text" name="pre" th:field="*{prenom}"
-								required="required" /></td>
-						</tr>
+			<fieldset style="border:solid 1px black; padding:20px; width:950px; color:midnightblue; font-family:verdana;">
 
-						<tr>
-							<td>Date Naissance:</td>
-							<td><input type="date" name="date"
-								th:field="*{date_naissance}" max="24-02-2013" min="1920-01-01" /></td>
-						</tr>
-						<tr>
-							<td>Sexe</td>
-							<td><label class="radio" for="radios-0"> <input
-									type="radio" name="radios" id="radios-0" value="Homme"
-									checked="checked" th:field="*{sexe}" /> Homme
-							</label> <label class="radio" for="radios-1"> <input type="radio"
-									name="radios" id="radios-1" value="Femme" th:field="*{sexe}" />
-									Femme
-							</label></td>
-						</tr>
-						<tr>
-							<td>Telephone:</td>
-							<td><input type="text" name="tel" th:field="*{telephone}"
-								required="required" /></td>
-						</tr>
 
-						<tr>
-							<td>Email:</td>
-							<td><input type="email" name="email" th:field="*{email}"
-								required="required" /></td>
-						</tr>
-						<tr>
-							<td>Adress:</td>
-							<td><input type="text" name="adr" th:field="*{adress}"
-								required="required" /></td>
-						</tr>
-					</table>
-					<input type="checkbox" name="fidel" value="fidel" id="fidel"
-						onclick="check();"></input> Program Fidélité
-					<div id="fid">
-						<fieldset>
-							<legend>Program fidelité</legend>
-							<table>
-								<tr>
-									<td>Num carte:</td>
-									<td th:field="*{cartefid}"  th:text="${client.getCartefid()}">
-									</td>
-								</tr>
-							</table>
 
-						</fieldset>
-					</div>
-					<table>
-						<tr>
-							<td><input type="submit" value="Valider" /></td>
-							<td><input type="reset" value="Annuler" /></td>
-						</tr>
-					</table>
-				</ol>
+				<label class="control-label" for="textinput"> Nom:</label> <input
+					type="text" name="nom" th:field="*{nom}" required="required" /> <label
+					class="control-label" for="textinput">Prenom:</label> <input
+					type="text" name="pre" th:field="*{prenom}" required="required" />
+				<label class="control-label" for="textinput">Date Naissance:</label>
+				<input type="date" name="date" th:field="*{date_naissance}"
+					max="24-02-2013" min="1920-01-01" /> <br />
+				<table>
+					<tr>
+						<td><label class="control-label" for="textinput">Genre</label></td>
+						<td width="30px"></td>
+						<td><label class="radio" for="radios-0"> <input
+								type="radio" name="radios" id="radios-0" value="Homme"
+								checked="checked" th:field="*{sexe}" /> Homme
+						</label></td>
+						<td width="30px"></td>
+						<td><label class="radio" for="radios-1"> <input
+								type="radio" name="radios" id="radios-1" value="Femme"
+								th:field="*{sexe}" /> Femme
+						</label></td>
+					</tr>
+
+				</table>
+
+
+
+
+				<label class="control-label" for="textinput">Telephone:</label> <input
+					type="text" name="tel" th:field="*{telephone}" required="required" />
+
+
+				<label class="control-label" for="textinput"> Email:</label> <input
+					type="email" name="email" th:field="*{email}" required="required" />
+
+
+
+
+
+				<label class="control-label" for="textinput">Adress:</label> <input
+					type="text" name="adr" th:field="*{adress}" required="required" />
+				<br />
+				<div id="fid">
+					<fieldset>
+					<br />	<label class="control-label" for="textinput">Num carte:</label> <label
+							th:field="*{cartefid}" th:text="${client.getCartefid()}">
+						</label>
+					</fieldset>
+				</div>
+
+
+
+
+
+				<br /> <input type="submit" class="btn btn-success" value="Valider" />
+				<input type="reset" class="btn btn-danger" value="Annuler" />
+
+
+
 			</fieldset>
 		</div>
 
+		<br />
 		<div>
 
 			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
@@ -246,9 +249,7 @@
 			</table>
 		</div>
 		<div id="toolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-				onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a> <a
-				href="#" class="easyui-linkbutton" iconCls="icon-remove"
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
 				plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
 			//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
 				plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
@@ -261,6 +262,6 @@
 	<div id="footer">
 		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
 	</div>
-
+</div>
 </body>
 </html>

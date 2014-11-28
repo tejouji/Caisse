@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>	
+<head>
 
 
 
@@ -23,33 +23,49 @@
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"></link>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
- 
-	
-	
-	
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Historique</title>
 
 <script type="text/javascript">
-function verif(){
-	var a = document.getElementById("da").value;
-	var b= document.getElementById("emp").value;
-	alert(a);
-	window.location = "/histo?term="+a+"!"+b;
-}
+	function verif() {
+		var a = document.getElementById("da").value;
+		var b = document.getElementById("emp").value;
+		alert(a);
+		window.location = "/histo?term=" + a + "!" + b;
+	}
 </script>
 <script type="text/javascript">
-function autoemp() {
-	jQuery(document).ready(function(){
+	function autoemp() {
+		jQuery(document).ready(function() {
 
+			jQuery("#emp").autocomplete({
+				source : "/autoemp"
 
-		jQuery("#emp").autocomplete({
-			source : "/autoemp"
-
+			});
 		});
-	});
-}
+	}
 </script>
+
+<style>
+#cent {
+	position: absolute;
+	left: 10%;
+	margin-left: 40px;
+	top: 70px;
+}
+</style>
+<style>
+#cent1 {
+	position: absolute;
+	left: 5%;
+	margin-left: 10px;
+	top: 150px;
+}
+</style>
 </head>
 <body>
 
@@ -71,36 +87,30 @@ function autoemp() {
 			</div>
 		</div>
 	</div>
-	
 
-		<input type="date" name="date" max="24-02-2013" min="1920-01-01" id="da" />	
-		Employé: <input type="text" name="emp" id="emp"  onkeypress="autoemp();"/>					 
-		<input type="button" value="recherche" onClick="verif();" />
-	
-	<div class="container">
+	<div id=+"cent" align="center">
+		<fieldset
+			style="border: solid 1px black; padding: 20px; width: 950px; color: midnightblue; font-family: verdana;">
+			<label class="control-label">Date</label> <input type="date"
+				name="date" max="24-02-2013" min="1920-01-01" id="da" /> <label
+				class="control-label">Employé:</label> <input type="text" name="emp"
+				id="emp" onkeypress="autoemp();" /> <input type="button"
+				value="Recherche" onClick="verif();" />
+		</fieldset>
+	</div>
+	<div id="cent1" class="container">
 		<div class="row">
-
-
 			<div class="col-md-12">
-				<h4>Liste Des ventes</h4>
 				<div class="table-responsive">
-
-
 					<table id="mytable" class="table table-bordred table-striped">
 
 						<thead>
-
-
 							<th>id</th>
 							<th>Employe</th>
 							<th>Date</th>
 							<th>Montant</th>
-							<th>Client</th>
-
-
 						</thead>
 						<tbody>
-
 							<tr th:each="cm : ${cms}">
 								<td th:text="${cm.getId()}"></td>
 								<td th:text="${cm.getEmploye().getNom_emp()}"></td>
@@ -108,20 +118,10 @@ function autoemp() {
 								<td th:text="${cm.getMontant()}"></td>
 							</tr>
 						</tbody>
-
 					</table>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 </body>
 </html>

@@ -15,11 +15,28 @@
 <!-- Optional theme -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
-	
+
 
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<style>
+#cent {
+position: absolute; 
+left: 10%; 
+margin-left: -100px;
+top: 200px;
+
+}
+</style>
+<style type="text/css">
+#fil
+{
+  background-color:#CCC;
+  max-width:500px;
+  padding:16px;	
+}
+</style>	
 </head>
 <body>
 	<div th:if="${param.error}">Invalid username and password.</div>
@@ -37,32 +54,34 @@
 			</div>
 		</div>
 	</div>
+	<div id="cent" align="center">
+		<div class="container">
+			<form th:action="@{/login}" method="post">
+				<fieldset id="fil">
+					<h2>Authentification</h2>
+					<table>
+						<tr>
+							<td><label> Login :</label></td>
+							<td><input type="text" class="form-control" name="login" /></td>
+						</tr>
+						<tr>
+							<td><label> Password:</label></td>
+							<td><input type="password" class="form-control" name="pwd" /></td>
+						</tr>
+						<tr>
+						    <td width="5px"></td> 
+							<td><input class="btn btn-lg btn-primary btn-block"
+								type="submit" value="Se connecter" /></td>
+						</tr>
+					</table>
+				</fieldset>
 
-	<div class="container">
-		<form th:action="@{/login}" method="post">
-			<fieldset>
-			 <legend>Authentication</legend>
-				<table>
-					<tr>
-						<td><label> User Name :</label></td>
-						<td><input type="text" name="login" /></td>
-					</tr>
-					<tr>
-						<td><label> Password:</label></td>
-						<td><input type="password" name="pwd" /></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="Sign In" /></td>
-					</tr>
-				</table>
-			</fieldset>
-
-		</form>
+			</form>
 
 
 
+		</div>
 	</div>
-
 
 
 

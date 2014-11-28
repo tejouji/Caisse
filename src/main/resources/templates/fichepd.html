@@ -31,20 +31,18 @@
 			url : '/loaddatapd',
 			updateUrl : '/updatedatapd',
 			destroyUrl : '/deletedatapd',
-			columns : [ [
-{
-	field : 'codbar',
-	title : 'Code',
-	width : 100,
-	editor : {
-		type : 'validatebox',
-		options : {
-			required : true
-		}
+			columns : [ [ {
+				field : 'codbar',
+				title : 'Code',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
 
-	}
-},
-			{
+				}
+			}, {
 				field : 'designation_pd',
 				title : 'Désignation',
 				width : 100,
@@ -107,6 +105,13 @@
 		});
 	});
 </script>
+<style>
+#cent {
+	position: absolute;
+	left: 10%;
+	margin-left: 40px;
+}
+</style>
 
 </head>
 <body>
@@ -124,103 +129,105 @@
 							Clients</a></li>
 					<li role="presentation"><a href="/employe">Getion des
 							employés</a></li>
-					<li role="presentation"><a href="/histo">Historique</a></li>		
+					<li role="presentation"><a href="/histo">Historique</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
+	<div id="cent">
+		<input type="button" id="voir" value="Ajouter produit."
+			class="btn btn-primary" onClick="divaffiche()"
+			style="display: inline;" />
 
-	<input type="button" id="voir" value="Ajouter produit."  class="btn btn-success"
-		onClick="divaffiche()" style="display: inline;" />
+		<form action="#" th:action="@{/fichepd}" th:object="${produit}"
+			method="post" onsubmit="divaffiche()">
+			<div id="popup" style="display: none;">
+			<br />	<fieldset style="border:solid 1px black; padding:20px; width:950px; color:midnightblue; font-family:verdana;">
 
-	<form action="#" th:action="@{/fichepd}" th:object="${produit}"
-		method="post" onsubmit="divaffiche()">
-		<div id="popup" style="display: none;">
-			<fieldset>
-				<legend>Nouevau produit</legend>
-				<ol>
-					<table>
+					
+						<table>
 
-						<tr>
-							<td>Désignation:</td>
-							<td><input type="text" th:field="*{designation_pd}"
-								required="required" /></td>
-							<td th:if="${#fields.hasErrors('designation_pd')}"
-								th:errors="*{designation_pd}">tva Error</td>
-						</tr>
-						<tr>
-							<td>codbar</td>
-							<td><input type="text" th:field="*{codbar}"
-								required="required" /></td>
-							<td th:if="${#fields.hasErrors('codbar')}"
-								th:errors="*{codbar}">tva Error</td>
-						</tr>
-						<tr>
-							<td>prix_ht</td>
-							<td><input type="text" th:field="*{prix_ht}"
-								required="required" /></td>
-							<td th:if="${#fields.hasErrors('prix_ht')}"
-								th:errors="*{prix_ht}">tva Error</td>
-						</tr>
-						
-						<tr>
-							<td>Quantité</td>
-							<td><input type="text" th:field="*{quantite}"
-								required="required" /></td>
-							<td th:if="${#fields.hasErrors('quantite')}"
-								th:errors="*{quantite}">tva Error</td>
-						</tr>
-						<tr>
-							<td>Catégorie</td>
-							<td><select th:field="*{categorie}">
-									<option value="-----------">-----------</option>
-									<option th:each="categorie : ${categorieProduits}"
-										th:value="${categorie.id}" th:text="${categorie.designation}"></option>
+							<tr>
+								<td>Désignation:</td>
+								<td><input type="text" th:field="*{designation_pd}"
+									required="required" /></td>
+								<td th:if="${#fields.hasErrors('designation_pd')}"
+									th:errors="*{designation_pd}">tva Error</td>
+							</tr>
+							<tr>
+								<td>codbar</td>
+								<td><input type="text" th:field="*{codbar}"
+									required="required" /></td>
+								<td th:if="${#fields.hasErrors('codbar')}" th:errors="*{codbar}">tva
+									Error</td>
+							</tr>
+							<tr>
+								<td>prix_ht</td>
+								<td><input type="text" th:field="*{prix_ht}"
+									required="required" /></td>
+								<td th:if="${#fields.hasErrors('prix_ht')}"
+									th:errors="*{prix_ht}">tva Error</td>
+							</tr>
 
-							</select></td>
-						</tr>
+							<tr>
+								<td>Quantité</td>
+								<td><input type="text" th:field="*{quantite}"
+									required="required" /></td>
+								<td th:if="${#fields.hasErrors('quantite')}"
+									th:errors="*{quantite}">tva Error</td>
+							</tr>
+							<tr>
+								<td>Catégorie</td>
+								<td><select th:field="*{categorie}">
+										<option value="-----------">-----------</option>
+										<option th:each="categorie : ${categorieProduits}"
+											th:value="${categorie.id}" th:text="${categorie.designation}"></option>
 
-						<tr>
-							<td>TVA</td>
-							<td><input type="text" th:field="*{tva}" required="required" />
-							</td>
-							<td th:if="${#fields.hasErrors('tva')}" th:errors="*{tva}">tva
-								Error</td>
-						</tr>
+								</select></td>
+							</tr>
 
-						<tr>
-							<td><input type="submit" value="Valider" /></td>
+							<tr>
+								<td>TVA</td>
+								<td><input type="text" th:field="*{tva}"
+									required="required" /></td>
+								<td th:if="${#fields.hasErrors('tva')}" th:errors="*{tva}">tva
+									Error</td>
+							</tr>
+                        </table>
+                     <br />   <table>
+							<tr>
+								<td><input type="submit" class="btn btn-success"
+									value="Valider" /></td>
 
-							<td><input type="reset" value="Annuler" /></td>
-						</tr>
-					</table>
-				</ol>
-			</fieldset>
+								<td><input type="reset" class="btn btn-danger"
+									value="Annuler" /></td>
+							</tr>
+						</table>
+					
+				</fieldset>
+			</div>
+			<div>
+
+				<table id="tt" toolbar="#toolbar" pagination="true"
+					rownumbers="true" fitColumns="true">
+				</table>
+			</div>
+			<div id="toolbar">
+				<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
+					plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
+				//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
+					plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
+				//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
+					plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
+			</div>
+		</form>
+
+
+		<div id="footer">
+			<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
 		</div>
-		<div>
 
-			<table id="tt" toolbar="#toolbar" pagination="true" rownumbers="true"
-				fitColumns="true">
-			</table>
-		</div>
-		<div id="toolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-				onClick="javascript:$('#tt').edatagrid('addRow')">Nouveau</a> <a
-				href="#" class="easyui-linkbutton" iconCls="icon-remove"
-				plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
-			//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
-				plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
-			//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
-				plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
-		</div>
-	</form>
-
-
-	<div id="footer">
-		<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
 	</div>
-
-
 
 
 

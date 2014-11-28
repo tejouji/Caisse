@@ -640,7 +640,7 @@ function getmeth(chaine)
 	</div>
 
 
-
+<fieldset style="border:solid 1px black; padding:20px; width:950px; color:midnightblue; font-family:verdana;">
 	<label for="prd">Désignation </label>
 
 	<input id="prd" onKeyPress="test();"></input>
@@ -648,9 +648,8 @@ function getmeth(chaine)
 	<input id="code"></input>
 	<label>Quantité</label>
 	<input id="quantit" onKeyPress="verif();"></input>
+</fieldset>
 
-	<br />
-	<br />
 
 	<br />
 	<table>
@@ -673,12 +672,12 @@ function getmeth(chaine)
 				</div></td>
 			<td width="20px"></td>
 			<td style="margin-top: -30px">
-				<div style=" border: 2px solid red;width: 320px;height: 450px;" >
-<table id="sanscode">
+				<div style=" border: solid 1px black;;width: 320px;height: 450px;" >
+<table id="sanscode" style=" color:midnightblue;">
 
 </table>
 
-<table id="sss">
+<table id="sss" >
 <tr>
 <td>
 <img  src="/icons/gauche.png" style="margin-left: 10px" id="gauche" onClick="btgauche();"/>
@@ -696,9 +695,12 @@ function getmeth(chaine)
 			</td>
 		</tr>
 	</table>
-	<form action="#">
 	
-     <table style="margin-top: -200px">
+	<form action="#">
+	<fieldset style="border:solid 1px black; padding:20px; width:950px; margin-top: -250px; color:midnightblue; font-family:verdana;">
+	
+	 <table >
+	 
          <tr>
 		         <td> <label for="prd">Numéro Carte : </label></td>
 		         <td><input type="text" id="carte" onKeyPress="autocarte();" /></td>
@@ -708,23 +710,18 @@ function getmeth(chaine)
 		         <td></td>
 		         <td><b style="color: blue; font-size: x-large;">Total: </b></td>
 		         <td><b id="tota" style="color: blue; font-size: x-large;"></b></td>
-                 <td><b style="color: blue; font-size: x-large;"> euros</b></td>
+                 <td><b style="color: blue; font-size: x-large;">€</b></td>
          </tr>
          <tr>
 		         <td><label for="prd">Rendu : </label></td>
 		         <td><input type="text" id="r"/></td>
 		         <td></td><td></td><td></td>
-		         <td> <a href="/caisse" class="btn btn-success" onClick="valider();">Valider</a></td>
+		         <td> <a href="/caisse" class="btn btn-lg btn-primary btn-block"  onClick="valider();">Valider</a></td>
 		        
          </tr>
-     </table>
-      
-   </form>             	
-
-		
-	
-	
-	
-
+     </table> 
+        </fieldset> 
+   </form>   
+   	          	
 </body>
 </html>
