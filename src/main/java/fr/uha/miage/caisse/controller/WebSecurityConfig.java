@@ -48,10 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 			employeRepository.save(new Employe("Benkhabcheche", "tedj",
 					"02/04/1989", "Homme", "077777", "b.tedj@gmail.com",
-					"mulhouse", "test",null));
+					"mulhouse", "test",null,"admin"));
 			employeRepository.save(new Employe("BenAttouche", "Mohamed",
 					"12/03/1989", "Homme", "05555", "b.med@gmail.com",
-					"mulhouse", "test",null));
+					"mulhouse", "test",null,"user"));
 
 			ArrayList<Employe> listE = (ArrayList<Employe>) employeRepository
 					.findAll();

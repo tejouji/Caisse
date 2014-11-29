@@ -37,15 +37,15 @@ public class Application {
 		CommandeRepository cmdrep=context.getBean(CommandeRepository.class);
 		// ------------------- échantillon de données------------------
 		
-		Client c=new Client(1, "nom", "prenom", " b.tedjeddine@gmail.com", "adress", "12/03/1989", "sexe", 22033651, 1450, (long)11111111, null);
+		Client c=new Client(1, "nonou", "pipoi", " eddine@gmail.com", "adress", "12/03/1989", "Homme", 22033651, 1450, (long)11111111, null);
 		clientRepository.save(c);
 		Employe em=new Employe("Benkhabcheche", "redouane",
 				"02/04/1989", "Homme", "077777", "b.tedj@gmail.com",
-				"mulhouse", "test",null);
+				"mulhouse", "test",null,"user");
 		employeRepository.save(em);
 		employeRepository.save(new Employe("BenAttouche", "meki",
 				"12/03/1989", "Homme", "05555", "b.med@gmail.com", "mulhouse",
-				"test",null));
+				"test",null,"user"));
 		CategorieProduit cr=new CategorieProduit("sport", null);
 		catprdRepository.save(cr);
 		Produit p= new Produit("addidas", (double) 11, 0, "non", 5, cr, null, 15.00);

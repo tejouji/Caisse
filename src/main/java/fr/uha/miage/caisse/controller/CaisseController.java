@@ -80,18 +80,25 @@ public class CaisseController {
 		session.getAttribute(name);
 		System.out.println(clre.findAll().toString());
 		System.out.println(clre.findAll().size());
-		
-		
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-		return "caisse";
+		Employe em = (Employe) employeRepository.FIND_BY_EM(name);
+		if(em.getRole().equals("admin")){
+			return "caisse";
+		}
+		else{
+			return"user";
+		}
 	}
 
-	public String getCaisse(Model model) {
-		// Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 //String name = auth.getName(); //get logged in username
-		 //System.out.println(name);	
-
-		return "caisse";
+	public String getCaisse(Model model) {	
+		Employe em = (Employe) employeRepository.FIND_BY_EM(name);
+		if(em.getRole().equals("admin")){
+			return "caisse";
+		}
+		else{
+			return"user";
+		}
+		
 	}
 
 	@ResponseBody

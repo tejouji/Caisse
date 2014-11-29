@@ -7,7 +7,11 @@ package fr.uha.miage.caisse.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +23,17 @@ import fr.uha.miage.caisse.model.Commande;
 import fr.uha.miage.caisse.model.Employe;
 import fr.uha.miage.caisse.model.Produit;
 import fr.uha.miage.caisse.repository.CommandeRepository;
+import fr.uha.miage.caisse.repository.EmployeRepository;
 
 @Controller
 public class histoController {
 	@Autowired
 	CommandeRepository cmdR;
+	@Autowired
+	EmployeRepository employeRepository;
 
 	@RequestMapping(value = "/histo", method = RequestMethod.GET)
-	public String HistoForm(Model model,@RequestParam (defaultValue="" ) String term ) {
+	public String HistoForm(Model model,HttpSession session,@RequestParam (defaultValue="" ) String term ) {
 	String nom;
 	String prenom;
 	String str[]=term.split("!");
@@ -55,13 +62,18 @@ public class histoController {
 		model.addAttribute("cms" ,cmdR.findAll());
 	}
 		System.out.println("kkkkkkkk"+cmdR.FIND_BY_date(dat,nom,prenom));
-			
-		
-		
-		
-		
-		
-		return "histo";
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+	    String name = auth.getName(); // get logged in username
+		session.getAttribute(name);
+		Employe em = (Employe) employeRepository.FIND_BY_EM(name);
+		if(em.getRole().equals("admin")){
+			return "histo";
+		}
+		else{
+			return"user";
+		}		
+	
 	}
 	@SuppressWarnings("null")
 	@ResponseBody

@@ -49,8 +49,18 @@
 			url : '/loaddataem',
 			updateUrl : '/updatedataem',
 			destroyUrl : '/deletedataem',
-			columns : [ [
+			columns : [ [ {
+				field : 'role',
+				title : 'Role',
+				width : 100,
+				editor : {
+					type : 'validatebox',
+					options : {
+						required : true
+					}
 
+				}
+			},
 			{
 				field : 'nom_emp',
 				title : 'Nom',
@@ -169,82 +179,62 @@
 		<form action="#" th:action="@{/employe}" th:object="${employe}"
 			method="post" onSubmit="return validation(this)">
 			<div id="popup" style="display: none;">
-				<fieldset style="border:solid 1px black; padding:20px; width:950px; color:midnightblue; font-family:verdana;">
-					
-						
-							
-								<label>Nom:</label> 
-								<input type="text" name="nom" th:field="*{nom_emp}"
-									required="required" />
-								
-							
-							
-								<label>Prenom:</label>
-								<input type="text" name="pre" th:field="*{pre_emp}"
-									required="required" />
-							
-
-							
-								<label>Date Naissance:</label>
-								<input type="date" name="date"
-									th:field="*{dat_nai_emp}" max="24-02-2013" min="1920-01-01"
-									required="required" />
-							
-							   <table>
-							   <tr>
-								<td><label>Genre :</label></td>
-								<td width="30px"></td> 
-								<td><label class="radio" for="radios-0"> <input
-										type="radio" name="radios" id="radios-0" value="Homme"
-										checked="checked" th:field="*{sex_emp}" /> Homme
-								</label></td> 
-								<td width="30px"></td>
-								<td><label class="radio" for="radios-1"> <input
-										type="radio" name="radios" id="radios-1" value="Femme"
-										th:field="*{sex_emp}" /> Femme
-								</label></td>
-								</tr>
-							</table>
-							
-							    <label>Email:</label> 	
-								<input type="email" name="email" th:field="*{mail_emp}"
-									required="required" />
-							
-							
-								<label>Adress:</label>
-								<input type="text" name="adr" th:field="*{adr_emp}"
-									required="required" />
-																<label>Téléphone:</label> 
-								<input type="text" name="tel" th:field="*{tel_emp}"
-									required="required" />	
-							
-						<br />	
-						<br />	<label>Mot de passe:</label>	
-								<input id='pwd1' type="password" name="pwd1"
-									th:field="*{mp_emp}" required="required" />
-							
-							
-							<label>Confirmation:</label>	
-								<input id='pwd2' type="password" name="pwd2"
-									required="required" />
-							
+				<fieldset
+					style="border: solid 1px black; padding: 20px; width: 950px; color: midnightblue; font-family: verdana;">
 
 
 
-                       <br /> 
-                        <table>
-							<tr>
-								<td><input type="submit" class="btn btn-success"
-									value="Valider" /></td>
-								<td><input type="reset" class="btn btn-danger"
-									value="Annuler" /></td>
-							</tr>
-						</table>
-				
+					<label>Nom:</label> <input type="text" name="nom"
+						th:field="*{nom_emp}" required="required" /> <label>Prenom:</label>
+					<input type="text" name="pre" th:field="*{pre_emp}"
+						required="required" /> <label>Date Naissance:</label> <input
+						type="date" name="date" th:field="*{dat_nai_emp}" max="24-02-2013"
+						min="1920-01-01" required="required" />
+
+					<table>
+						<tr>
+							<td><label>Genre :</label></td>
+							<td width="30px"></td>
+							<td><label class="radio" for="radios-0"> <input
+									type="radio" name="radios" id="radios-0" value="Homme"
+									checked="checked" th:field="*{sex_emp}" /> Homme
+							</label></td>
+							<td width="30px"></td>
+							<td><label class="radio" for="radios-1"> <input
+									type="radio" name="radios" id="radios-1" value="Femme"
+									th:field="*{sex_emp}" /> Femme
+							</label></td>
+						</tr>
+					</table>
+
+					<label>Email:</label> <input type="email" name="email"
+						th:field="*{mail_emp}" required="required" /> <label>Adress:</label>
+					<input type="text" name="adr" th:field="*{adr_emp}"
+						required="required" /> <label>Téléphone:</label> <input
+						type="text" name="tel" th:field="*{tel_emp}" required="required" />
+
+					<br /> <br /> <label>Mot de passe:</label> <input id='pwd1'
+						type="password" name="pwd1" th:field="*{mp_emp}"
+						required="required" /> <label>Confirmation:</label> <input
+						id='pwd2' type="password" name="pwd2" required="required" /> <label>Confirmation:</label>
+					<select th:field="*{role}">
+						<option value="admin">admin</option>
+						<option value="user">user</option>
+					</select> <br />
+					<table>
+						<tr>
+							<td><input type="submit" class="btn btn-success"
+								value="Valider" /></td>
+							<td><input type="reset" class="btn btn-danger"
+								value="Annuler" /></td>
+						</tr>
+					</table>
+
 				</fieldset>
 
 			</div>
-		<br />	<div>
+			<br />
+			<div>
 
 				<table id="tt" toolbar="#toolbar" pagination="true"
 					rownumbers="true" fitColumns="true">

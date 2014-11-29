@@ -7,9 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,13 +28,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.uha.miage.caisse.model.CategorieProduit;
+import fr.uha.miage.caisse.model.Employe;
 import fr.uha.miage.caisse.model.Produit;
 import fr.uha.miage.caisse.model.ProduitCat;
 import fr.uha.miage.caisse.repository.CategorieProduitRepository;
+import fr.uha.miage.caisse.repository.EmployeRepository;
 import fr.uha.miage.caisse.repository.ProduitRepository;
 
 @Controller
 public class ProduitController {
+	@Autowired
+	EmployeRepository employeRepository;
 	@Autowired
 	private ProduitRepository prodRepository;
 	
@@ -41,14 +48,24 @@ public class ProduitController {
 	CategorieProduit cat;
 	
 	@RequestMapping(value = "/fichepd", method = RequestMethod.GET)
-	public String Auth(Model model) {
+	public String Auth(Model model,HttpSession session) {
 	model.addAttribute("produit", new Produit());
 	
 	model.addAttribute("categorieProduits",catProdRepository.findAll());
 //	model.addAttribute("categorieProduit", new CategorieProduit());
 	model.addAttribute("produits", prodRepository.findAll());
-	
+	Authentication auth = SecurityContextHolder.getContext()
+			.getAuthentication();
+    String name = auth.getName(); // get logged in username
+	session.getAttribute(name);
+	Employe em = (Employe) employeRepository.FIND_BY_EM(name);
+	if(em.getRole().equals("admin")){
 		return "fichepd";
+	}
+	else{
+		return"user";
+	}	
+		
 	}	
 	
 	@RequestMapping(value = "/fichepd", method = RequestMethod.POST)

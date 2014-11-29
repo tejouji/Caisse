@@ -47,6 +47,8 @@ public class Employe implements Serializable {
 	private String adr_emp;
 	@Column(name="mp_emp")
 	private String mp_emp;
+	@Column(name="role")
+	private String role;
 	 @JsonManagedReference
 	@OneToMany(mappedBy="employe",cascade=CascadeType.ALL)
 	private Collection<Commande> commande ;
@@ -57,7 +59,7 @@ public class Employe implements Serializable {
 	
 	public Employe(String nom_emp, String pre_emp, String dat_nai_emp,
 			String sex_emp, String tel_emp, String mail_emp, String adr_emp,
-			String mp_emp, Collection<Commande> commande) {
+			String mp_emp, Collection<Commande> commande,String role) {
 	
 		this.nom_emp = nom_emp;
 		this.pre_emp = pre_emp;
@@ -68,6 +70,7 @@ public class Employe implements Serializable {
 		this.adr_emp = adr_emp;
 		this.mp_emp = mp_emp;
 		this.commande = commande;
+		this.role=role;
 	}
 
 	public Long getId() {
@@ -131,6 +134,15 @@ public class Employe implements Serializable {
 	public void setCommande(Collection<Commande> commande) {
 		this.commande = commande;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "Employe [id=" + id + ", nom_emp=" + nom_emp + ", pre_emp="
@@ -138,6 +150,6 @@ public class Employe implements Serializable {
 				+ sex_emp + ", tel_emp=" + tel_emp + ", mail_emp=" + mail_emp
 				+ ", adr_emp=" + adr_emp + ", mp_emp=" + mp_emp + "]";
 	}
-
+     
 
 }

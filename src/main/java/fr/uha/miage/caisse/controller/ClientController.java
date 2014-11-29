@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,15 +27,18 @@ import fr.uha.miage.caisse.model.Client;
 import fr.uha.miage.caisse.model.Employe;
 import fr.uha.miage.caisse.model.Produit;
 import fr.uha.miage.caisse.repository.ClientRepository;
+import fr.uha.miage.caisse.repository.EmployeRepository;
 
 @Controller
 public class ClientController {
 
 	@Autowired
 	ClientRepository clientrepository;
+	@Autowired
+	EmployeRepository employeRepository;
 
 	@RequestMapping(value = "/client", method = RequestMethod.GET)
-	public String Auth(Model model) {
+	public String Auth(Model model,HttpSession session) {
 		
 		Client c = new Client();
 		
@@ -69,8 +75,18 @@ public class ClientController {
 		c.setCartefid(cartefid);
 		
 		model.addAttribute("client", c);
-	
-		return "client";
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+	    String name = auth.getName(); // get logged in username
+		session.getAttribute(name);
+		Employe em = (Employe) employeRepository.FIND_BY_EM(name);
+		if(em.getRole().equals("admin")){
+			return "client";
+		}
+		else{
+			return"userClt";
+		}	
+		
 	}
 
 	@RequestMapping(value = "/client", method = RequestMethod.POST)
