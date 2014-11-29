@@ -323,7 +323,7 @@ public class CaisseController {
 		
 		try
 		{
-			j.setHost("smtp.free.fr");
+			j.setHost("smtp.uha.fr");
 			String sex="";
 		if(clt.getSexe()=="Homme")
 		{
