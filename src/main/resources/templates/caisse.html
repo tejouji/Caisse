@@ -127,17 +127,32 @@ var identifiant;
 </script>
 <script type="text/javascript">
 	function valider() {
+		var a =document.getElementById('esp');
+		var b=document.getElementById('pt');
+		var moy="";
+		if(b.checked)
+			moy="pt";
+		else if(a.checked)
+			moy="esp";
+		alert(moy);
+	
 		j.ajax({
 			type : 'POST',
 			url : "/valider",
 			data : {
 				"cartefid" : j("#carte").val(),
-				"montant" : document.getElementById('tota').innerHTML
+				"montant" : document.getElementById('tota').innerHTML,
+				"moyen":moy
 			},
 			success : function(result) {
+				window.location="/impression";
+				
 			}
 		});
-
+	
+		
+			
+			
 	}
 </script>
 <script type="text/javascript">
@@ -199,6 +214,17 @@ var identifiant;
 
 		});
 	});
+	//<![CDATA[
+	function test1(){
+		var table = document.getElementById("tt");
+     var rowss= new Array();
+     rowss=table;
+        for (var i = 0; i < rowss.length; i++) {    
+            //je suppose que la date de naissance se trouve sur la troisième colonne
+    document.getElementById("jus").innerHtml =rowss[i].cells[2];    
+            }
+		}
+	//]]>
 	function Affichesum() {
 		j.ajax({
 			type : 'POST',
@@ -700,6 +726,18 @@ function getmeth(chaine)
 	<fieldset style="border:solid 1px black; padding:20px; width:950px; margin-top: -250px; color:midnightblue; font-family:verdana;">
 	
 	 <table >
+	 <tr>
+						<td><label class="control-label" for="textinput">Moyen</label></td>
+						<td width="30px"></td>
+						<td><label class="radio" for="esp"> <input
+								type="radio" name="radios" id="esp" value="esp"
+								checked="checked" /> Espèce
+						</label></td>
+						<td width="30px"></td>
+						<td><label class="radio" for="pt"> <input
+								type="radio" name="radios" id="pt" value="pt"/> Points
+						</label></td>
+					</tr>
 	 
          <tr>
 		         <td> <label for="prd">Numéro Carte : </label></td>
@@ -716,11 +754,12 @@ function getmeth(chaine)
 		         <td><label for="prd">Rendu : </label></td>
 		         <td><input type="text" id="r"/></td>
 		         <td></td><td></td><td></td>
-		         <td> <a href="/caisse" class="btn btn-lg btn-primary btn-block"  onClick="valider();">Valider</a></td>
-		        
+		         <td> <a  class="btn btn-lg btn-primary btn-block"  onClick="valider();">Valider</a></td>
+		        <td> <a  class="btn btn-lg btn-primary btn-block"  onClick="test();">hahah</a></td>
          </tr>
      </table> 
         </fieldset> 
+        <span id="jus">ici</span>
    </form>   
    	          	
 </body>

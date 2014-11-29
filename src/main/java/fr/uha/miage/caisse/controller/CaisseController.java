@@ -212,9 +212,9 @@ public class CaisseController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/valider", method = RequestMethod.POST)
-	public void validerC(@RequestParam("cartefid") String cartefid ,@RequestParam("montant") double montant ,Model model){
+	public void validerC(@RequestParam("cartefid") String cartefid ,@RequestParam("montant") double montant ,@RequestParam("moyen") String moyen,Model model){
 	
-		System.out.println(cartefid);
+		System.out.println( "mooyennnnnnn"+moyen);
 		List<CommandeVirt> liste = cmdVirRepository.findAll();
 	Authentication auth = SecurityContextHolder.getContext()
 			.getAuthentication();
@@ -252,19 +252,43 @@ public class CaisseController {
 	Commande cmdp= (Commande) cmdrep.FIND_BY_CMD(); 
 	cmdp.setLigne(lgc);
 	if(String.valueOf(cartefid )!=""){
+		System.out.println("pppppppppppppppppp"+cartefid);
 		Client clt = (Client) clientRepository.FIND_BY_CLT(Long.parseLong(cartefid));
+		System.out.println("CLIENT"+clt);
 		int nb = (int) (5 * montant);
-		System.out.println("nombre de pointttttttt"+nb);
-		clt.setNbr_point(nb+clt.getNbr_point());
-		if(clt.getNbr_point()>1500){
-			sendmail(clt);
+		int a=clt.getNbr_point();
+		System.out.println("nbpointde prix"+nb);
+		System.out.println("nbpointde client"+a);
+		if(moyen.equalsIgnoreCase("pt")){
+			
+			int l=a-nb;
+			if(nb<a)
+			{
+			
+			System.out.println(l);
+				clt.setNbr_point(l);
+				clientRepository.save(clt);
+			}
 		}
+		else if(moyen.equalsIgnoreCase("esp"))
+			{
+				
+				System.out.println("nombre de pointttttttt"+nb);
+				clt.setNbr_point(nb+clt.getNbr_point());
+				clientRepository.save(clt);
+				if(clt.getNbr_point()>1500){
+					sendmail(clt);
+				}
+				
+				
+			}
 		cmdp.setClient(clt);
+		
 	}
    cmdrep.save(cmdp);
 cmdVirRepository.deleteAll();
     System.out.println("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah"+cmdp);
-    
+
 		
 	}
 
@@ -305,4 +329,11 @@ cmdVirRepository.deleteAll();
 		System.out.println(s);
 		return s;
 	}
+	@RequestMapping(value = "/impression", method = RequestMethod.GET)
+
+	public String imp(Model model, HttpSession session) {
+	
+		return "impression";
+	}
+
 }

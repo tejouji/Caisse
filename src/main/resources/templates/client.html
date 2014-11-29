@@ -37,6 +37,10 @@
 		document.getElementById("cache").style.display = "inline";
 		document.getElementById("voir").style.display = "none";
 	}
+	var sexe = [
+			    {name:'Homme'},
+			    {name:'Femme'}
+			]
 	$(function() {
 		$('#tt').edatagrid({
 			title : 'Liste des clients',
@@ -52,7 +56,7 @@
 			{
 				field : 'nom',
 				title : 'Nom',
-				width : 100,
+				width : 70,
 				editor : {
 					type : 'validatebox',
 					options : {
@@ -63,7 +67,7 @@
 			}, {
 				field : 'prenom',
 				title : 'Prénom',
-				width : 100,
+				width : 70,
 				editor : {
 					type : 'validatebox',
 					options : {
@@ -74,7 +78,7 @@
 			}, {
 				field : 'date_naissance',
 				title : 'Date de naissance',
-				width : 100,
+				width : 60,
 				editor : {
 					type : 'datebox',
 					options : {
@@ -85,18 +89,20 @@
 			}, {
 				field : 'sexe',
 				title : 'Sexe',
-				width : 100,
-				editor : {
-					type : 'validatebox',
-					options : {
-						required : true
+				width : 70,
+				editor:{
+					type:'combobox',
+					options:{
+						valueField:'name',
+						textField:'name',
+						data:sexe,
+						required:true
 					}
-
 				}
 			}, {
 				field : 'telephone',
 				title : 'Télèphone',
-				width : 100,
+				width : 70,
 				editor : {
 					type : 'validatebox',
 					options : {
@@ -129,10 +135,15 @@
 			}, {
 				field : 'cartefid',
 				title : 'Num carte',
-				width : 100
+				width : 80
 
 			}
+			, {
+				field : 'nbr_point',
+				title : 'Nombre de points',
+				width : 80
 
+			}
 			] ],
 
 		});
