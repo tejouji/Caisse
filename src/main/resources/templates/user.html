@@ -134,7 +134,7 @@ var identifiant;
 			moy="pt";
 		else if(a.checked)
 			moy="esp";
-		alert(moy);
+		
 	
 		j.ajax({
 			type : 'POST',
@@ -145,7 +145,7 @@ var identifiant;
 				"moyen":moy
 			},
 			success : function(result) {
-				window.location="/impression";
+				window.location="/impression?valeur="+document.getElementById('tota').innerHTML;
 				
 			}
 		});
@@ -214,17 +214,7 @@ var identifiant;
 
 		});
 	});
-	//<![CDATA[
-	function test1(){
-		var table = document.getElementById("tt");
-     var rowss= new Array();
-     rowss=table;
-        for (var i = 0; i < rowss.length; i++) {    
-            //je suppose que la date de naissance se trouve sur la troisième colonne
-    document.getElementById("jus").innerHtml =rowss[i].cells[2];    
-            }
-		}
-	//]]>
+	
 	function Affichesum() {
 		j.ajax({
 			type : 'POST',
@@ -748,12 +738,14 @@ function getmeth(chaine)
 		         <td><input type="text" id="r"/></td>
 		         <td></td><td></td><td></td>
 		         <td> <a  class="btn btn-lg btn-primary btn-block"  onClick="valider();">Valider</a></td>
-		        <td> <a  class="btn btn-lg btn-primary btn-block"  onClick="test();">hahah</a></td>
+		       
          </tr>
      </table> 
         </fieldset> 
         <span id="jus">ici</span>
    </form>   
-   	          	
+   	      <div id="footer">
+			<p style="margin: auto; width: 25%">&copy; copyright M2 MIAGE</p>
+		</div>    	
 </body>
 </html>

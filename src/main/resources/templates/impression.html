@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Magasin Ciga</title>
+<script type="text/javascript"> 
+//<![CDATA[
+function getParams() {
+    var url = window.location.href;
+    var splitted = url.split("?");
+    if(splitted.length === 1) {
+       return {};
+    }
+    var paramList = decodeURIComponent(splitted[1]).split("-");
+    var params=new Array() ;
+    for(var i = 0; i < paramList.length; i++) {
+        var paramTuple = paramList[i].split("=");
+        
+        params.push(paramTuple[1]);
+    }
+    document.getElementById('tot').innerHTML=params[0];
+   
+}
+//]]>
+
+</script>
 </head>
-<body onload="javascript:window.print();">
-<span> Facture </span>
-<table id="liste">
+<body onload="javascript:window.print();getParams();">
+<span style="font-size: xx-large;font-style: italic;border-left: 50%"> Facture </span>
+<table id="liste" class="table table-striped" >
+<thead>
 <th> Désignation</th>
 <th> Prix HT</th>
 <th>Quantité</th>
 <th> Total</th>
+</thead>
+<tbody>
+<tr th:each="lc : ${lcs}">
+								<td th:text="${lc.getDesignation_pd()}"></td>
+								<td th:text="${lc.getPrix_ht()}"></td>
+								<td th:text="${lc.getQuantite()}"></td>
+								<td th:text="${lc.getTotal()}"></td>
+							</tr>
+							</tbody>
 </table>
-<span>Net à payé:</span>
+<span>Net à payé:</span><span id="tot"> </span>
 </body>
 </html>

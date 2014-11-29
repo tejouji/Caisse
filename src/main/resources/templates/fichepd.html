@@ -155,14 +155,14 @@
 									th:errors="*{designation_pd}">tva Error</td>
 							</tr>
 							<tr>
-								<td>codbar</td>
+								<td>Code à barre</td>
 								<td><input type="text" th:field="*{codbar}"
 									required="required" /></td>
 								<td th:if="${#fields.hasErrors('codbar')}" th:errors="*{codbar}">tva
 									Error</td>
 							</tr>
 							<tr>
-								<td>prix_ht</td>
+								<td>Prix HT</td>
 								<td><input type="text" th:field="*{prix_ht}"
 									required="required" /></td>
 								<td th:if="${#fields.hasErrors('prix_ht')}"
@@ -215,9 +215,9 @@
 			<div id="toolbar">
 				<a href="#" class="easyui-linkbutton" iconCls="icon-remove"
 					plain="true" onClick="javascript:$('#tt').edatagrid('destroyRow')">Supprimer</a>
-				//<a href="#" class="easyui-linkbutton" iconCls="icon-save"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-save"
 					plain="true" onClick="javascript:$('#tt').edatagrid('saveRow')">Enregistrer</a>
-				//<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
+				<a href="#" class="easyui-linkbutton" iconCls="icon-undo"
 					plain="true" onClick="javascript:$('#tt').edatagrid('cancelRow')">Annuler</a>
 			</div>
 		</form>

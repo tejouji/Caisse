@@ -73,7 +73,7 @@ public class CaisseController {
 	
 	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
 
-	public String getCaisse(Model model, HttpSession session) {
+		public String getCaisse(Model model, HttpSession session) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 	    name = auth.getName(); // get logged in username
@@ -90,7 +90,7 @@ public class CaisseController {
 		}
 	}
 
-	public String getCaisse(Model model) {	
+	public String getCaisse() {	
 		Employe em = (Employe) employeRepository.FIND_BY_EM(name);
 		if(em.getRole().equals("admin")){
 			return "caisse";
@@ -263,7 +263,16 @@ public class CaisseController {
 		Client clt = (Client) clientRepository.FIND_BY_CLT(Long.parseLong(cartefid));
 		System.out.println("CLIENT"+clt);
 		int nb = (int) (5 * montant);
-		int a=clt.getNbr_point();
+		int a=0;
+		try
+		{
+			a=clt.getNbr_point();
+		}
+		catch(Exception e)
+		{
+			a=0;
+		}
+		
 		System.out.println("nbpointde prix"+nb);
 		System.out.println("nbpointde client"+a);
 		if(moyen.equalsIgnoreCase("pt")){
@@ -280,8 +289,15 @@ public class CaisseController {
 		else if(moyen.equalsIgnoreCase("esp"))
 			{
 				
-				System.out.println("nombre de pointttttttt"+nb);
-				clt.setNbr_point(nb+clt.getNbr_point());
+				try
+				{
+					clt.setNbr_point(nb+clt.getNbr_point());
+				}
+				catch(Exception e)
+				{
+					clt.setNbr_point(nb);
+				}
+				
 				clientRepository.save(clt);
 				if(clt.getNbr_point()>1500){
 					sendmail(clt);
@@ -293,8 +309,8 @@ public class CaisseController {
 		
 	}
    cmdrep.save(cmdp);
-cmdVirRepository.deleteAll();
-    System.out.println("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah"+cmdp);
+
+    
 
 		
 	}
@@ -322,7 +338,7 @@ cmdVirRepository.deleteAll();
 		helper.setFrom("mohamed.benattouche@gmail.com","CIGA");
 		helper.setSubject("sujet");
 		 String text="<img  src='http://www.ciga.fr/assets/shop_resources/79/docs/carte-fidelite_1.jpg' style='width: 200px;height: 200px'/><b style='color:#000066;font-size:48px;font-family: fantasy;'> Magasin CIGA</b>"+
-		 "<p style='color: #003399;font-family: monospace;font-size: 36px'> Bonjour"+sex+"</p>"
+		 "<p style='color: #003399;font-family: monospace;font-size: 36px'> Bonjour "+sex+"</p>"
 		+" <p style='color: #003399;font-family: monospace;font-size: 36px'> Grâce à votre fidélité vous avez atteint "+ clt.getNbr_point() +"d’une valeur de"+mont +" euros</p>"+
 		" <img  src='http://www.lactolerance.fr/img/bloc%20fidelite.jpg' style='display: block; margin-left: auto; margin-right: auto;width: 400px;height: 150px;'/>"
 		+" <p style='color: #003399;font-family: monospace;font-size: 36px'> Merci pour votre confiance à bientôt</p>";
@@ -340,6 +356,9 @@ cmdVirRepository.deleteAll();
 
 	public String imp(Model model, HttpSession session) {
 	
+		model.addAttribute("lc", new Commande());
+		model.addAttribute("lcs" ,cmdVirRepository.findAll());
+		cmdVirRepository.deleteAll();
 		return "impression";
 	}
 

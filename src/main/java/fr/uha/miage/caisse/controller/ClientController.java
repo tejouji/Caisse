@@ -36,7 +36,7 @@ public class ClientController {
 	ClientRepository clientrepository;
 	@Autowired
 	EmployeRepository employeRepository;
-
+	long cartefid=0;
 	@RequestMapping(value = "/client", method = RequestMethod.GET)
 	public String Auth(Model model,HttpSession session) {
 		
@@ -70,7 +70,7 @@ public class ClientController {
 		System.out.println("nbaler" + nombreAleatoire);
 		nbaleForme = String.valueOf(nombreAleatoire);
 		String f = nbaleForme + idForme;
-		long cartefid = Long.valueOf(f);
+		 cartefid = Long.valueOf(f);
 		System.out.print(cartefid);
 		c.setCartefid(cartefid);
 		
@@ -92,59 +92,20 @@ public class ClientController {
 	@RequestMapping(value = "/client", method = RequestMethod.POST)
 	public String Add(@Valid Client client, BindingResult bindingResult,
 			Model model) {
-		System.out.println("getcarte"+client.getCartefid());
+		System.out.println("getcarte"+cartefid);
 	//	clientrepository.save(client);
 
 		// pour afficher sur la meme page
 	
-		long l;
-		Client c = clientrepository.findOne(clientrepository.count());
-		l = c.getId() + 1;
-		String idForme = null;
-		String nbaleForme = null;
-		long nombreAleatoire = 0;
-		if (l < 10) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 1000000 + (int) (Math.random() * ((9999999 - 1000000) + 1));
-		}
-		if (l > 10 && l < 100) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 100000 + (int) (Math.random() * ((999999 - 100000) + 1));
-		}
-		if (l > 100 && l < 1000) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 10000 + (int) (Math.random() * ((99999 - 10000) + 1));
-		}
-		if (l > 1000 && l < 10000) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 10000 + (int) (Math.random() * ((99999 - 10000) + 1));
-		}
-		if (l > 10000 && l < 100000) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 10000 + (int) (Math.random() * ((99999 - 10000) + 1));
-		}
-		if (l > 100000 && l < 1000000) {
-			idForme = String.valueOf(l);
-			nombreAleatoire = 10000 + (int) (Math.random() * ((99999 - 10000) + 1));
-		}
-		System.out.println("pleine");
-		System.out.println(clientrepository.count());
-		System.out.println("id" + l);
-
-		System.out.println("nbaler" + nombreAleatoire);
-		nbaleForme = String.valueOf(nombreAleatoire);
-	
-		String f = nbaleForme + idForme;
-		long cartefid = Long.valueOf(f);
 		client.setCartefid(cartefid);
-		System.out.print(cartefid);
+	client.setNbr_point(0);
 		clientrepository.save(client);
 		//c.setCartefid(cartefid);
 	//	model.addAttribute("client", c);
 		System.out.println("liste   **" + clientrepository.findAll());
 		model.addAttribute("clients", clientrepository.findAll());
 		Client cc = new Client();
-		cc.setCartefid(cartefid+1);
+		cc.setCartefid(client.getCartefid()+1);
 		model.addAttribute("client", cc);
 		
 		System.out.println(clientrepository.findAll());
